@@ -1,5 +1,7 @@
 <p align="center">
-  <a href="https://davityavryan.github.io/material-ui-chameleon" rel="noopener" target="_blank"><img width="150" src="https://davityavryan.github.io/material-ui-chameleon/img/logo.svg" alt="Material-UI Chameleon"></a></p>
+    <a href="https://davityavryan.github.io/material-ui-chameleon" rel="noopener" target="_blank">
+        <img width="150" src="https://raw.githubusercontent.com/davityavryan/material-ui-chameleon/master/gh-pages-src/static/img/logo.svg?sanitize=true" alt="Material-UI Chameleon">
+    </a>
 </p>
 
 <h1 align="center">Material-UI Chameleon</h1>
