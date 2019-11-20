@@ -1,0 +1,13 @@
+{
+    "presets": [
+        "@babel/preset-react",
+        [
+            "@babel/preset-env",
+            {
+                "useBuiltIns": "entry",
+                "loose": true,
+                "corejs": 3
+            }
+        ]
+    ]
+}
