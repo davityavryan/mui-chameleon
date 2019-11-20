@@ -19,7 +19,7 @@
         "predemo:build": "yarn install --prefer-offline --frozen-lockfile",
         "predemo:production": "yarn install --prefer-offline --frozen-lockfile",
         "prebuild": "yarn install --prefer-offline --frozen-lockfile && rimraf build",
-        "release": "yarn build && npm publish build --tag latest"
+        "prepublishOnly": "yarn build"
     },
     "sideEffects": false,
     "dependencies": {
