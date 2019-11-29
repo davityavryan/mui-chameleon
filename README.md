@@ -14,7 +14,7 @@
 
 [![npm package](https://img.shields.io/npm/v/material-ui-chameleon/latest.svg)](https://www.npmjs.com/package/material-ui-chameleon)
 [![npm downloads](https://img.shields.io/npm/dm/material-ui-chameleon.svg)](https://www.npmjs.com/package/material-ui-chameleon)
-[![PeerDependencies](https://david-dm.org/davityavryan/material-ui-chameleon/master/peer-status.svg)](https://david-dm.org/davityavryan/material-ui-chameleon/master?type=peer&path=packages/material-ui)
+[![PeerDependencies](https://david-dm.org/davityavryan/material-ui-chameleon/master/peer-status.svg)](https://david-dm.org/davityavryan/material-ui-chameleon/master?type=peer)
 [![Dependencies](https://david-dm.org/davityavryan/material-ui-chameleon/master/status.svg)](https://david-dm.org/davityavryan/material-ui-chameleon/master)
 [![DevDependencies](https://david-dm.org/davityavryan/material-ui-chameleon/master/dev-status.svg)](https://david-dm.org/davityavryan/material-ui-chameleon/master?type=dev)
 [![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/davityavryan/material-ui-chameleon.svg)](https://isitmaintained.com/project/davityavryan/material-ui-chameleon "Average time to resolve an issue")
