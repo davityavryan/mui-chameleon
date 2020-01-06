@@ -25,7 +25,7 @@ function Section({ title, secondaryTitle, children }) {
     const classes = useStyles();
 
     return (
-        <ExpansionPanel>
+        <ExpansionPanel TransitionProps={{ mountOnEnter: true, unmountOnExit: true }}>
             <ExpansionPanelSummary
                 classes={{ root: classes.summaryRoot, content: classes.summaryContent }}
                 expandIcon={Boolean(children) ? <ExpandMoreIcon /> : null}

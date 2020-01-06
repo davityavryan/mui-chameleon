@@ -14,7 +14,8 @@ import themeKeyLabel from '../../utils/themeKeyLabel';
 const useStyles = makeStyles(({ palette, spacing, zIndex, shape }) => {
     return {
         popoverRoot: {
-            zIndex: `${zIndex.tooltip + 1} !important`,
+            // Color picker on top of everything
+            zIndex: `${zIndex.tooltip + 11} !important`,
         },
         colorPicker: {
             width: spacing(3),

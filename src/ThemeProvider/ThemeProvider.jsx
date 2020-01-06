@@ -5,7 +5,7 @@ import { ThemeProvider as MuiThemeProvider, createMuiTheme } from '@material-ui/
 
 import ChameleonContext from '../internal/ChameleonContext/ChameleonContext';
 
-const reducer = (state, action) => {
+function reducer(state, action) {
     switch (action.type) {
         case 'reset': {
             return {
@@ -20,7 +20,7 @@ const reducer = (state, action) => {
             };
         }
     }
-};
+}
 
 function ThemeProvider({ theme, children }) {
     const [state, dispatch] = useReducer(reducer, { theme, originalTheme: theme });
