@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import objectPath from 'object-path';
 
-import Box from '@material-ui/core/Box'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListSubheader from '@material-ui/core/ListSubheader'
@@ -42,7 +41,10 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
         backgroundColor: 'inherit',
     },
     listSubHeader: {
-        backgroundColor: palette.background.default,
+        zIndex: 2,
+
+        color: palette.type === 'light' ? palette.common.black : palette.common.white,
+        backgroundColor: palette.type === 'light' ? palette.grey['200'] : palette.grey['700'],
     },
     ul: {
         backgroundColor: 'inherit',
@@ -99,30 +101,18 @@ function Parser({ item, itemKey, defaultValue, onChange, isTopLevel }) {
         );
     }
 
-    if (mapItem) {
-        const { type, ...props } = mapItem;
+    const { type, ...props } = mapItem || { type: 'text' };
 
-        const Component = typesMap[type];
-
-        // const isDry = JSON.stringify(defaultValue) === JSON.stringify(item);
-
-        return (
-            <ListItem className={classes.listItem}>
-                <Component
-                    {...props}
-                    value={item}
-                    themeKey={itemKey}
-                    onChange={onChange(itemKey)}
-                />
-            </ListItem>
-        );
-    }
+    const Component = typesMap[type];
 
     return (
         <ListItem className={classes.listItem}>
-            <Box overflow="auto">
-                <pre>{itemKey} - {JSON.stringify(item, null, 4)}</pre>
-            </Box>
+            <Component
+                {...props}
+                value={item}
+                themeKey={itemKey}
+                onChange={onChange(itemKey)}
+            />
         </ListItem>
     );
 }
