@@ -1,9 +1,14 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useState } from 'react';
 import ReactDOM from 'react-dom';
 
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -23,10 +28,32 @@ const useStyles = makeStyles(({ spacing }) => ({
     button: {
         margin: spacing(1),
     },
+    clickMe: {
+        position: 'fixed',
+        top: 25,
+        right: 75,
+    },
 }));
 
 function Index() {
     const classes = useStyles();
+
+    const [updatedTheme, setUpdatedTheme] = useState(initialTheme);
+    const [isExpanded, setIsExpanded] = useState(false);
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+    const handleThemeSave = (newTheme) => {
+        setUpdatedTheme(newTheme);
+        setIsDialogOpen(true);
+    };
+
+    const handleExpandToggle = () => {
+        setIsExpanded(true);
+    };
+
+    const handleCloseDialog = () => {
+        setIsDialogOpen(false);
+    };
 
     return (
         <ThemeProvider theme={initialTheme}>
@@ -51,7 +78,35 @@ function Index() {
                 </div>
             </Box>
 
-            <SideBarEditor />
+            {!isExpanded && (
+                <img className={classes.clickMe} src="img/click-me.svg" alt="Click me" />
+            )}
+
+            <SideBarEditor onSave={handleThemeSave} onExpandToggle={handleExpandToggle} />
+
+            <Dialog
+                open={isDialogOpen}
+                onClose={handleCloseDialog}
+                maxWidth="md"
+                aria-labelledby="theme-dialog-title"
+                aria-describedby="theme-dialog-description"
+                fullWidth
+            >
+                <DialogTitle id="theme-dialog-title">New theme</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="theme-dialog-description">
+                        <pre>{JSON.stringify(updatedTheme, null, 4)}</pre>
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleCloseDialog}>
+                        Close
+                    </Button>
+                    <Button onClick={handleCloseDialog} color="primary" variant="contained" autoFocus>
+                        Download
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </ThemeProvider>
     );
 }
