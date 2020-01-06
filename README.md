@@ -43,9 +43,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import ThemeProvider from 'material-ui-chameleon/ThemeProvider';
-import Editor from 'material-ui-chameleon/Editor';
+import SideBarEditor from 'material-ui-chameleon/SideBarEditor';
 
-// import { ThemeProvider, Editor } from 'material-ui-chameleon';
+// import { ThemeProvider, SideBarEditor } from 'material-ui-chameleon';
 
 function App() {
     const showEditor = true; // of course
@@ -56,7 +56,7 @@ function App() {
 
             {/* rest of the app */}
 
-            {showEditor && <Editor />}
+            {showEditor && <SideBarEditor />}
         </ThemeProvider>
     );
 }

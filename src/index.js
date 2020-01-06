@@ -1,7 +1,7 @@
-import Editor from './Editor/Editor';
+import SideBarEditor from './SideBarEditor/SideBarEditor';
 import ThemeProvider from './ThemeProvider/ThemeProvider';
 
 export {
-    Editor,
+    SideBarEditor,
     ThemeProvider,
 };

@@ -8,7 +8,7 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 
 import ThemeProvider from 'material-ui-chameleon/ThemeProvider';
-import Editor from 'material-ui-chameleon/Editor';
+import SideBarEditor from 'material-ui-chameleon/SideBarEditor';
 
 const initialTheme = {};
 
@@ -51,7 +51,7 @@ function Index() {
                 </div>
             </Box>
 
-            <Editor />
+            <SideBarEditor />
         </ThemeProvider>
     );
 }

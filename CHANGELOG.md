@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Unreleased
+
+### Breaking change
+
+`Editor` component is now called `SideBarEditor`.
+
 ## v0.1.0-alpha.2
 ###### *Nov 21, 2019*
 
