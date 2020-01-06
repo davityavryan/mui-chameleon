@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -50,5 +51,12 @@ function Header() {
         </Box>
     );
 }
+
+Header.propTypes = {
+    onToggleOpen: PropTypes.func.isRequired,
+    onReset: PropTypes.func.isRequired,
+    onSave: PropTypes.func.isRequired,
+    isOpen: PropTypes.bool.isRequired,
+};
 
 export default Header;

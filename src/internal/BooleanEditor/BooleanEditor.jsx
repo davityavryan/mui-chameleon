@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 
 import IconButton from '@material-ui/core/IconButton';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -25,5 +26,13 @@ function BooleanEditor({ options, icons, value, themeKey, onChange }) {
         </Fragment>
     );
 }
+
+BooleanEditor.propTypes = {
+    options: PropTypes.array.isRequired,
+    icons: PropTypes.array.isRequired,
+    value: PropTypes.string.isRequired,
+    themeKey: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+};
 
 export default BooleanEditor;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import objectPath from 'object-path';
 
@@ -49,7 +50,7 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
     },
 }));
 
-function Parser({ item, itemKey, defaultValue, onChange, isTopLevel = false }) {
+function Parser({ item, itemKey, defaultValue, onChange, isTopLevel }) {
     const classes = useStyles({ isTopLevel });
 
     const mapItem = objectPath.get(themeMap, itemKey);
@@ -125,5 +126,17 @@ function Parser({ item, itemKey, defaultValue, onChange, isTopLevel = false }) {
         </ListItem>
     );
 }
+
+Parser.propTypes = {
+    item: PropTypes.any.isRequired,
+    itemKey: PropTypes.string.isRequired,
+    defaultValue: PropTypes.any.isRequired,
+    onChange: PropTypes.func.isRequired,
+    isTopLevel: PropTypes.bool,
+};
+
+Parser.defaultProps = {
+    isTopLevel: false,
+};
 
 export default Parser;

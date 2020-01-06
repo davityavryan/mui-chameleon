@@ -1,4 +1,5 @@
 import React, { useReducer } from 'react';
+import PropTypes from 'prop-types';
 
 import { ThemeProvider as MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
@@ -32,5 +33,10 @@ function ThemeProvider({ theme, children }) {
         </ChameleonContext.Provider>
     )
 }
+
+ThemeProvider.propTypes = {
+    theme: PropTypes.object.isRequired,
+    children: PropTypes.node.isRequired,
+};
 
 export default ThemeProvider;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
@@ -20,7 +21,7 @@ const useStyles = makeStyles(({ spacing }) => ({
     },
 }));
 
-function Section({ title, secondaryTitle = '', children = null }) {
+function Section({ title, secondaryTitle, children }) {
     const classes = useStyles();
 
     return (
@@ -45,5 +46,16 @@ function Section({ title, secondaryTitle = '', children = null }) {
         </ExpansionPanel>
     );
 }
+
+Section.propTypes = {
+    title: PropTypes.string.isRequired,
+    secondaryTitle: PropTypes.string,
+    children: PropTypes.node,
+};
+
+Section.defaultProps = {
+    secondaryTitle: '',
+    children: null,
+};
 
 export default Section;

@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from 'react';
+import PropTypes from 'prop-types';
 
 import { SketchPicker } from 'react-color';
 
@@ -92,5 +93,11 @@ function ColorPicker({ value, themeKey, onChange }) {
         </Fragment>
     );
 }
+
+ColorPicker.propTypes = {
+    value: PropTypes.string.isRequired,
+    themeKey: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+};
 
 export default ColorPicker;
