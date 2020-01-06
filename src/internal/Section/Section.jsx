@@ -6,7 +6,7 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import Typography from '@material-ui/core/Typography'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 
-import ExpandMoreIcon from '../ExpandMoreIcon/ExpandMoreIcon';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import themeKeyLabel from '../../utils/themeKeyLabel';
 
