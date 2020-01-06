@@ -8,12 +8,12 @@ import FormatTextdirectionRToL from '@material-ui/icons/FormatTextdirectionRToL'
 import BooleanEditor from '../internal/BooleanEditor/BooleanEditor';
 import ColorPicker from '../internal/ColorPicker/ColorPicker';
 import FieldEditor from '../internal/FieldEditor/FieldEditor';
+import ShadowEditor from '../internal/ShadowEditor/ShadowEditor';
 
 const themeMap = {
     shape: {
         borderRadius: {
             type: 'number',
-            step: 0.1,
             min: 0,
             unit: 'px',
         },
@@ -54,6 +54,24 @@ const themeMap = {
             light: { type: 'color' },
             main: { type: 'color' },
         },
+        warning: {
+            contrastText: { type: 'color' },
+            dark: { type: 'color' },
+            light: { type: 'color' },
+            main: { type: 'color' },
+        },
+        info: {
+            contrastText: { type: 'color' },
+            dark: { type: 'color' },
+            light: { type: 'color' },
+            main: { type: 'color' },
+        },
+        success: {
+            contrastText: { type: 'color' },
+            dark: { type: 'color' },
+            light: { type: 'color' },
+            main: { type: 'color' },
+        },
         grey: {
             50: { type: 'color' },
             100: { type: 'color' },
@@ -87,7 +105,7 @@ const themeMap = {
             hover: { type: 'color' },
             hoverOpacity: {
                 type: 'number',
-                step: 0.01,
+                step: 0.1,
                 min: 0,
                 max: 1,
             },
@@ -170,6 +188,29 @@ const typesMap = {
     ),
     number: ({ value, onChange, ...props }) => (
         <FieldEditor
+            {...props}
+            type="number"
+            formatter={(newValue) => Number(newValue)}
+            value={value}
+            onChange={onChange}
+        />
+    ),
+    fontFamily: ({ value, onChange, ...props }) => (
+        <FieldEditor
+            {...props}
+            value={value}
+            onChange={onChange}
+        />
+    ),
+    text: ({ value, onChange, ...props }) => (
+        <FieldEditor
+            {...props}
+            value={value}
+            onChange={onChange}
+        />
+    ),
+    shadow: ({ value, onChange, ...props }) => (
+        <ShadowEditor
             {...props}
             value={value}
             onChange={onChange}
