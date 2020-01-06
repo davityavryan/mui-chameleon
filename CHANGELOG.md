@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v0.1.0-alpha.4
+###### *Jan 6, 2020*
+
+Remove unnecessary dependency.
+
 ## v0.1.0-alpha.3
 ###### *Jan 6, 2020*
 
