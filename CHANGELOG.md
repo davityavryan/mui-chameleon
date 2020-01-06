@@ -1,6 +1,7 @@
 # CHANGELOG
 
-## Unreleased
+## v0.1.0-alpha.3
+###### *Jan 6, 2020*
 
 ### Breaking change
 
