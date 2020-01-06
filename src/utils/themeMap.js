@@ -7,7 +7,7 @@ import FormatTextdirectionRToL from '@material-ui/icons/FormatTextdirectionRToL'
 
 import BooleanEditor from '../internal/BooleanEditor/BooleanEditor';
 import ColorPicker from '../internal/ColorPicker/ColorPicker';
-import NumberEditor from '../internal/NumberEditor/NumberEditor';
+import FieldEditor from '../internal/FieldEditor/FieldEditor';
 
 const themeMap = {
     shape: {
@@ -169,7 +169,7 @@ const typesMap = {
         />
     ),
     number: ({ value, onChange, ...props }) => (
-        <NumberEditor
+        <FieldEditor
             {...props}
             value={value}
             onChange={onChange}
