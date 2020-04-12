@@ -9,6 +9,7 @@ const globals = {
     react: 'React',
     'react-dom': 'ReactDOM',
     '@material-ui/core': 'MaterialUI',
+    'deepmerge': 'merge',
     'object-path': 'objectPath',
     'react-color': 'reactColor',
 };
@@ -35,6 +36,7 @@ const commonjsOptions = {
             'isLazy',
             'isMemo',
             'isValidElementType',
+            'Memo',
         ],
     },
 };
@@ -43,7 +45,7 @@ const resolveOptions = {
 };
 
 function onwarn(warning) {
-    throw Error(warning.message);
+    console.warn(warning.message);
 }
 
 export default [
