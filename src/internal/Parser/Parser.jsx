@@ -62,6 +62,11 @@ function Parser({ item, itemKey, defaultValue, onChange, isTopLevel }) {
 
     if (typeof item === 'object') {
         const entries = Object.entries(item);
+
+        entries.sort(([key1], [key2]) => (
+            Number.isNaN(Number(key1)) ? key1.localeCompare(key2) : key1 - key2
+        ));
+
         return (
             <List className={classes.root} subheader={<li />}>
                 {entries.map(([nestedItemKey, nestedItem]) => {

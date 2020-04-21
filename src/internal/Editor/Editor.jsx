@@ -12,6 +12,11 @@ import { themeMap } from '../../utils';
 
 function Editor({ theme, defaultTheme, onChange }) {
     const entries = Object.entries(theme);
+
+    entries.sort(([key1], [key2]) => (
+        Number.isNaN(Number(key1)) ? key1.localeCompare(key2) : key1 - key2
+    ));
+
     return (
         <Fragment>
             {entries.map(([key, themeItem]) => {
