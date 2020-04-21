@@ -8,7 +8,6 @@ import FormatTextdirectionRToL from '@material-ui/icons/FormatTextdirectionRToL'
 import BooleanEditor from '../internal/BooleanEditor/BooleanEditor';
 import ColorPicker from '../internal/ColorPicker/ColorPicker';
 import FieldEditor from '../internal/FieldEditor/FieldEditor';
-import ShadowEditor from '../internal/ShadowEditor/ShadowEditor';
 
 const themeMap = {
     shape: {
@@ -18,7 +17,39 @@ const themeMap = {
             unit: 'px',
         },
     },
-    breakpoints: { type: 'soon' },
+    breakpoints: {
+        keys: {
+            type: 'skip',
+        },
+        values: {
+            // TODO: construct this
+            lg: {
+                type: 'number',
+                min: 0,
+                step: 1,
+            },
+            md: {
+                type: 'number',
+                min: 0,
+                step: 1,
+            },
+            sm: {
+                type: 'number',
+                min: 0,
+                step: 1,
+            },
+            xl: {
+                type: 'number',
+                min: 0,
+                step: 1,
+            },
+            xs: {
+                type: 'number',
+                min: 0,
+                step: 1,
+            },
+        },
+    },
     direction: {
         type: 'boolean',
         options: ['ltr', 'rtl'],
@@ -102,6 +133,12 @@ const themeMap = {
         },
         action: {
             active: { type: 'color' },
+            activatedOpacity: {
+                type: 'number',
+                step: 0.1,
+                min: 0,
+                max: 1,
+            },
             hover: { type: 'color' },
             hoverOpacity: {
                 type: 'number',
@@ -110,8 +147,27 @@ const themeMap = {
                 max: 1,
             },
             selected: { type: 'color' },
+            selectedOpacity: {
+                type: 'number',
+                step: 0.1,
+                min: 0,
+                max: 1,
+            },
             disabled: { type: 'color' },
+            disabledOpacity: {
+                type: 'number',
+                step: 0.1,
+                min: 0,
+                max: 1,
+            },
             disabledBackground: { type: 'color' },
+            focus: { type: 'color' },
+            focusOpacity: {
+                type: 'number',
+                step: 0.1,
+                min: 0,
+                max: 1,
+            },
         },
         contrastThreshold: {
             type: 'number',
@@ -125,10 +181,181 @@ const themeMap = {
         },
     },
     props: { type: 'skip' },
-    shadows: { type: 'soon' },
+    shadows: [
+        { type: 'shadow' },
+        { type: 'shadow' },
+        { type: 'shadow' },
+        { type: 'shadow' },
+        { type: 'shadow' },
+        { type: 'shadow' },
+        { type: 'shadow' },
+        { type: 'shadow' },
+        { type: 'shadow' },
+        { type: 'shadow' },
+        { type: 'shadow' },
+        { type: 'shadow' },
+        { type: 'shadow' },
+        { type: 'shadow' },
+        { type: 'shadow' },
+        { type: 'shadow' },
+        { type: 'shadow' },
+        { type: 'shadow' },
+        { type: 'shadow' },
+        { type: 'shadow' },
+        { type: 'shadow' },
+        { type: 'shadow' },
+        { type: 'shadow' },
+        { type: 'shadow' },
+        { type: 'shadow' },
+    ],
     spacing: { type: 'skip' },
-    transitions: { type: 'soon' },
-    typography: { type: 'soon' },
+    transitions: {
+        duration: {
+            shortest: {
+                type: 'number',
+                min: 0,
+                unit: 'ms',
+            },
+            shorter: {
+                type: 'number',
+                min: 0,
+                unit: 'ms',
+            },
+            short: {
+                type: 'number',
+                min: 0,
+                unit: 'ms',
+            },
+            standard: {
+                type: 'number',
+                min: 0,
+                unit: 'ms',
+            },
+            complex: {
+                type: 'number',
+                min: 0,
+                unit: 'ms',
+            },
+            enteringScreen: {
+                type: 'number',
+                min: 0,
+                unit: 'ms',
+            },
+            leavingScreen: {
+                type: 'number',
+                min: 0,
+                unit: 'ms',
+            },
+        },
+        easing: {
+            easeInOut: { type: 'easing' },
+            easeOut: { type: 'easing' },
+            easeIn: { type: 'easing' },
+            sharp: { type: 'easing' },
+        },
+    },
+    typography: {
+        htmlFontSize: { type: 'fontSize' },
+        fontFamily: { type: 'fontFamily' },
+        fontSize: { type: 'fontSize' },
+        fontWeightLight: { type: 'fontWeight' },
+        fontWeightRegular: { type: 'fontWeight' },
+        fontWeightMedium: { type: 'fontWeight' },
+        fontWeightBold: { type: 'fontWeight' },
+        h1: {
+            fontFamily: { type: 'fontFamily' },
+            fontWeight: { type: 'fontWeight' },
+            fontSize: { type: 'fontSize' },
+            lineHeight: { type: 'lineHeight' },
+            letterSpacing: { type: 'letterSpacing' },
+        },
+        h2: {
+            fontFamily: { type: 'fontFamily' },
+            fontWeight: { type: 'fontWeight' },
+            fontSize: { type: 'fontSize' },
+            lineHeight: { type: 'lineHeight' },
+            letterSpacing: { type: 'letterSpacing' },
+        },
+        h3: {
+            fontFamily: { type: 'fontFamily' },
+            fontWeight: { type: 'fontWeight' },
+            fontSize: { type: 'fontSize' },
+            lineHeight: { type: 'lineHeight' },
+            letterSpacing: { type: 'letterSpacing' },
+        },
+        h4: {
+            fontFamily: { type: 'fontFamily' },
+            fontWeight: { type: 'fontWeight' },
+            fontSize: { type: 'fontSize' },
+            lineHeight: { type: 'lineHeight' },
+            letterSpacing: { type: 'letterSpacing' },
+        },
+        h5: {
+            fontFamily: { type: 'fontFamily' },
+            fontWeight: { type: 'fontWeight' },
+            fontSize: { type: 'fontSize' },
+            lineHeight: { type: 'lineHeight' },
+            letterSpacing: { type: 'letterSpacing' },
+        },
+        h6: {
+            fontFamily: { type: 'fontFamily' },
+            fontWeight: { type: 'fontWeight' },
+            fontSize: { type: 'fontSize' },
+            lineHeight: { type: 'lineHeight' },
+            letterSpacing: { type: 'letterSpacing' },
+        },
+        subtitle1: {
+            fontFamily: { type: 'fontFamily' },
+            fontWeight: { type: 'fontWeight' },
+            fontSize: { type: 'fontSize' },
+            lineHeight: { type: 'lineHeight' },
+            letterSpacing: { type: 'letterSpacing' },
+        },
+        subtitle2: {
+            fontFamily: { type: 'fontFamily' },
+            fontWeight: { type: 'fontWeight' },
+            fontSize: { type: 'fontSize' },
+            lineHeight: { type: 'lineHeight' },
+            letterSpacing: { type: 'letterSpacing' },
+        },
+        body1: {
+            fontFamily: { type: 'fontFamily' },
+            fontWeight: { type: 'fontWeight' },
+            fontSize: { type: 'fontSize' },
+            lineHeight: { type: 'lineHeight' },
+            letterSpacing: { type: 'letterSpacing' },
+        },
+        body2: {
+            fontFamily: { type: 'fontFamily' },
+            fontWeight: { type: 'fontWeight' },
+            fontSize: { type: 'fontSize' },
+            lineHeight: { type: 'lineHeight' },
+            letterSpacing: { type: 'letterSpacing' },
+        },
+        button: {
+            fontFamily: { type: 'fontFamily' },
+            fontWeight: { type: 'fontWeight' },
+            fontSize: { type: 'fontSize' },
+            lineHeight: { type: 'lineHeight' },
+            letterSpacing: { type: 'letterSpacing' },
+            textTransform: { type: 'textTransform' },
+        },
+        caption: {
+            fontFamily: { type: 'fontFamily' },
+            fontWeight: { type: 'fontWeight' },
+            fontSize: { type: 'fontSize' },
+            lineHeight: { type: 'lineHeight' },
+            letterSpacing: { type: 'letterSpacing' },
+        },
+        overline: {
+            fontFamily: { type: 'fontFamily' },
+            fontWeight: { type: 'fontWeight' },
+            fontSize: { type: 'fontSize' },
+            lineHeight: { type: 'lineHeight' },
+            letterSpacing: { type: 'letterSpacing' },
+            textTransform: { type: 'textTransform' },
+        },
+    },
     zIndex: {
         mobileStepper: {
             type: 'number',
@@ -195,7 +422,70 @@ const typesMap = {
             onChange={onChange}
         />
     ),
+    easing: ({ value, onChange, ...props }) => (
+        <FieldEditor
+            {...props}
+            value={value}
+            onChange={onChange}
+        />
+    ),
     fontFamily: ({ value, onChange, ...props }) => (
+        <FieldEditor
+            {...props}
+            value={value}
+            onChange={onChange}
+        />
+    ),
+    fontWeight: ({ value, onChange, ...props }) => (
+        <FieldEditor
+            {...props}
+            value={value}
+            onChange={onChange}
+        />
+    ),
+    fontSize: ({ value, onChange, unit = 'px', ...props }) => {
+        const matches = typeof value === 'string' && value.match(/^([\d.]*)(px|rem|em)$/);
+        const newUnit = matches ? matches[2] : unit;
+        const newValue = matches ? Number(matches[1]) : value;
+
+        return (
+            <FieldEditor
+                {...props}
+                type="number"
+                step={newUnit === 'px' ? 1: 0.1}
+                min={0}
+                unit={newUnit}
+                value={newValue}
+                formatter={(newValue) => `${Number(newValue)}${newUnit}`}
+                onChange={onChange}
+            />
+        );
+    },
+    lineHeight: ({ value, onChange, ...props }) => (
+        <FieldEditor
+            {...props}
+            value={value}
+            onChange={onChange}
+        />
+    ),
+    letterSpacing: ({ value, onChange, unit = 'px', ...props }) => {
+        const matches = typeof value === 'string' && value.match(/^([\d.]*)(px|rem|em)$/);
+        const newUnit = matches ? matches[2] : unit;
+        const newValue = matches ? Number(matches[1]) : value;
+
+        return (
+            <FieldEditor
+                {...props}
+                type="number"
+                step={newUnit === 'px' ? 1: 0.1}
+                unit={newUnit}
+                value={newValue}
+                formatter={(newValue) => `${Number(newValue)}${newUnit}`}
+                onChange={onChange}
+            />
+        );
+    },
+    textTransform: ({ value, onChange, ...props }) => (
         <FieldEditor
             {...props}
             value={value}
@@ -210,7 +500,7 @@ const typesMap = {
         />
     ),
     shadow: ({ value, onChange, ...props }) => (
-        <ShadowEditor
+        <FieldEditor
             {...props}
             value={value}
             onChange={onChange}

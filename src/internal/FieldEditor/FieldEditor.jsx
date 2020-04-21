@@ -16,12 +16,12 @@ function FieldEditor({ value, themeKey, step, min, max, onChange, unit, formatte
     const handleChange = useCallback((event) => {
         clearTimeout(timer);
 
-        const newValue = formatter(event.target.value);
+        const newValue = event.target.value;
 
         setLocalValue(newValue);
 
         timer = setTimeout(() => {
-            onChange(newValue);
+            onChange(formatter(newValue));
         }, 50);
     }, []);
 
