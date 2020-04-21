@@ -37,13 +37,25 @@ function SideBarEditor({ open, onReset, onExpandToggle, onSave }) {
     });
 
     const defaultTheme = createMuiTheme({
-        palette: { type: muiTheme.palette.type },
+        palette: {
+            type: muiTheme.palette.type,
+        },
         overrides: {
             MuiPaper: {
                 root: {
                     // Do not instanciate font-size from `body`
                     fontSize: 16,
                 }
+            },
+            MuiAutocomplete: {
+                popper: {
+                    zIndex: `${muiTheme.zIndex.tooltip + 11} !important`,
+                },
+            },
+            MuiPopover: {
+                root: {
+                    zIndex: `${muiTheme.zIndex.tooltip + 11} !important`,
+                },
             },
         },
     });

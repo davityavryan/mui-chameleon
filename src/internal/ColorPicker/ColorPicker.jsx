@@ -13,10 +13,6 @@ import themeKeyLabel from '../../utils/themeKeyLabel';
 
 const useStyles = makeStyles(({ palette, spacing, zIndex, shape }) => {
     return {
-        popoverRoot: {
-            // Color picker on top of everything
-            zIndex: `${zIndex.tooltip + 11} !important`,
-        },
         colorPicker: {
             width: spacing(3),
             minWidth: spacing(3),
@@ -67,9 +63,6 @@ function ColorPicker({ value, themeKey, onChange }) {
 
                 <Popover
                     id={id}
-                    classes={{
-                        root: classes.popoverRoot,
-                    }}
                     open={open}
                     anchorEl={anchorEl}
                     onClose={handleClose}

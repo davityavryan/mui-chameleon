@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
 
-import themeKeyLabel from '../../utils/themeKeyLabel';
+import { themeKeyLabel } from '../../utils';
 
 let timer;
 
@@ -31,7 +31,7 @@ function FieldEditor({ value, themeKey, step, min, max, onChange, unit, formatte
             InputProps={{
                 endAdornment,
             }}
-            variant="outlined"
+            variant="filled"
             value={localValue}
             label={themeKeyLabel(themeKey)}
             onChange={handleChange}

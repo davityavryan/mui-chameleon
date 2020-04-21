@@ -8,12 +8,13 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import Section from '../Section/Section';
 import Parser from '../Parser/Parser';
 
-import { themeMap } from '../../utils/themeMap';
+import { themeMap } from '../../utils';
 
 function Editor({ theme, defaultTheme, onChange }) {
+    const entries = Object.entries(theme);
     return (
         <Fragment>
-            {Object.entries(theme).map(([key, themeItem]) => {
+            {entries.map(([key, themeItem]) => {
                 const themeKey = key;
                 const mapItem = themeMap[themeKey];
 

@@ -9,8 +9,7 @@ import ListSubheader from '@material-ui/core/ListSubheader'
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 
-import themeKeyLabel from '../../utils/themeKeyLabel';
-import { themeMap, typesMap } from '../../utils/themeMap';
+import { themeMap, typesMap, themeKeyLabel } from '../../utils';
 
 // TODO: separate theme for this file? :/
 const defaultTheme = createMuiTheme();
@@ -62,9 +61,10 @@ function Parser({ item, itemKey, defaultValue, onChange, isTopLevel }) {
     }
 
     if (typeof item === 'object') {
+        const entries = Object.entries(item);
         return (
             <List className={classes.root} subheader={<li />}>
-                {Object.entries(item).map(([nestedItemKey, nestedItem]) => {
+                {entries.map(([nestedItemKey, nestedItem]) => {
                     const themeKey = `${itemKey}.${nestedItemKey}`;
 
                     if (typeof nestedItem !== 'object') {

@@ -7,7 +7,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
@@ -89,14 +88,11 @@ function Index() {
                 onClose={handleCloseDialog}
                 maxWidth="md"
                 aria-labelledby="theme-dialog-title"
-                aria-describedby="theme-dialog-description"
                 fullWidth
             >
                 <DialogTitle id="theme-dialog-title">New theme</DialogTitle>
                 <DialogContent>
-                    <DialogContentText id="theme-dialog-description">
-                        <pre>{JSON.stringify(updatedTheme, null, 4)}</pre>
-                    </DialogContentText>
+                    <pre>{JSON.stringify(updatedTheme, null, 4)}</pre>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleCloseDialog}>
