@@ -1,3 +1,4 @@
+import fs from 'fs';
 import path from 'path';
 
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
@@ -189,6 +190,11 @@ export default (env, args = {}) => {
             port: 4040,
             writeToDisk: true,
             compress: true,
+            http2: true,
+            https: {
+                key: fs.readFileSync(here('./etc/dev-cert.key')),
+                cert: fs.readFileSync(here('./etc/dev-cert.crt')),
+            },
             overlay: {
                 warnings: true,
                 errors: true,
