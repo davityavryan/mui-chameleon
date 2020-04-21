@@ -69,6 +69,17 @@ function SideBarEditor({ open, onReset, onExpandToggle, onSave }) {
     const handleChange = (themeKey) => (newValue) => {
         const dynamicThemeCopy = JSON.parse(JSON.stringify(state.theme));
 
+        const parentKey = themeKey.replace(/^(.*)\.[^.]*$/, '$1');
+        const parentDefaultValue = objectPath.get(defaultTheme, parentKey);
+
+        if (Array.isArray(parentDefaultValue)) {
+            objectPath.set(dynamicThemeCopy, parentKey, parentDefaultValue);
+        } else if (parentDefaultValue.main !== undefined) {
+            if (themeKey !== 'main') {
+                objectPath.set(dynamicThemeCopy, `${parentKey}.main`, parentDefaultValue.main);
+            }
+        }
+
         objectPath.set(dynamicThemeCopy, themeKey, newValue);
 
         dispatch({
