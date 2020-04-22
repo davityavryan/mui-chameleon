@@ -2,7 +2,10 @@
 
 ## Unreleased
 
-Keep all packages up to date.
+- Complete coverage for theme
+- Sort theme keys
+- Fix palette saving bug
+- Keep packages up to date
 
 ## v0.1.0-alpha.4
 ###### *Jan 6, 2020*
