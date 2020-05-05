@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Keep packages up to date
+
+## v0.1.0-alpha.5
+###### *Apr 22, 2020*
+
 - Complete coverage for theme
 - Sort theme keys
 - Fix palette saving bug
