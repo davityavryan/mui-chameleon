@@ -76,21 +76,22 @@ export default (env, args = {}) => {
         },
         plugins: [
             new CleanWebpackPlugin(),
-            // NOTE: CopyPlugin has a bug with wildcard file selection.
-            new CopyPlugin([
-                {
-                    from: `${dirs.src}/static/img`,
-                    to: './img',
-                },
-                {
-                    from: `${dirs.src}/static/browserconfig.xml`,
-                    to: './browserconfig.xml',
-                },
-                {
-                    from: `${dirs.src}/static/manifest.json`,
-                    to: './manifest.json',
-                },
-            ]),
+            new CopyPlugin({
+                patterns: [
+                    {
+                        from: `${dirs.src}/static/img`,
+                        to: './img',
+                    },
+                    {
+                        from: `${dirs.src}/static/browserconfig.xml`,
+                        to: './browserconfig.xml',
+                    },
+                    {
+                        from: `${dirs.src}/static/manifest.json`,
+                        to: './manifest.json',
+                    },
+                ],
+            }),
             new HtmlWebpackPlugin({
                 template: `${dirs.src}/static/index.html`,
                 cache: true,
