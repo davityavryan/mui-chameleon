@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import objectPath from 'object-path';
@@ -36,14 +36,14 @@ function SideBarEditor({ open, onReset, onExpandToggle, onSave }) {
         muiDirection: muiTheme.direction,
     });
 
-    const defaultTheme = createMuiTheme({
+    const defaultTheme = useMemo(() => createMuiTheme({
         palette: {
             type: muiTheme.palette.type,
         },
         overrides: {
             MuiPaper: {
                 root: {
-                    // Do not instanciate font-size from `body`
+                    // Do not instantiate font-size from `body`
                     fontSize: 16,
                 }
             },
@@ -58,7 +58,7 @@ function SideBarEditor({ open, onReset, onExpandToggle, onSave }) {
                 },
             },
         },
-    });
+    }), []);
 
     const handleToggleOpen = () => {
         setIsOpen(!isOpen);
