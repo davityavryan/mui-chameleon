@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
 
-import { themeKeyLabel } from '../../utils';
+import themeKeyLabel from '../../utils/themeKeyLabel';
 
 let timer;
 
