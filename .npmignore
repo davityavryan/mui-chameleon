@@ -1,10 +1,8 @@
-.babelrc
-.browserslistrc
-webpack.config.babel.js
-rollup.config.js
-copy-files.js
 src
-gh-pages-src
 gh-pages
-public
+.browserslistrc
+babel.config.js
+copy-files.js
+renovate.json
+rollup.config.js
 yarn.lock

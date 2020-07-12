@@ -1,0 +1,43 @@
+{
+    "name": "material-ui-chameleon-gh-pages",
+    "version": "0.0.1",
+    "description": "Material-UI Chameleon - Github pages",
+    "author": "Davit Yavryan <davit.yavryan@gmail.com>",
+    "license": "MIT",
+    "private": true,
+    "sideEffects": false,
+    "scripts": {
+        "start": "webpack-dev-server --progress --mode development",
+        "build": "webpack-cli --progress -p",
+        "production": "webpack-dev-server --progress -p",
+        "deploy": "yarn build && gh-pages -d ./gh-pages/public",
+        "prestart": "yarn install --prefer-offline --frozen-lockfile",
+        "prebuild": "yarn install --prefer-offline --frozen-lockfile",
+        "preproduction": "yarn install --prefer-offline --frozen-lockfile"
+    },
+    "dependencies": {
+        "@material-ui/core": "^4.11.0",
+        "@material-ui/icons": "^4.9.1",
+        "material-ui-chameleon": "link:../build/",
+        "prop-types": "^15.7.2",
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1",
+        "react-router-dom": "^5.2.0"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.10.4",
+        "@babel/preset-env": "^7.10.4",
+        "@babel/preset-react": "^7.10.4",
+        "babel-loader": "^8.1.0",
+        "clean-webpack-plugin": "^3.0.0",
+        "copy-webpack-plugin": "^6.0.3",
+        "core-js": "^3.6.5",
+        "gh-pages": "^3.1.0",
+        "html-webpack-plugin": "^4.3.0",
+        "script-ext-html-webpack-plugin": "^2.1.4",
+        "terser-webpack-plugin": "^3.0.6",
+        "webpack": "^4.43.0",
+        "webpack-cli": "^3.3.12",
+        "webpack-dev-server": "^3.11.0"
+    }
+}

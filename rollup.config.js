@@ -21,24 +21,6 @@ const babelOptions = {
 };
 const commonjsOptions = {
     include: /node_modules/,
-    namedExports: {
-        'prop-types': [
-            'elementType',
-            'bool',
-            'func',
-            'object',
-            'oneOfType',
-            'element',
-        ],
-        'react-is': [
-            'ForwardRef',
-            'isFragment',
-            'isLazy',
-            'isMemo',
-            'isValidElementType',
-            'Memo',
-        ],
-    },
 };
 const resolveOptions = {
     extensions: ['.jsx', '.js'],

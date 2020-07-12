@@ -1,19 +1,18 @@
-import fs from 'fs';
-import path from 'path';
+const path = require('path');
 
-import { CleanWebpackPlugin } from 'clean-webpack-plugin';
-import CopyPlugin from 'copy-webpack-plugin';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import TerserPlugin from 'terser-webpack-plugin';
-import ScriptExtHtmlWebpackPlugin from 'script-ext-html-webpack-plugin';
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 
 const here = (dir) => (
     dir ? path.resolve(__dirname, dir) : __dirname
 );
 
 const dirs = {
-    src: './gh-pages-src',
-    dist: './gh-pages',
+    src: './src',
+    dist: './public',
 };
 
 const devServerPackages = [
@@ -31,7 +30,7 @@ const devServerPackages = [
     'webpack-dev-server',
 ];
 
-export default (env, args = {}) => {
+module.exports = (env, args = {}) => {
     const { mode = 'development' } = args;
     const isProduction = mode === 'production';
 
@@ -43,8 +42,8 @@ export default (env, args = {}) => {
         },
         output: {
             path: here(dirs.dist),
-            filename: 'js/[name]-[hash].js',
-            chunkFilename: 'js/[name]-[chunkhash].js',
+            filename: 'js/[name].js',
+            chunkFilename: 'js/[name].js',
             sourceMapFilename: '[file].map',
         },
         resolve: {
@@ -54,7 +53,7 @@ export default (env, args = {}) => {
                 here(dirs.src),
             ],
             alias: {
-                'material-ui-chameleon': here('./build'),
+                'material-ui-chameleon': here('../build'),
             },
         },
         devtool: isProduction ? 'source-map' : 'inline-cheap-module-source-map',
@@ -95,6 +94,7 @@ export default (env, args = {}) => {
             new HtmlWebpackPlugin({
                 template: `${dirs.src}/static/index.html`,
                 cache: true,
+                scriptLoading: 'defer',
                 minify: isProduction && {
                     minifyCSS: true,
                     minifyJS: true,
@@ -105,21 +105,15 @@ export default (env, args = {}) => {
                     removeStyleLinkTypeAttributes: true,
                     useShortDoctype: true,
                 },
-                // Fixes "Error: Cyclic dependency"
-                // see https://github.com/marcelklehr/toposort/issues/20#issuecomment-388025176
-                chunksSortMode: 'none',
             }),
             new ScriptExtHtmlWebpackPlugin({
                 inline: isProduction && 'runtime',
-                defaultAttribute: 'defer',
             }),
         ],
         optimization: {
             runtimeChunk: 'single',
             splitChunks: {
                 chunks: 'all',
-                maxInitialRequests: Infinity,
-                minSize: 0,
                 cacheGroups: {
                     // Separate dev related packages
                     'webpack-dev-server': {
@@ -137,7 +131,6 @@ export default (env, args = {}) => {
                         test: /[\\/]node_modules[\\/]/,
                         chunks: 'all',
                         enforce: true,
-                        reuseExistingChunk: true,
                         name: (module) => {
                             // get the name. E.g. node_modules/packageName/not/this/part.js
                             // or node_modules/packageName
@@ -163,7 +156,7 @@ export default (env, args = {}) => {
             },
             minimizer: [
                 new TerserPlugin({
-                    cache: here(`./node_modules/.cache/${mode}/uglify-js`),
+                    cache: here(`./node_modules/.cache/${mode}/terser-js`),
                     parallel: true,
                     sourceMap: true,
                     terserOptions: {
@@ -182,6 +175,7 @@ export default (env, args = {}) => {
         },
         stats: {
             assetsSort: 'chunkNames',
+            cachedAssets: false,
             children: false,
             modules: false,
             entrypoints: false,
@@ -189,19 +183,16 @@ export default (env, args = {}) => {
         },
         devServer: {
             port: 4040,
-            writeToDisk: true,
+            contentBase: here(dirs.dist),
             compress: true,
-            http2: true,
-            https: {
-                key: fs.readFileSync(here('./etc/dev-cert.key')),
-                cert: fs.readFileSync(here('./etc/dev-cert.crt')),
-            },
+            historyApiFallback: true,
             overlay: {
                 warnings: true,
                 errors: true,
             },
             stats: {
                 assetsSort: 'chunkNames',
+                cachedAssets: false,
                 children: false,
                 modules: false,
                 entrypoints: false,
