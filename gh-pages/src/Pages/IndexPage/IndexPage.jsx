@@ -1,7 +1,7 @@
 import React, { Suspense, useState } from 'react';
 import ReactDOM from 'react-dom';
 
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Button from '@material-ui/core/Button';
@@ -44,7 +44,7 @@ function IndexPage() {
     };
 
     return (
-        <BrowserRouter basename={process.env.NODE_ENV === 'production' ? '/material-ui-chameleon' : '/'}>
+        <HashRouter>
             <MainLayout>
                 <ThemeProvider theme={initialTheme}>
                     <CssBaseline />
@@ -85,7 +85,7 @@ function IndexPage() {
                     </Dialog>
                 </ThemeProvider>
             </MainLayout>
-        </BrowserRouter>
+        </HashRouter>
     );
 }
 

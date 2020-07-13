@@ -1,6 +1,6 @@
 {
     "name": "material-ui-chameleon-gh-pages",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "description": "Material-UI Chameleon - Github pages",
     "author": "Davit Yavryan <davit.yavryan@gmail.com>",
     "license": "MIT",
@@ -10,7 +10,7 @@
         "start": "webpack-dev-server --progress --mode development",
         "build": "webpack-cli --progress -p",
         "production": "webpack-dev-server --progress -p",
-        "deploy": "yarn build && gh-pages -d ./gh-pages/public",
+        "deploy": "yarn build && gh-pages -d ./public",
         "prestart": "yarn install --prefer-offline --frozen-lockfile",
         "prebuild": "yarn install --prefer-offline --frozen-lockfile",
         "preproduction": "yarn install --prefer-offline --frozen-lockfile"

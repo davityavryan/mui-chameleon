@@ -42,8 +42,8 @@ module.exports = (env, args = {}) => {
         },
         output: {
             path: here(dirs.dist),
-            filename: 'js/[name].js',
-            chunkFilename: 'js/[name].js',
+            filename: `js/[name]${isProduction ? '.[contenthash]' : ''}.js`,
+            chunkFilename: `js/[name]${isProduction ? '.[chunkhash]' : ''}.js`,
             sourceMapFilename: '[file].map',
         },
         resolve: {
