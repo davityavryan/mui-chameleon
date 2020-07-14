@@ -12,7 +12,7 @@
 
 [Material-UI](https://material-ui.com/) theme editor.
 
-[![npm package](https://img.shields.io/npm/v/material-ui-chameleon/alpha.svg)](https://www.npmjs.com/package/material-ui-chameleon)
+[![npm package](https://img.shields.io/npm/v/material-ui-chameleon/latest.svg)](https://www.npmjs.com/package/material-ui-chameleon)
 [![npm downloads](https://img.shields.io/npm/dm/material-ui-chameleon.svg)](https://www.npmjs.com/package/material-ui-chameleon)
 [![PeerDependencies](https://david-dm.org/davityavryan/material-ui-chameleon/master/peer-status.svg)](https://david-dm.org/davityavryan/material-ui-chameleon/master?type=peer)
 [![Dependencies](https://david-dm.org/davityavryan/material-ui-chameleon/master/status.svg)](https://david-dm.org/davityavryan/material-ui-chameleon/master)
