@@ -64,6 +64,14 @@ module.exports = {
         },
         test: {
             sourceMaps: 'both',
+            plugins: [
+                ['istanbul', {
+                    exclude: [
+                        '**/*.unit.{js,jsx}',
+                        '**/*.e2e.{js,jsx}',
+                    ],
+                }],
+            ],
         },
         benchmark: {
             plugins: [

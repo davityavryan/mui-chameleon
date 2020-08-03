@@ -3,7 +3,12 @@
 # Dependency directories
 node_modules/
 
+# Cypress
+cypress/screenshots/
+cypress/videos/
+
 # Coverage directory used by tools like istanbul
+.nyc_output/
 coverage/
 *.lcov
 
@@ -16,6 +21,7 @@ yarn-error.log*
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 # dotenv environment variables file
+.envrc
 .env
 .env.test
 

@@ -9,5 +9,17 @@
                 "corejs": 3
             }
         ]
-    ]
+    ],
+    "env": {
+        "test": {
+            "plugins": [
+                ["istanbul", {
+                    "exclude": [
+                        "**/*.unit.{js,jsx}",
+                        "**/*.e2e.{js,jsx}"
+                    ]
+                }]
+            ]
+        }
+    }
 }

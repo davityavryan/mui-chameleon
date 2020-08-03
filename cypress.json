@@ -1,0 +1,13 @@
+{
+    "projectId": "99caai",
+    "baseUrl": "http://localhost:4040",
+    "defaultCommandTimeout": 10000,
+    "integrationFolder": "./gh-pages/src",
+    "video": false,
+    "videoUploadOnPasses": false,
+    "screenshotOnRunFailure": true,
+    "testFiles": [
+        "./**/*.unit.{js,jsx}",
+        "./**/*.e2e.{js,jsx}"
+    ]
+}
