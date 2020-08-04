@@ -95,12 +95,13 @@ function SideBarEditor({ open, onReset, onExpandToggle, onSave }) {
 
     return (
         <MuiThemeProvider theme={defaultTheme}>
-            <div className={classes.root}>
+            <div className={classes.root} data-testid="side-bar-editor">
                 <Header
                     isOpen={isOpen}
                     onReset={onReset}
                     onSave={onSave}
                     onToggleOpen={handleToggleOpen}
+                    data-testid="side-bar-header"
                 />
 
                 <Collapse in={isOpen} mountOnEnter unmountOnExit>

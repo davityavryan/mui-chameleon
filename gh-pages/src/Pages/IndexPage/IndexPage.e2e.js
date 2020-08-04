@@ -7,9 +7,9 @@ context('Home page', () => {
 
     describe('should', () => {
         it('contain correct title', () => {
-            cy.title().should('contain', 'Material-ui Chameleon');
+            cy.getByTestId('side-bar-logo-button').click();
 
-            cy.screenshot();
+            cy.getByTestId('side-bar-editor').screenshot('side-bar-editor');
         });
     });
 });

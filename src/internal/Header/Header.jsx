@@ -49,7 +49,7 @@ function Header({ isOpen, onToggleOpen, onReset, onSave }) {
                 </Button>
             )}
 
-            <IconButton onClick={onToggleOpen}>
+            <IconButton onClick={onToggleOpen} data-testid="side-bar-logo-button">
                 <svg width="1.5em" height="1.5em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
                     <g fillRule="nonzero" fill="none">
                         <path fill={palette.grey['400']} fillOpacity=".77" d="M128 19C67.808 19 19 67.808 19 128s48.808 109 109 109c10.052 0 18.167-8.114 18.167-18.167 0-4.723-1.817-8.962-4.724-12.232-2.785-3.149-4.602-7.388-4.602-11.99 0-10.052 8.115-18.167 18.167-18.167h21.436c33.427 0 60.556-27.128 60.556-60.555C237 62.358 188.192 19 128 19z"/>

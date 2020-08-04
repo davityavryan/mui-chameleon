@@ -1,5 +1,6 @@
 {
     "projectId": "99caai",
+    "nodeVersion": "system",
     "baseUrl": "http://localhost:4040",
     "defaultCommandTimeout": 10000,
     "integrationFolder": "./gh-pages/src",
