@@ -1,0 +1,41 @@
+name: Material-UI-Chameleon
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        node: [ '10', '12' ]
+
+    name: Build and test on Node v${{ matrix.node }}
+    steps:
+      - uses: actions/checkout@v2
+
+      # TODO: use static server instead of Webpack
+      - name: Increase file limit
+        run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+
+      - name: Setup node
+        uses: actions/setup-node@v2.1.1
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Install dependencies
+        run: |
+          yarn install --prefer-offline --frozen-lockfile
+          yarn --cwd ./gh-pages install --prefer-offline --frozen-lockfile
+
+      - name: Build package
+        run: yarn build
+
+      - name: Run tests
+        env:
+          CYPRESS_WATCH_FOR_FILE_CHANGES: false
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+        run: yarn test:ci
