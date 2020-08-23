@@ -2,16 +2,16 @@ name: Material-UI-Chameleon
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        node: [ '10', '12' ]
+        node: ['10', '12', '14']
 
     name: Build and test on Node v${{ matrix.node }}
     steps:
@@ -22,7 +22,7 @@ jobs:
         run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
       - name: Setup node
-        uses: actions/setup-node@v2.1.1
+        uses: actions/setup-node@v2.1.4
         with:
           node-version: ${{ matrix.node }}
 
