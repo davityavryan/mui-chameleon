@@ -1,0 +1,7 @@
+.idea/
+.vscode/
+.husky/
+
+node_modules/
+
+build/
