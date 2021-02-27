@@ -45,9 +45,7 @@ module.exports = {
             plugins: productionPlugins,
         },
         coverage: {
-            plugins: [
-                'babel-plugin-istanbul',
-            ],
+            plugins: ['babel-plugin-istanbul'],
         },
         development: {},
         esm: {
@@ -65,18 +63,16 @@ module.exports = {
         test: {
             sourceMaps: 'both',
             plugins: [
-                ['istanbul', {
-                    exclude: [
-                        '**/*.unit.{js,jsx}',
-                        '**/*.e2e.{js,jsx}',
-                    ],
-                }],
+                [
+                    'istanbul',
+                    {
+                        exclude: ['**/*.unit.{js,jsx}', '**/*.e2e.{js,jsx}'],
+                    },
+                ],
             ],
         },
         benchmark: {
-            plugins: [
-                ...productionPlugins,
-            ],
+            plugins: [...productionPlugins],
         },
     },
 };

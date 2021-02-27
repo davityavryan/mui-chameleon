@@ -9,7 +9,7 @@ const globals = {
     react: 'React',
     'react-dom': 'ReactDOM',
     '@material-ui/core': 'MaterialUI',
-    'deepmerge': 'merge',
+    deepmerge: 'merge',
     'object-path': 'objectPath',
     'react-color': 'reactColor',
 };

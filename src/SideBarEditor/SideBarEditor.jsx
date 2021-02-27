@@ -36,29 +36,33 @@ function SideBarEditor({ open, onReset, onExpandToggle, onSave }) {
         muiDirection: muiTheme.direction,
     });
 
-    const defaultTheme = useMemo(() => createMuiTheme({
-        palette: {
-            type: muiTheme.palette.type,
-        },
-        overrides: {
-            MuiPaper: {
-                root: {
-                    // Do not instantiate font-size from `body`
-                    fontSize: 16,
-                }
-            },
-            MuiAutocomplete: {
-                popper: {
-                    zIndex: `${muiTheme.zIndex.tooltip + 11} !important`,
+    const defaultTheme = useMemo(
+        () =>
+            createMuiTheme({
+                palette: {
+                    type: muiTheme.palette.type,
                 },
-            },
-            MuiPopover: {
-                root: {
-                    zIndex: `${muiTheme.zIndex.tooltip + 11} !important`,
+                overrides: {
+                    MuiPaper: {
+                        root: {
+                            // Do not instantiate font-size from `body`
+                            fontSize: 16,
+                        },
+                    },
+                    MuiAutocomplete: {
+                        popper: {
+                            zIndex: `${muiTheme.zIndex.tooltip + 11} !important`,
+                        },
+                    },
+                    MuiPopover: {
+                        root: {
+                            zIndex: `${muiTheme.zIndex.tooltip + 11} !important`,
+                        },
+                    },
                 },
-            },
-        },
-    }), []);
+            }),
+        []
+    );
 
     const handleToggleOpen = () => {
         setIsOpen(!isOpen);
@@ -106,16 +110,12 @@ function SideBarEditor({ open, onReset, onExpandToggle, onSave }) {
 
                 <Collapse in={isOpen} mountOnEnter unmountOnExit>
                     <Box m={1}>
-                        <Editor
-                            theme={muiTheme}
-                            defaultTheme={defaultTheme}
-                            onChange={handleChange}
-                        />
+                        <Editor theme={muiTheme} defaultTheme={defaultTheme} onChange={handleChange} />
                     </Box>
                 </Collapse>
             </div>
         </MuiThemeProvider>
-    )
+    );
 }
 
 SideBarEditor.propTypes = {

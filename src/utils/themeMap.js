@@ -399,20 +399,9 @@ const typesMap = {
     soon: () => null,
     skip: () => null,
     boolean: ({ value, options, onChange, ...props }) => (
-        <BooleanEditor
-            {...props}
-            options={options}
-            value={value}
-            onChange={onChange}
-        />
+        <BooleanEditor {...props} options={options} value={value} onChange={onChange} />
     ),
-    color: ({ value, onChange, ...props }) => (
-        <ColorPicker
-            {...props}
-            value={value}
-            onChange={onChange}
-        />
-    ),
+    color: ({ value, onChange, ...props }) => <ColorPicker {...props} value={value} onChange={onChange} />,
     number: ({ value, onChange, ...props }) => (
         <FieldEditor
             {...props}
@@ -422,27 +411,9 @@ const typesMap = {
             onChange={onChange}
         />
     ),
-    easing: ({ value, onChange, ...props }) => (
-        <FieldEditor
-            {...props}
-            value={value}
-            onChange={onChange}
-        />
-    ),
-    fontFamily: ({ value, onChange, ...props }) => (
-        <FieldEditor
-            {...props}
-            value={value}
-            onChange={onChange}
-        />
-    ),
-    fontWeight: ({ value, onChange, ...props }) => (
-        <FieldEditor
-            {...props}
-            value={value}
-            onChange={onChange}
-        />
-    ),
+    easing: ({ value, onChange, ...props }) => <FieldEditor {...props} value={value} onChange={onChange} />,
+    fontFamily: ({ value, onChange, ...props }) => <FieldEditor {...props} value={value} onChange={onChange} />,
+    fontWeight: ({ value, onChange, ...props }) => <FieldEditor {...props} value={value} onChange={onChange} />,
     fontSize: ({ value, onChange, unit = 'px', ...props }) => {
         const matches = typeof value === 'string' && value.match(/^([\d.]*)(px|rem|em)$/);
         const newUnit = matches ? matches[2] : unit;
@@ -452,7 +423,7 @@ const typesMap = {
             <FieldEditor
                 {...props}
                 type="number"
-                step={newUnit === 'px' ? 1: 0.1}
+                step={newUnit === 'px' ? 1 : 0.1}
                 min={0}
                 unit={newUnit}
                 value={newValue}
@@ -461,13 +432,7 @@ const typesMap = {
             />
         );
     },
-    lineHeight: ({ value, onChange, ...props }) => (
-        <FieldEditor
-            {...props}
-            value={value}
-            onChange={onChange}
-        />
-    ),
+    lineHeight: ({ value, onChange, ...props }) => <FieldEditor {...props} value={value} onChange={onChange} />,
     letterSpacing: ({ value, onChange, unit = 'px', ...props }) => {
         const matches = typeof value === 'string' && value.match(/^([\d.]*)(px|rem|em)$/);
         const newUnit = matches ? matches[2] : unit;
@@ -477,7 +442,7 @@ const typesMap = {
             <FieldEditor
                 {...props}
                 type="number"
-                step={newUnit === 'px' ? 1: 0.1}
+                step={newUnit === 'px' ? 1 : 0.1}
                 unit={newUnit}
                 value={newValue}
                 formatter={(newValue) => `${Number(newValue)}${newUnit}`}
@@ -485,30 +450,9 @@ const typesMap = {
             />
         );
     },
-    textTransform: ({ value, onChange, ...props }) => (
-        <FieldEditor
-            {...props}
-            value={value}
-            onChange={onChange}
-        />
-    ),
-    text: ({ value, onChange, ...props }) => (
-        <FieldEditor
-            {...props}
-            value={value}
-            onChange={onChange}
-        />
-    ),
-    shadow: ({ value, onChange, ...props }) => (
-        <FieldEditor
-            {...props}
-            value={value}
-            onChange={onChange}
-        />
-    ),
+    textTransform: ({ value, onChange, ...props }) => <FieldEditor {...props} value={value} onChange={onChange} />,
+    text: ({ value, onChange, ...props }) => <FieldEditor {...props} value={value} onChange={onChange} />,
+    shadow: ({ value, onChange, ...props }) => <FieldEditor {...props} value={value} onChange={onChange} />,
 };
 
-export {
-    themeMap,
-    typesMap,
-};
+export { themeMap, typesMap };

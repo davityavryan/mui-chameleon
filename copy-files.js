@@ -24,7 +24,7 @@ async function createModulePackages({ from, to }) {
     const directoryPackages = glob.sync('*/index.js', { cwd: from }).map(path.dirname);
 
     await Promise.all(
-        directoryPackages.map(async directoryPackage => {
+        directoryPackages.map(async (directoryPackage) => {
             const packageJson = {
                 sideEffects: false,
                 module: path.join('../esm', directoryPackage, 'index.js'),
@@ -34,15 +34,13 @@ async function createModulePackages({ from, to }) {
             await fse.writeFile(packageJsonPath, JSON.stringify(packageJson, null, 4));
 
             return packageJsonPath;
-        }),
+        })
     );
 }
 
 async function createPackageFile() {
     const packageData = await fse.readFile(path.resolve(packagePath, './package.json'), 'utf8');
-    const { nyc, scripts, devDependencies, workspaces, ...packageDataOther } = JSON.parse(
-        packageData,
-    );
+    const { nyc, scripts, devDependencies, workspaces, ...packageDataOther } = JSON.parse(packageData);
     const newPackageData = {
         ...packageDataOther,
         private: false,
@@ -75,7 +73,7 @@ async function addLicense(packageData) {
             './esm/index.js',
             './umd/material-ui-chameleon.development.js',
             './umd/material-ui-chameleon.production.min.js',
-        ].map(async file => {
+        ].map(async (file) => {
             try {
                 await prepend(path.resolve(buildPath, file), license);
             } catch (err) {
@@ -85,7 +83,7 @@ async function addLicense(packageData) {
                     throw err;
                 }
             }
-        }),
+        })
     );
 }
 
@@ -93,13 +91,7 @@ async function run() {
     try {
         const packageData = await createPackageFile();
 
-        await Promise.all(
-            [
-                './README.md',
-                './CHANGELOG.md',
-                './LICENSE.md',
-            ].map(file => includeFileInBuild(file)),
-        );
+        await Promise.all(['./README.md', './CHANGELOG.md', './LICENSE.md'].map((file) => includeFileInBuild(file)));
 
         await addLicense(packageData);
 

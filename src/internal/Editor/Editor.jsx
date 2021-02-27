@@ -13,9 +13,7 @@ import { themeMap } from '../../utils';
 function Editor({ theme, defaultTheme, onChange }) {
     const entries = Object.entries(theme);
 
-    entries.sort(([key1], [key2]) => (
-        Number.isNaN(Number(key1)) ? key1.localeCompare(key2) : key1 - key2
-    ));
+    entries.sort(([key1], [key2]) => (Number.isNaN(Number(key1)) ? key1.localeCompare(key2) : key1 - key2));
 
     return (
         <Fragment>
@@ -23,14 +21,12 @@ function Editor({ theme, defaultTheme, onChange }) {
                 const themeKey = key;
                 const mapItem = themeMap[themeKey];
 
-                if (typeof themeItem === 'function' || mapItem && mapItem.type === 'skip') {
+                if (typeof themeItem === 'function' || (mapItem && mapItem.type === 'skip')) {
                     return null;
                 }
 
                 if (mapItem && mapItem.type === 'soon') {
-                    return (
-                        <Section key={themeKey} title={themeKey} secondaryTitle="Coming soon" />
-                    );
+                    return <Section key={themeKey} title={themeKey} secondaryTitle="Coming soon" />;
                 }
 
                 if (typeof themeItem === 'object') {

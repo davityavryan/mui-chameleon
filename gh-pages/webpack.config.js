@@ -6,9 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 
-const here = (dir) => (
-    dir ? path.resolve(__dirname, dir) : __dirname
-);
+const here = (dir) => (dir ? path.resolve(__dirname, dir) : __dirname);
 
 const dirs = {
     src: './src',
@@ -48,10 +46,7 @@ module.exports = (env, args = {}) => {
         },
         resolve: {
             extensions: ['.js', '.jsx'],
-            modules: [
-                here('./node_modules'),
-                here(dirs.src),
-            ],
+            modules: [here('./node_modules'), here(dirs.src)],
             alias: {
                 'material-ui-chameleon': here('../build'),
             },
@@ -123,7 +118,9 @@ module.exports = (env, args = {}) => {
                         priority: 2,
                     },
                     'material-ui-chameleon': {
-                        test: (module) => /[\\/]material-ui-chameleon[\\/]build[\\/]/.test(module.request) || module.rawRequest === 'material-ui-chameleon',
+                        test: (module) =>
+                            /[\\/]material-ui-chameleon[\\/]build[\\/]/.test(module.request) ||
+                            module.rawRequest === 'material-ui-chameleon',
                         name: 'vendors/material-ui-chameleon',
                         priority: 2,
                     },
@@ -134,7 +131,9 @@ module.exports = (env, args = {}) => {
                         name: (module) => {
                             // get the name. E.g. node_modules/packageName/not/this/part.js
                             // or node_modules/packageName
-                            const match = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]([^\\/]*)([\\/]([^\\/]*))?([\\/]([^\\/]*))?|$)/);
+                            const match = module.context.match(
+                                /[\\/]node_modules[\\/](.*?)([\\/]([^\\/]*)([\\/]([^\\/]*))?([\\/]([^\\/]*))?|$)/
+                            );
 
                             // npm package names are URL-safe, but some servers don't like @ symbols
                             const packageName = match[1].replace('@', '');

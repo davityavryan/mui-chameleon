@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 import objectPath from 'object-path';
 
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListSubheader from '@material-ui/core/ListSubheader'
-import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
-import makeStyles from '@material-ui/core/styles/makeStyles'
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
+import makeStyles from '@material-ui/core/styles/makeStyles';
 
 import { themeMap, typesMap, themeKeyLabel } from '../../utils';
 
@@ -63,9 +63,7 @@ function Parser({ item, itemKey, defaultValue, onChange, isTopLevel }) {
     if (typeof item === 'object') {
         const entries = Object.entries(item);
 
-        entries.sort(([key1], [key2]) => (
-            Number.isNaN(Number(key1)) ? key1.localeCompare(key2) : key1 - key2
-        ));
+        entries.sort(([key1], [key2]) => (Number.isNaN(Number(key1)) ? key1.localeCompare(key2) : key1 - key2));
 
         return (
             <List className={classes.root} subheader={<li />}>
@@ -112,12 +110,7 @@ function Parser({ item, itemKey, defaultValue, onChange, isTopLevel }) {
 
     return (
         <ListItem className={classes.listItem}>
-            <Component
-                {...props}
-                value={item}
-                themeKey={itemKey}
-                onChange={onChange(itemKey)}
-            />
+            <Component {...props} value={item} themeKey={itemKey} onChange={onChange(itemKey)} />
         </ListItem>
     );
 }

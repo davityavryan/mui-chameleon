@@ -17,9 +17,7 @@ function MainLayout({ children }) {
 
             <Box component="main" display="flex" alignItems="center" flexGrow={1} py={3}>
                 <Container maxWidth="md">
-                    <ErrorBoundary>
-                        {children}
-                    </ErrorBoundary>
+                    <ErrorBoundary>{children}</ErrorBoundary>
                 </Container>
             </Box>
         </MuiThemeProvider>

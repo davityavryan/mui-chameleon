@@ -43,7 +43,7 @@ function ColorPicker({ value, themeKey, onChange }) {
     };
 
     const handleChange = (color) => {
-        const {r, g, b, a} = color.rgb;
+        const { r, g, b, a } = color.rgb;
 
         if (a === 1) {
             onChange(color.hex);
@@ -78,10 +78,7 @@ function ColorPicker({ value, themeKey, onChange }) {
                         zIndex: 1500,
                     }}
                 >
-                    <SketchPicker
-                        color={value}
-                        onChangeComplete={handleChange}
-                    />
+                    <SketchPicker color={value} onChangeComplete={handleChange} />
                 </Popover>
             </ListItemSecondaryAction>
         </Fragment>

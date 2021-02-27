@@ -27,11 +27,9 @@ function ThemeProvider({ theme, children }) {
 
     return (
         <ChameleonContext.Provider value={{ state, dispatch }}>
-            <MuiThemeProvider theme={createMuiTheme(state.theme)}>
-                {children}
-            </MuiThemeProvider>
+            <MuiThemeProvider theme={createMuiTheme(state.theme)}>{children}</MuiThemeProvider>
         </ChameleonContext.Provider>
-    )
+    );
 }
 
 ThemeProvider.propTypes = {

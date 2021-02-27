@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ExpansionPanel from '@material-ui/core/ExpansionPanel'
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
-import Typography from '@material-ui/core/Typography'
-import makeStyles from '@material-ui/core/styles/makeStyles'
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import Typography from '@material-ui/core/Typography';
+import makeStyles from '@material-ui/core/styles/makeStyles';
 
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
@@ -31,9 +31,7 @@ function Section({ title, secondaryTitle, children }) {
                 expandIcon={Boolean(children) ? <ExpandMoreIcon /> : null}
                 disabled={!Boolean(children)}
             >
-                <Typography variant="subtitle1">
-                    {themeKeyLabel(title)}
-                </Typography>
+                <Typography variant="subtitle1">{themeKeyLabel(title)}</Typography>
 
                 {secondaryTitle && (
                     <Typography variant="caption" color="textSecondary">

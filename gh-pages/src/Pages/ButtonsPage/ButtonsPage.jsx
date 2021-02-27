@@ -16,9 +16,7 @@ function ButtonsPage() {
             </Typography>
 
             <div className={classes.buttons}>
-                <Button variant="text">
-                    Default
-                </Button>
+                <Button variant="text">Default</Button>
                 <Button variant="text" color="primary">
                     Primary
                 </Button>
@@ -31,9 +29,7 @@ function ButtonsPage() {
             </div>
 
             <div className={classes.buttons}>
-                <Button variant="outlined">
-                    Default
-                </Button>
+                <Button variant="outlined">Default</Button>
                 <Button variant="outlined" color="primary">
                     Primary
                 </Button>
@@ -46,9 +42,7 @@ function ButtonsPage() {
             </div>
 
             <div className={classes.buttons}>
-                <Button variant="contained">
-                    Default
-                </Button>
+                <Button variant="contained">Default</Button>
                 <Button variant="contained" color="primary">
                     Primary
                 </Button>

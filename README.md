@@ -19,7 +19,7 @@
 [![DevDependencies](https://img.shields.io/david/dev/davityavryan/material-ui-chameleon)](https://david-dm.org/davityavryan/material-ui-chameleon/master?type=dev)
 [![PeerDependencies](https://img.shields.io/david/peer/davityavryan/material-ui-chameleon)](https://david-dm.org/davityavryan/material-ui-chameleon/master?type=peer)
 [![BundlePhobia](https://badgen.net/bundlephobia/minzip/material-ui-chameleon)](https://bundlephobia.com/result?p=material-ui-chameleon)
-[![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/davityavryan/material-ui-chameleon.svg)](https://isitmaintained.com/project/davityavryan/material-ui-chameleon "Average time to resolve an issue")
+[![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/davityavryan/material-ui-chameleon.svg)](https://isitmaintained.com/project/davityavryan/material-ui-chameleon 'Average time to resolve an issue')
 
 </div>
 
@@ -67,10 +67,9 @@ ReactDOM.render(<App />, document.querySelector('#app'));
 
 ## Acknowledgments
 
-* Bundling Tools and scripts are used from [Material-UI](https://github.com/mui-org/material-ui) packages. This makes my job easier, faster and compatibility of this package better with Material-UI packages.
-
+-   Bundling Tools and scripts are used from [Material-UI](https://github.com/mui-org/material-ui) packages. This makes
+    my job easier, faster and compatibility of this package better with Material-UI packages.
 
 ## License
 
-This project is licensed under the terms of the
-[MIT license](/LICENSE.md).
+This project is licensed under the terms of the [MIT license](/LICENSE.md).

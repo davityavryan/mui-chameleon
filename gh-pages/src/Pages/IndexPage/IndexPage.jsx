@@ -57,9 +57,7 @@ function IndexPage() {
                         </Switch>
                     </Suspense>
 
-                    {!isExpanded && (
-                        <img className={classes.clickMe} src="img/click-me.svg" alt="Click me" />
-                    )}
+                    {!isExpanded && <img className={classes.clickMe} src="img/click-me.svg" alt="Click me" />}
 
                     <SideBarEditor onSave={handleThemeSave} onExpandToggle={handleExpandToggle} />
 
@@ -75,9 +73,7 @@ function IndexPage() {
                             <pre>{JSON.stringify(updatedTheme, null, 4)}</pre>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={handleCloseDialog}>
-                                Close
-                            </Button>
+                            <Button onClick={handleCloseDialog}>Close</Button>
                             <Button onClick={handleCloseDialog} color="primary" variant="contained" autoFocus>
                                 Download
                             </Button>
@@ -94,6 +90,6 @@ export default () => {
         <Suspense fallback={<Spinner />}>
             <IndexPage />
         </Suspense>,
-        document.getElementById('root'),
+        document.getElementById('root')
     );
 };
