@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://davityavryan.github.io/material-ui-chameleon" rel="noopener" target="_blank">
-        <img width="150" src="https://raw.githubusercontent.com/davityavryan/material-ui-chameleon/master/gh-pages/src/static/img/logo.svg?sanitize=true" alt="Material-UI Chameleon">
+        <img width="256" src="https://raw.githubusercontent.com/davityavryan/material-ui-chameleon/master/gh-pages/src/static/img/logo.svg?sanitize=true" alt="Material-UI Chameleon">
     </a>
 </p>
 
@@ -67,6 +67,7 @@ ReactDOM.render(<App />, document.querySelector('#app'));
 
 ## Acknowledgments
 
+-   Logo Design by Zara Magumyan. See her [Dribbble](https://dribbble.com/zmagumyan) for more awesome designs.
 -   Bundling Tools and scripts are used from [Material-UI](https://github.com/mui-org/material-ui) packages. This makes
     my job easier, faster and compatibility of this package better with Material-UI packages.
 
