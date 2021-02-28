@@ -1,15 +1,44 @@
 import React from 'react';
 
-import Brightness4Rounded from '@material-ui/icons/Brightness4Rounded';
-import BrightnessHighRounded from '@material-ui/icons/BrightnessHighRounded';
-import FormatTextdirectionLToR from '@material-ui/icons/FormatTextdirectionLToR';
-import FormatTextdirectionRToL from '@material-ui/icons/FormatTextdirectionRToL';
+import { ThemeOptions } from '@material-ui/core/styles';
 
-import BooleanEditor from '../internal/BooleanEditor/BooleanEditor';
-import ColorPicker from '../internal/ColorPicker/ColorPicker';
-import FieldEditor from '../internal/FieldEditor/FieldEditor';
+import {
+    Brightness4Rounded,
+    BrightnessHighRounded,
+    FormatTextdirectionLToR,
+    FormatTextdirectionRToL,
+} from '@material-ui/icons';
 
-const themeMap = {
+import { BooleanEditor, ColorPicker, FieldEditor } from '../internal';
+
+import { TThemeItemType, TUnit } from '../types';
+
+export type TThemeMapItem = {
+    type: TThemeItemType;
+    min?: number;
+    max?: number;
+    unit?: TUnit;
+    step?: number;
+    options?: string[];
+    icons?: React.ElementType[];
+};
+
+// FIXME: ThemeOptions or Theme?
+export type TThemeMap = {
+    [key in keyof ThemeOptions]:
+        | TThemeMapItem
+        | TThemeMapItem[]
+        | {
+              [subKey in keyof ThemeOptions[key]]:
+                  | TThemeMapItem
+                  | TThemeMapItem[]
+                  | {
+                        [subSubKey: string]: TThemeMapItem;
+                    };
+          };
+};
+
+export const themeMap: TThemeMap = {
     shape: {
         borderRadius: {
             type: 'number',
@@ -395,12 +424,20 @@ const themeMap = {
     },
 };
 
-const typesMap = {
+type TProps = TThemeMapItem & {
+    value: any;
+    themeKey: any;
+    onChange: any;
+};
+
+type TTypesMap = {
+    [key: string]: React.FunctionComponent<TProps>;
+};
+
+export const typesMap: TTypesMap = {
     soon: () => null,
     skip: () => null,
-    boolean: ({ value, options, onChange, ...props }) => (
-        <BooleanEditor {...props} options={options} value={value} onChange={onChange} />
-    ),
+    boolean: (props) => <BooleanEditor {...props} />,
     color: ({ value, onChange, ...props }) => <ColorPicker {...props} value={value} onChange={onChange} />,
     number: ({ value, onChange, ...props }) => (
         <FieldEditor
@@ -425,7 +462,7 @@ const typesMap = {
                 type="number"
                 step={newUnit === 'px' ? 1 : 0.1}
                 min={0}
-                unit={newUnit}
+                unit={newUnit as TUnit}
                 value={newValue}
                 formatter={(newValue) => `${Number(newValue)}${newUnit}`}
                 onChange={onChange}
@@ -443,7 +480,7 @@ const typesMap = {
                 {...props}
                 type="number"
                 step={newUnit === 'px' ? 1 : 0.1}
-                unit={newUnit}
+                unit={newUnit as TUnit}
                 value={newValue}
                 formatter={(newValue) => `${Number(newValue)}${newUnit}`}
                 onChange={onChange}
@@ -454,5 +491,3 @@ const typesMap = {
     text: ({ value, onChange, ...props }) => <FieldEditor {...props} value={value} onChange={onChange} />,
     shadow: ({ value, onChange, ...props }) => <FieldEditor {...props} value={value} onChange={onChange} />,
 };
-
-export { themeMap, typesMap };

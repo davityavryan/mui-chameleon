@@ -1,28 +1,19 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import Paper from '@material-ui/core/Paper';
-import useTheme from '@material-ui/core/styles/useTheme';
-import makeStyles from '@material-ui/core/styles/makeStyles';
+import { Button, IconButton, Paper, useTheme } from '@material-ui/core';
 
 import ChameleonContext from '../ChameleonContext/ChameleonContext';
 
-const useStyles = makeStyles(({ spacing, transitions, shape }) => ({
-    root: {
-        display: 'flex',
-        justifyContent: ({ isDry, isOpen }) => (isDry || !isOpen ? 'center' : 'space-between'),
-        alignItems: 'center',
-        paddingLeft: ({ isOpen }) => spacing(isOpen ? 2 : 1.25),
-        paddingRight: ({ isOpen }) => spacing(isOpen ? 2 : 1.25),
-        margin: spacing(),
-        borderRadius: ({ isOpen }) => (isOpen ? shape.borderRadius : '50%'),
-        transition: transitions.create(['border-radius', 'padding']),
-    },
-}));
+import useStyles from './Header.style';
 
-function Header({ isOpen, onToggleOpen, onReset, onSave }) {
+interface IProps {
+    onToggleOpen: any;
+    onReset?: any;
+    onSave: any;
+    isOpen: boolean;
+}
+
+function Header({ isOpen, onToggleOpen, onReset, onSave }: IProps) {
     const { state, dispatch } = useContext(ChameleonContext);
 
     const { palette } = useTheme();
@@ -34,7 +25,9 @@ function Header({ isOpen, onToggleOpen, onReset, onSave }) {
     const handleReset = () => {
         dispatch({ type: 'reset' });
 
-        onReset();
+        if (typeof onReset === 'function') {
+            onReset();
+        }
     };
 
     const handleSave = () => {
@@ -85,12 +78,5 @@ function Header({ isOpen, onToggleOpen, onReset, onSave }) {
         </Paper>
     );
 }
-
-Header.propTypes = {
-    onToggleOpen: PropTypes.func.isRequired,
-    onReset: PropTypes.func.isRequired,
-    onSave: PropTypes.func.isRequired,
-    isOpen: PropTypes.bool.isRequired,
-};
 
 export default Header;

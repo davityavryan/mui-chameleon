@@ -1,60 +1,28 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-import objectPath from 'object-path';
+import delve from 'dlv';
 
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
-import makeStyles from '@material-ui/core/styles/makeStyles';
+import { List, ListItem, ListSubheader, createMuiTheme } from '@material-ui/core';
 
 import { themeMap, typesMap, themeKeyLabel } from '../../utils';
+
+import useStyles from './Parser.style';
 
 // TODO: separate theme for this file? :/
 const defaultTheme = createMuiTheme();
 
-const useStyles = makeStyles(({ palette, spacing }) => ({
-    root: {
-        position: 'relative',
+interface IProps {
+    item: any;
+    itemKey: any;
+    defaultValue: any;
+    onChange: any;
+    isTopLevel?: boolean;
+}
 
-        width: '100%',
-        overflow: 'auto',
-        maxHeight: spacing(85),
-
-        backgroundColor: palette.background.paper,
-    },
-    listItem: ({ isTopLevel }) => {
-        const listItemStyles = {
-            justifyContent: 'space-between',
-        };
-
-        if (isTopLevel) {
-            listItemStyles.paddingTop = spacing(1.25);
-            listItemStyles.paddingBottom = spacing(1.25);
-        }
-
-        return listItemStyles;
-    },
-    listSection: {
-        backgroundColor: 'inherit',
-    },
-    listSubHeader: {
-        zIndex: 2,
-
-        color: palette.type === 'light' ? palette.common.black : palette.common.white,
-        backgroundColor: palette.type === 'light' ? palette.grey['200'] : palette.grey['700'],
-    },
-    ul: {
-        backgroundColor: 'inherit',
-        padding: 0,
-    },
-}));
-
-function Parser({ item, itemKey, defaultValue, onChange, isTopLevel }) {
+function Parser({ item, itemKey, defaultValue, onChange, isTopLevel = false }: IProps) {
     const classes = useStyles({ isTopLevel });
 
-    const mapItem = objectPath.get(themeMap, itemKey);
+    const mapItem = delve(themeMap, itemKey);
 
     if (typeof item === 'function' || (mapItem && mapItem.type === 'skip')) {
         return null;
@@ -63,7 +31,7 @@ function Parser({ item, itemKey, defaultValue, onChange, isTopLevel }) {
     if (typeof item === 'object') {
         const entries = Object.entries(item);
 
-        entries.sort(([key1], [key2]) => (Number.isNaN(Number(key1)) ? key1.localeCompare(key2) : key1 - key2));
+        entries.sort(([key1], [key2]) => String(key1).localeCompare(String(key2)));
 
         return (
             <List className={classes.root} subheader={<li />}>
@@ -76,7 +44,7 @@ function Parser({ item, itemKey, defaultValue, onChange, isTopLevel }) {
                                 key={themeKey}
                                 item={nestedItem}
                                 itemKey={themeKey}
-                                defaultValue={objectPath.get(defaultTheme, themeKey)}
+                                defaultValue={delve(defaultTheme, themeKey)}
                                 onChange={onChange}
                             />
                         );
@@ -93,7 +61,7 @@ function Parser({ item, itemKey, defaultValue, onChange, isTopLevel }) {
                                     key={themeKey}
                                     item={nestedItem}
                                     itemKey={themeKey}
-                                    defaultValue={objectPath.get(defaultTheme, themeKey)}
+                                    defaultValue={delve(defaultTheme, themeKey)}
                                     onChange={onChange}
                                 />
                             </ul>
@@ -114,17 +82,5 @@ function Parser({ item, itemKey, defaultValue, onChange, isTopLevel }) {
         </ListItem>
     );
 }
-
-Parser.propTypes = {
-    item: PropTypes.any.isRequired,
-    itemKey: PropTypes.string.isRequired,
-    defaultValue: PropTypes.any.isRequired,
-    onChange: PropTypes.func.isRequired,
-    isTopLevel: PropTypes.bool,
-};
-
-Parser.defaultProps = {
-    isTopLevel: false,
-};
 
 export default Parser;

@@ -1,31 +1,32 @@
 import React, { Fragment, memo } from 'react';
-import PropTypes from 'prop-types';
 
-import objectPath from 'object-path';
+import delve from 'dlv';
 
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import { Theme, ExpansionPanel } from '@material-ui/core';
 
-import Section from '../Section/Section';
-import Parser from '../Parser/Parser';
+import { Section, Parser } from '..';
 
-import { themeMap } from '../../utils';
+import { themeMap, TThemeMapItem } from '../../utils';
 
-function Editor({ theme, defaultTheme, onChange }) {
-    const entries = Object.entries(theme);
+interface IProps {
+    theme: Theme;
+    defaultTheme: any;
+    onChange: any;
+}
 
-    entries.sort(([key1], [key2]) => (Number.isNaN(Number(key1)) ? key1.localeCompare(key2) : key1 - key2));
-
+function Editor({ theme, defaultTheme, onChange }: IProps) {
     return (
         <Fragment>
-            {entries.map(([key, themeItem]) => {
-                const themeKey = key;
+            {Object.entries(theme).map(([key, themeItem]) => {
+                const themeKey = key as keyof Theme;
                 const mapItem = themeMap[themeKey];
+                const mapItemType = (mapItem as TThemeMapItem).type;
 
-                if (typeof themeItem === 'function' || (mapItem && mapItem.type === 'skip')) {
+                if (typeof themeItem === 'function' || mapItemType === 'skip') {
                     return null;
                 }
 
-                if (mapItem && mapItem.type === 'soon') {
+                if (mapItem && mapItemType === 'soon') {
                     return <Section key={themeKey} title={themeKey} secondaryTitle="Coming soon" />;
                 }
 
@@ -35,7 +36,7 @@ function Editor({ theme, defaultTheme, onChange }) {
                             <Parser
                                 item={themeItem}
                                 itemKey={themeKey}
-                                defaultValue={objectPath.get(defaultTheme, themeKey)}
+                                defaultValue={delve(defaultTheme, themeKey)}
                                 onChange={onChange}
                             />
                         </Section>
@@ -47,7 +48,7 @@ function Editor({ theme, defaultTheme, onChange }) {
                         <Parser
                             item={themeItem}
                             itemKey={themeKey}
-                            defaultValue={objectPath.get(defaultTheme, themeKey)}
+                            defaultValue={delve(defaultTheme, themeKey)}
                             onChange={onChange}
                             isTopLevel
                         />
@@ -57,11 +58,5 @@ function Editor({ theme, defaultTheme, onChange }) {
         </Fragment>
     );
 }
-
-Editor.propTypes = {
-    theme: PropTypes.object.isRequired,
-    defaultTheme: PropTypes.object.isRequired,
-    onChange: PropTypes.func.isRequired,
-};
 
 export default memo(Editor);

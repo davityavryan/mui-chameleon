@@ -1,11 +1,10 @@
 import React, { useReducer } from 'react';
-import PropTypes from 'prop-types';
 
-import { ThemeProvider as MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider as MuiThemeProvider, createMuiTheme, ThemeOptions } from '@material-ui/core/styles';
 
-import ChameleonContext from '../internal/ChameleonContext/ChameleonContext';
+import { ChameleonContext } from '../internal';
 
-function reducer(state, action) {
+function reducer(state: any, action: any) {
     switch (action.type) {
         case 'reset': {
             return {
@@ -22,7 +21,12 @@ function reducer(state, action) {
     }
 }
 
-function ThemeProvider({ theme, children }) {
+interface IProps {
+    theme: ThemeOptions;
+    children: React.ReactChildren;
+}
+
+function ThemeProvider({ theme, children }: IProps) {
     const [state, dispatch] = useReducer(reducer, { theme, originalTheme: theme });
 
     return (
@@ -31,10 +35,5 @@ function ThemeProvider({ theme, children }) {
         </ChameleonContext.Provider>
     );
 }
-
-ThemeProvider.propTypes = {
-    theme: PropTypes.object.isRequired,
-    children: PropTypes.node.isRequired,
-};
 
 export default ThemeProvider;

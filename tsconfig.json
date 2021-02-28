@@ -3,6 +3,7 @@
     "include": ["src"],
     "compilerOptions": {
         "outDir": "build",
+        "baseUrl": "src",
         "target": "ESNext",
         "module": "ESNext",
         "lib": ["DOM", "DOM.Iterable", "ESNext"],
