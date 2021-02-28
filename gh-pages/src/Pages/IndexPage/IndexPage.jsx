@@ -1,7 +1,8 @@
 import React, { Suspense, useState } from 'react';
 import ReactDOM from 'react-dom';
 
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router';
+import { HashRouter } from 'react-router-dom';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Button from '@material-ui/core/Button';
@@ -19,9 +20,15 @@ import { Spinner } from 'Components';
 
 import ROUTES from 'helpers/routes';
 
+import ClickMe from 'static/img/click-me.svg';
+
 import useStyles from './IndexPage.style';
 
-const initialTheme = {};
+const initialTheme = {
+    palette: {
+        type: 'dark',
+    },
+};
 
 function IndexPage() {
     const classes = useStyles();
@@ -45,8 +52,8 @@ function IndexPage() {
 
     return (
         <HashRouter>
-            <MainLayout>
-                <ThemeProvider theme={initialTheme}>
+            <ThemeProvider theme={initialTheme}>
+                <MainLayout>
                     <CssBaseline />
 
                     <Suspense fallback={<Spinner />}>
@@ -57,7 +64,7 @@ function IndexPage() {
                         </Switch>
                     </Suspense>
 
-                    {!isExpanded && <img className={classes.clickMe} src="img/click-me.svg" alt="Click me" />}
+                    {!isExpanded && <ClickMe className={classes.clickMe} />}
 
                     <SideBarEditor onSave={handleThemeSave} onExpandToggle={handleExpandToggle} />
 
@@ -79,8 +86,8 @@ function IndexPage() {
                             </Button>
                         </DialogActions>
                     </Dialog>
-                </ThemeProvider>
-            </MainLayout>
+                </MainLayout>
+            </ThemeProvider>
         </HashRouter>
     );
 }

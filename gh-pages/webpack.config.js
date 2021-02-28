@@ -1,12 +1,25 @@
 const path = require('path');
 
+const browserslist = require('browserslist');
+
+const { ESBuildPlugin, ESBuildMinifyPlugin } = require('esbuild-loader');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
-const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 
 const here = (dir) => (dir ? path.resolve(__dirname, dir) : __dirname);
+
+function getBuildTarget() {
+    const SUPPORTED_BUILD_TARGETS = ['es', 'chrome', 'edge', 'firefox', 'ios', 'node', 'safari'];
+
+    const sep = ' ';
+    const supported = (b) =>
+        SUPPORTED_BUILD_TARGETS.some((t) => b.startsWith(t + sep)) ? b.replace(sep, '') : undefined;
+
+    return browserslist().map(supported).filter(Boolean);
+}
+
+const target = getBuildTarget();
 
 const dirs = {
     src: './src',
@@ -57,12 +70,25 @@ module.exports = (env, args = {}) => {
                 {
                     test: /\.jsx?$/,
                     sideEffects: false,
-                    loader: {
-                        loader: 'babel-loader',
-                        options: {
-                            babelrc: true,
-                            comments: true,
-                            cacheDirectory: here(`./node_modules/.cache/${mode}/js`),
+                    loader: 'esbuild-loader',
+                    options: {
+                        loader: 'jsx',
+                        target,
+                    },
+                },
+                {
+                    test: /\.svg$/,
+                    include: here(dirs.src),
+                    exclude: here('node_modules'),
+                    loader: 'svg-react-loader',
+                    options: {
+                        classIdPrefix: '[name]-[hash:8]__',
+                        props: {
+                            fill: 'currentColor',
+                            preserveAspectRatio: 'xMidYMid meet',
+                        },
+                        propsMap: {
+                            fillRule: 'fill-rule',
                         },
                     },
                 },
@@ -101,11 +127,10 @@ module.exports = (env, args = {}) => {
                     useShortDoctype: true,
                 },
             }),
-            new ScriptExtHtmlWebpackPlugin({
-                inline: isProduction && 'runtime',
-            }),
+            new ESBuildPlugin(),
         ],
         optimization: {
+            minimize: isProduction,
             runtimeChunk: 'single',
             splitChunks: {
                 chunks: 'all',
@@ -153,19 +178,7 @@ module.exports = (env, args = {}) => {
                     },
                 },
             },
-            minimizer: [
-                new TerserPlugin({
-                    cache: here(`./node_modules/.cache/${mode}/terser-js`),
-                    parallel: true,
-                    sourceMap: true,
-                    terserOptions: {
-                        ecma: 8,
-                        output: {
-                            comments: /licen[sc]e/i,
-                        },
-                    },
-                }),
-            ],
+            minimizer: [new ESBuildMinifyPlugin({ target })],
         },
         performance: {
             hints: isProduction && 'warning',
