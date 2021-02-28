@@ -7,6 +7,12 @@ const useStyles = makeStyles(({ zIndex }) => ({
         alignItems: 'center',
         flexGrow: 1,
     },
+    isFixed: {
+        position: 'fixed',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+    },
     backdrop: {
         zIndex: zIndex.modal,
     },

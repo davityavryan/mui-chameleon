@@ -56,7 +56,7 @@ function IndexPage() {
                 <MainLayout>
                     <CssBaseline />
 
-                    <Suspense fallback={<Spinner />}>
+                    <Suspense fallback={<Spinner isFixed />}>
                         <Switch>
                             {Object.entries(ROUTES).map(([routeKey, { path, exact, component }]) => (
                                 <Route key={routeKey} path={path} exact={exact} component={component} />
