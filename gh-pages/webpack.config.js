@@ -6,6 +6,7 @@ const { ESBuildPlugin, ESBuildMinifyPlugin } = require('esbuild-loader');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 const here = (dir) => (dir ? path.resolve(__dirname, dir) : __dirname);
 
@@ -48,6 +49,7 @@ module.exports = (env, args = {}) => {
     return {
         mode,
         context: here(),
+        target: 'web',
         entry: {
             index: `${dirs.src}/index.js`,
         },
@@ -128,10 +130,10 @@ module.exports = (env, args = {}) => {
                 },
             }),
             new ESBuildPlugin(),
-        ],
+            !isProduction && new ReactRefreshWebpackPlugin(),
+        ].filter(Boolean),
         optimization: {
             minimize: isProduction,
-            runtimeChunk: 'single',
             splitChunks: {
                 chunks: 'all',
                 cacheGroups: {
@@ -194,6 +196,7 @@ module.exports = (env, args = {}) => {
         },
         devServer: {
             port: 4040,
+            hot: true,
             contentBase: here(dirs.dist),
             compress: true,
             historyApiFallback: true,
