@@ -18,7 +18,7 @@
         "cy:run": "BABEL_ENV=test cypress run -q --headless --record false",
         "cy:open": "BABEL_ENV=test cypress open",
         "test": "BABEL_ENV=test start-server-and-test demo:production 4040 cy:run",
-        "test:ci": "BABEL_ENV=test start-server-and-test 'yarn demo:production --progress=0 --watch=0' 4040 'yarn cy:run --record'",
+        "test:ci": "BABEL_ENV=test start-server-and-test 'yarn demo:production' 4040 'yarn cy:run --record'",
         "test:open": "BABEL_ENV=test start-server-and-test demo:production 4040 cy:open",
         "prebuild": "yarn install --prefer-offline --frozen-lockfile && rimraf build",
         "prewatch": "yarn install --prefer-offline --frozen-lockfile && rimraf build",
@@ -40,7 +40,6 @@
     "devDependencies": {
         "@commitlint/cli": "^12.0.0",
         "@commitlint/config-conventional": "^12.0.0",
-        "@cypress/code-coverage": "^3.9.2",
         "@material-ui/core": "^4.11.3",
         "@material-ui/icons": "^4.11.2",
         "@types/dlv": "^1.1.2",
