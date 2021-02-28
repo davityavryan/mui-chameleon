@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useCallback, useEffect, useState } from 'react';
 
 import { ColorChangeHandler, SketchPicker } from 'react-color';
 
@@ -21,9 +21,10 @@ interface IProps {
 // };
 
 function ColorPicker({ value, themeKey, onChange }: IProps) {
-    const classes = useStyles({ value });
-
+    const [localValue, setLocalValue] = useState(value);
     const [anchorEl, setAnchorEl] = useState(null);
+
+    const classes = useStyles({ color: localValue });
 
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
@@ -36,15 +37,36 @@ function ColorPicker({ value, themeKey, onChange }: IProps) {
         setAnchorEl(null);
     };
 
-    const handleChange: ColorChangeHandler = (color) => {
-        const { r, g, b, a } = color.rgb;
+    const handleChange = useCallback<ColorChangeHandler>(
+        (color) => {
+            const { r, g, b, a } = color.rgb;
 
-        if (a === 1) {
-            onChange(color.hex);
-        } else {
-            onChange(`rgba(${r},${g},${b},${a})`);
-        }
-    };
+            let newColor = `rgba(${r},${g},${b},${a})`;
+
+            if (a === 1) {
+                newColor = color.hex;
+            }
+
+            setLocalValue(newColor);
+
+            return newColor;
+        },
+        [setLocalValue]
+    );
+
+    const handleChangeComplete = useCallback<ColorChangeHandler>(
+        (color, event) => {
+            const newColor = handleChange(color, event);
+
+            onChange(newColor);
+        },
+        [handleChange, onChange]
+    );
+
+    // Set Color back from props to reflect outside changes
+    useEffect(() => {
+        setLocalValue(value);
+    }, [value]);
 
     return (
         <Fragment>
@@ -70,7 +92,7 @@ function ColorPicker({ value, themeKey, onChange }: IProps) {
                         horizontal: 'right',
                     }}
                 >
-                    <SketchPicker color={value} onChangeComplete={handleChange} />
+                    <SketchPicker color={localValue} onChange={handleChange} onChangeComplete={handleChangeComplete} />
                 </Popover>
             </ListItemSecondaryAction>
         </Fragment>

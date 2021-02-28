@@ -3,7 +3,7 @@ import { makeStyles, createStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(({ palette, spacing, zIndex, shape }) =>
     createStyles({
         popover: {
-            zIndex: zIndex.tooltip + 11, // more than the highest zIndex
+            zIndex: `${zIndex.tooltip + 11} !important`, // more than the highest zIndex
         },
         colorPicker: {
             width: spacing(3),
@@ -13,7 +13,7 @@ const useStyles = makeStyles(({ palette, spacing, zIndex, shape }) =>
             border: `1px solid ${palette.action.selected}`,
 
             borderRadius: shape.borderRadius,
-            backgroundColor: ({ value }: { value: string }) => value,
+            backgroundColor: ({ color }: { color: string }) => color,
         },
     })
 );
