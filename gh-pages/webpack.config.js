@@ -186,7 +186,6 @@ module.exports = (env, args = {}) => {
             maxAssetSize: 0.25 * 10 ** 6, // 0.25mb
         },
         stats: {
-            assetsSort: 'chunkNames',
             cachedAssets: false,
             children: false,
             modules: false,
@@ -201,14 +200,6 @@ module.exports = (env, args = {}) => {
             overlay: {
                 warnings: true,
                 errors: true,
-            },
-            stats: {
-                assetsSort: 'chunkNames',
-                cachedAssets: false,
-                children: false,
-                modules: false,
-                entrypoints: false,
-                excludeAssets: /\.(jpe?g|png|webp|gif|ogg|m4a|mp4|webm|svg|ico|cur|eot|ttf|woff|woff2|map|LICENSE)$/i, // hiding images, fonts
             },
         },
     };
