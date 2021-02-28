@@ -1,14 +1,12 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 import Typography from '@material-ui/core/Typography';
 
+import { Frame } from 'Components';
+
 function TypographyPage() {
     return (
-        <Fragment>
-            <Typography variant="h5" paragraph>
-                Typography
-            </Typography>
-
+        <Frame title="Typography" align="flex-start">
             <Typography variant="h1" component="h2" gutterBottom>
                 h1. Heading
             </Typography>
@@ -52,7 +50,7 @@ function TypographyPage() {
             <Typography variant="overline" display="block" gutterBottom>
                 overline text
             </Typography>
-        </Fragment>
+        </Frame>
     );
 }
 

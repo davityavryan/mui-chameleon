@@ -1,20 +1,16 @@
 import React from 'react';
 
-import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 
-import useStyles from './ButtonsPage.style';
+import { Frame } from 'Components';
 
-function ButtonsPage() {
+import useStyles from './ButtonPage.style';
+
+function ButtonPage() {
     const classes = useStyles();
 
     return (
-        <Box textAlign="center">
-            <Typography variant="h5" paragraph>
-                Buttons
-            </Typography>
-
+        <Frame title="Buttons">
             <div className={classes.buttons}>
                 <Button variant="text">Default</Button>
                 <Button variant="text" color="primary">
@@ -53,8 +49,8 @@ function ButtonsPage() {
                     Disabled
                 </Button>
             </div>
-        </Box>
+        </Frame>
     );
 }
 
-export default ButtonsPage;
+export default ButtonPage;

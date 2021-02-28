@@ -1,4 +1,4 @@
-import { ButtonsPage, NotFoundPage, TypographyPage } from 'Pages';
+import { ButtonPage, NotFoundPage, TextFieldsPage, TypographyPage } from 'Pages';
 
 const ROUTES = {
     // home: {
@@ -6,11 +6,17 @@ const ROUTES = {
     //     component: HomePage,
     //     exact: true,
     // },
-    buttons: {
-        path: '/buttons',
-        component: ButtonsPage,
+    button: {
+        path: '/button',
+        component: ButtonPage,
         exact: true,
-        navName: 'Buttons',
+        navName: 'Button',
+    },
+    textField: {
+        path: '/text-field',
+        component: TextFieldsPage,
+        exact: true,
+        navName: 'TextField',
     },
     typography: {
         path: '/typography',

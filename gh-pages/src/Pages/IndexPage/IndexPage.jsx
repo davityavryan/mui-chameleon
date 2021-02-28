@@ -26,7 +26,7 @@ import useStyles from './IndexPage.style';
 
 const initialTheme = {
     palette: {
-        type: 'dark',
+        type: 'light',
     },
 };
 
