@@ -21,21 +21,21 @@ function SideBarEditor({ open = false, onReset, onExpandToggle, onSave }: IProps
 
     const { state, dispatch } = useContext(ChameleonContext);
 
-    const muiTheme = createMuiTheme(state.theme);
+    const editableTheme = createMuiTheme(state.theme);
 
     const classes = useStyles({
         isOpen,
-        muiDirection: muiTheme.direction,
+        muiDirection: editableTheme.direction,
     });
 
     const defaultTheme = useMemo(
         () =>
             createMuiTheme({
                 palette: {
-                    type: muiTheme.palette.type,
+                    type: editableTheme.palette.type,
                 },
                 zIndex: {
-                    tooltip: muiTheme.zIndex.tooltip + 11,
+                    tooltip: editableTheme.zIndex.tooltip + 11,
                 },
                 overrides: {
                     MuiPaper: {
@@ -96,7 +96,7 @@ function SideBarEditor({ open = false, onReset, onExpandToggle, onSave }: IProps
 
                 <Collapse in={isOpen} mountOnEnter unmountOnExit>
                     <Box m={1}>
-                        <Editor theme={muiTheme} defaultTheme={defaultTheme} onChange={handleChange} />
+                        <Editor theme={editableTheme} defaultTheme={defaultTheme} onChange={handleChange} />
                     </Box>
                 </Collapse>
             </div>
