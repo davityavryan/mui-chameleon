@@ -21,6 +21,7 @@
 [![BundlePhobia](https://badgen.net/bundlephobia/minzip/material-ui-chameleon)](https://bundlephobia.com/result?p=material-ui-chameleon)
 [![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/davityavryan/material-ui-chameleon.svg)](https://isitmaintained.com/project/davityavryan/material-ui-chameleon 'Average time to resolve an issue')
 
+[![Buy me a coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/davityavryan)
 </div>
 
 ## Installation
