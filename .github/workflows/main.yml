@@ -15,16 +15,16 @@ jobs:
 
         name: Build and test on Node v${{ matrix.node }}
         steps:
-            - uses: actions/checkout@v2
+            -   uses: actions/checkout@v2
 
             # TODO: use static server instead of Webpack
-            - name: Increase file limit
-              run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+            -   name: Increase file limit
+                run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
-            - name: Setup node
-              uses: actions/setup-node@v2.1.5
-              with:
-                  node-version: ${{ matrix.node }}
+            -   name: Setup node
+                uses: actions/setup-node@v2.1.5
+                with:
+                    node-version: ${{ matrix.node }}
 
             -   name: Cache node modules
                 uses: actions/cache@v2
@@ -52,7 +52,7 @@ jobs:
                         ${{ runner.os }}-node-${{ matrix.node }}-build-
                         ${{ runner.os }}-node-${{ matrix.node }}-
 
-            - name: Install dependencies
+            -   name: Install dependencies
                 if: steps.cache-modules.outputs.cache-hit != 'true'
                 run: yarn install --prefer-offline --frozen-lockfile
 
@@ -60,13 +60,13 @@ jobs:
                 if: steps.cache-gh-pages-modules.outputs.cache-hit != 'true'
                 run: yarn --cwd ./gh-pages install --prefer-offline --frozen-lockfile
 
-            - name: Build package
-              run: yarn build
+            -   name: Build package
+                run: yarn build
 
-            - name: Run tests
-              env:
-                  CYPRESS_WATCH_FOR_FILE_CHANGES: false
-                  CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-                  CYPRESS_GROUP_NAME: node v${{ matrix.node }}
-                  BABEL_ENV: test
-              run: yarn start-server-and-test 'yarn demo:production' 4040 'yarn cy:run --record --parallel --ci-build-id "${GITHUB_RUN_NUMBER}" --group "${CYPRESS_GROUP_NAME}"'
+            -   name: Run tests
+                env:
+                    CYPRESS_WATCH_FOR_FILE_CHANGES: false
+                    CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+                    CYPRESS_GROUP_NAME: node v${{ matrix.node }}
+                    BABEL_ENV: test
+                run: yarn start-server-and-test 'yarn demo:production' 4040 'yarn cy:run --record --parallel --ci-build-id "${GITHUB_RUN_NUMBER}" --group "${CYPRESS_GROUP_NAME}"'
