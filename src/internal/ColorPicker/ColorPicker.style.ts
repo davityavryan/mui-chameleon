@@ -1,9 +1,11 @@
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
+import { Property } from 'csstype';
+
 const useStyles = makeStyles(({ palette, spacing, zIndex, shape }) =>
     createStyles({
         popover: {
-            zIndex: `${zIndex.tooltip + 11} !important`, // more than the highest zIndex
+            zIndex: `${zIndex.tooltip + 11} !important` as Property.ZIndex, // more than the highest zIndex
         },
         colorPicker: {
             width: spacing(3),
