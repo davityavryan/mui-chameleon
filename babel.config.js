@@ -1,6 +1,6 @@
 const defaultPresets = ['@babel/preset-typescript', '@babel/preset-react'];
 
-const env = process.env.BABEL_ENV ?? 'cjs';
+const env = process.env.BABEL_ENV || 'cjs';
 const isCommonJS = env === 'cjs';
 
 // We release a ES version of Material-UI Chameleon.
