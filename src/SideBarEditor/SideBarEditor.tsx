@@ -3,7 +3,8 @@ import React, { useContext, useEffect, useMemo, useState } from 'react';
 import delve from 'dlv';
 import { dset } from 'dset';
 
-import { Box, Collapse, ThemeProvider as MuiThemeProvider, createMuiTheme } from '@material-ui/core';
+import { Box, Collapse } from '@material-ui/core';
+import { ThemeProvider as MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import { ChameleonContext, Editor, Header } from '../internal';
 

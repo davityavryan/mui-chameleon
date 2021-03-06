@@ -34,9 +34,12 @@ async function addLicense(packageData) {
             './index.js',
             './SideBarEditor/index.js',
             './ThemeProvider/index.js',
-            './cjs/index.js',
-            './cjs/SideBarEditor/index.js',
-            './cjs/ThemeProvider/index.js',
+            './es/index.js',
+            './es/SideBarEditor/index.js',
+            './es/ThemeProvider/index.js',
+            './esm/index.js',
+            './esm/SideBarEditor/index.js',
+            './esm/ThemeProvider/index.js',
             './umd/material-ui-chameleon.js',
         ].map(async (file) => {
             try {

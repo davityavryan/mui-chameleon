@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 
-import { Button, IconButton, Paper, createMuiTheme } from '@material-ui/core';
+import { Button, IconButton, Paper } from '@material-ui/core';
+import { createMuiTheme } from '@material-ui/core/styles';
 
 import ChameleonContext from '../ChameleonContext/ChameleonContext';
 

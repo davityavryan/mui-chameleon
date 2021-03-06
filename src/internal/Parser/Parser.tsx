@@ -2,7 +2,8 @@ import React from 'react';
 
 import delve from 'dlv';
 
-import { List, ListItem, ListSubheader, createMuiTheme } from '@material-ui/core';
+import { List, ListItem, ListSubheader } from '@material-ui/core';
+import { createMuiTheme } from '@material-ui/core/styles';
 
 import { themeMap, typesMap, themeKeyLabel } from '../../utils';
 
