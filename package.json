@@ -20,7 +20,6 @@
         "cy:run": "BABEL_ENV=test cypress run -q --headless --record false",
         "cy:open": "BABEL_ENV=test cypress open",
         "test": "BABEL_ENV=test start-server-and-test demo:production 4040 cy:run",
-        "test:ci": "BABEL_ENV=test start-server-and-test 'yarn demo:production' 4040 'yarn cy:run --record'",
         "test:open": "BABEL_ENV=test start-server-and-test demo:production 4040 cy:open",
         "tsc": "tsc",
         "prebuild": "rimraf build",
