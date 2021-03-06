@@ -26,10 +26,39 @@ jobs:
               with:
                   node-version: ${{ matrix.node }}
 
+            -   name: Cache node modules
+                uses: actions/cache@v2
+                id: cache-modules
+                env:
+                    cache-name: cache-node-${{ matrix.node }}-modules
+                with:
+                    path: ./node_modules
+                    key: ${{ runner.os }}-node-${{ matrix.node }}-build-${{ env.cache-name }}-${{ hashFiles('./yarn.lock') }}
+                    restore-keys: |
+                        ${{ runner.os }}-node-${{ matrix.node }}-build-${{ env.cache-name }}-
+                        ${{ runner.os }}-node-${{ matrix.node }}-build-
+                        ${{ runner.os }}-node-${{ matrix.node }}-
+
+            -   name: Cache node modules for gh-pages
+                uses: actions/cache@v2
+                id: cache-gh-pages-modules
+                env:
+                    cache-name: cache-node-${{ matrix.node }}-modules-gh-pages
+                with:
+                    path: ./gh-pages/node_modules
+                    key: ${{ runner.os }}-node-${{ matrix.node }}-build-${{ env.cache-name }}-${{ hashFiles('./hs-pages/yarn.lock') }}
+                    restore-keys: |
+                        ${{ runner.os }}-node-${{ matrix.node }}-build-${{ env.cache-name }}-
+                        ${{ runner.os }}-node-${{ matrix.node }}-build-
+                        ${{ runner.os }}-node-${{ matrix.node }}-
+
             - name: Install dependencies
-              run: |
-                  yarn install --prefer-offline --frozen-lockfile
-                  yarn --cwd ./gh-pages install --prefer-offline --frozen-lockfile
+                if: steps.cache-modules.outputs.cache-hit != 'true'
+                run: yarn install --prefer-offline --frozen-lockfile
+
+            -   name: Install dependencies for gh-pages
+                if: steps.cache-gh-pages-modules.outputs.cache-hit != 'true'
+                run: yarn --cwd ./gh-pages install --prefer-offline --frozen-lockfile
 
             - name: Build package
               run: yarn build
