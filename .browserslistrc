@@ -1,10 +1,6 @@
 [production test]
-ie 11
-edge >= 14
-firefox >= 52
-chrome >= 49
-safari >= 10
-node 8.0
+> 0.5%
+last 2 versions
 not dead
 
 [development]
