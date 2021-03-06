@@ -7,8 +7,10 @@
     "private": true,
     "sideEffects": false,
     "scripts": {
-        "build": "tsc",
-        "watch": "tsc -w",
+        "start": "tsc --inlineSourceMap --inlineSources -w",
+        "build": "yarn build:esm && yarn build:cjs",
+        "build:esm": "yarn tsc --module ES2020",
+        "build:cjs": "yarn tsc --module CommonJS --outDir build/cjs",
         "format:check": "prettier --check .",
         "format:fix": "prettier --write .",
         "demo:start": "yarn --cwd ./gh-pages start",
@@ -20,8 +22,9 @@
         "test": "BABEL_ENV=test start-server-and-test demo:production 4040 cy:run",
         "test:ci": "BABEL_ENV=test start-server-and-test 'yarn demo:production' 4040 'yarn cy:run --record'",
         "test:open": "BABEL_ENV=test start-server-and-test demo:production 4040 cy:open",
-        "prebuild": "yarn install --prefer-offline --frozen-lockfile && rimraf build",
-        "prewatch": "yarn install --prefer-offline --frozen-lockfile && rimraf build",
+        "tsc": "tsc",
+        "prebuild": "rimraf build",
+        "pretsc": "yarn install --prefer-offline --frozen-lockfile",
         "precy:run": "yarn install --prefer-offline --frozen-lockfile && rimraf .nyc_output coverage",
         "precy:open": "yarn install --prefer-offline --frozen-lockfile && rimraf .nyc_output coverage",
         "pretest": "yarn install --prefer-offline --frozen-lockfile",
@@ -29,7 +32,7 @@
         "preformat:fix": "yarn install --prefer-offline --frozen-lockfile",
         "preformat:check": "yarn install --prefer-offline --frozen-lockfile",
         "prepublishOnly": "yarn build",
-        "postbuild": "node ./copy-files.js",
+        "postbuild": "./copy-files.js",
         "postinstall": "husky install"
     },
     "dependencies": {
