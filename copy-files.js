@@ -68,8 +68,8 @@ async function run() {
         const newPackageData = {
             ...packageDataOther,
             private: false,
-            module: './index.js',
-            main: './cjs/index.js',
+            module: './esm/index.js',
+            main: './index.js',
             types: './types/index.d.ts',
         };
 

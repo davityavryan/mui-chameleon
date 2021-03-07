@@ -24,7 +24,7 @@
         "test": "BABEL_ENV=test start-server-and-test demo:production 4040 cy:run",
         "test:open": "BABEL_ENV=test start-server-and-test demo:production 4040 cy:open",
         "tsc": "NODE_ENV=production tsc",
-        "prestart": "yarn install --prefer-offline --frozen-lockfile",
+        "prestart": "yarn install --prefer-offline --frozen-lockfile && ./copy-files.js",
         "prebuild": "yarn install --prefer-offline --frozen-lockfile && rimraf build",
         "pretsc": "yarn install --prefer-offline --frozen-lockfile",
         "precy:run": "yarn install --prefer-offline --frozen-lockfile && rimraf .nyc_output coverage",
