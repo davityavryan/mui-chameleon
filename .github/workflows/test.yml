@@ -13,7 +13,7 @@ jobs:
             matrix:
                 node: ['14', '12', '10'] # Refer to https://nodejs.org/en/about/releases/ for supported versions
 
-        name: Build and test on Node v${{ matrix.node }}
+        name: Node v${{ matrix.node }}
         steps:
             -   uses: actions/checkout@v2
 
