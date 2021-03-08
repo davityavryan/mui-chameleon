@@ -35,19 +35,5 @@ jobs:
                 if: steps.cache-modules.outputs.cache-hit != 'true'
                 run: yarn install --prefer-offline --frozen-lockfile
 
-            -   name: Install dependencies for gh-pages
-                if: steps.cache-gh-pages-modules.outputs.cache-hit != 'true'
-                run: yarn --cwd ./gh-pages install --prefer-offline --frozen-lockfile
-
             -   name: Build package
                 run: yarn build
-
-            -   name: Run tests
-                env:
-                    CYPRESS_WATCH_FOR_FILE_CHANGES: false
-                    CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-                    GROUP_NAME: node v${{ matrix.node }}
-                    BABEL_ENV: test
-                run:
-                    yarn start-server-and-test 'yarn demo:production' 4040 'yarn cy:run --record --parallel --ci-build-id
-                    "${GITHUB_RUN_NUMBER}" --group "${GROUP_NAME}"'
