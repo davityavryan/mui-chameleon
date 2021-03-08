@@ -1,4 +1,4 @@
-name: Material-UI-Chameleon
+name: Test
 
 on:
     push:
@@ -11,7 +11,7 @@ jobs:
         runs-on: ubuntu-20.04
         strategy:
             matrix:
-                node: ['10', '12', '14'] # Refer to https://nodejs.org/en/about/releases/ for supported versions
+                node: ['14', '12', '10'] # Refer to https://nodejs.org/en/about/releases/ for supported versions
 
         name: Build and test on Node v${{ matrix.node }}
         steps:
@@ -35,11 +35,9 @@ jobs:
                     path: |
                         ./node_modules
                         ~/.cache/Cypress
-                    key: ${{ runner.os }}-node-${{ matrix.node }}-build-${{ env.cache-name }}-${{ hashFiles('./yarn.lock') }}
+                    key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./yarn.lock') }}
                     restore-keys: |
-                        ${{ runner.os }}-node-${{ matrix.node }}-build-${{ env.cache-name }}-
-                        ${{ runner.os }}-node-${{ matrix.node }}-build-
-                        ${{ runner.os }}-node-${{ matrix.node }}-
+                        ${{ runner.os }}-build-${{ env.cache-name }}-
 
             -   name: Cache node modules for gh-pages
                 uses: actions/cache@v2
@@ -48,11 +46,9 @@ jobs:
                     cache-name: cache-node-${{ matrix.node }}-modules-gh-pages
                 with:
                     path: ./gh-pages/node_modules
-                    key: ${{ runner.os }}-node-${{ matrix.node }}-build-${{ env.cache-name }}-${{ hashFiles('./hs-pages/yarn.lock') }}
+                    key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./hs-pages/yarn.lock') }}
                     restore-keys: |
-                        ${{ runner.os }}-node-${{ matrix.node }}-build-${{ env.cache-name }}-
-                        ${{ runner.os }}-node-${{ matrix.node }}-build-
-                        ${{ runner.os }}-node-${{ matrix.node }}-
+                        ${{ runner.os }}-build-${{ env.cache-name }}-
 
             -   name: Install dependencies
                 if: steps.cache-modules.outputs.cache-hit != 'true'
@@ -69,6 +65,8 @@ jobs:
                 env:
                     CYPRESS_WATCH_FOR_FILE_CHANGES: false
                     CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-                    CYPRESS_GROUP_NAME: node v${{ matrix.node }}
+                    GROUP_NAME: node v${{ matrix.node }}
                     BABEL_ENV: test
-                run: yarn start-server-and-test 'yarn demo:production' 4040 'yarn cy:run --record --parallel --ci-build-id "${GITHUB_RUN_NUMBER}" --group "${CYPRESS_GROUP_NAME}"'
+                run:
+                    yarn start-server-and-test 'yarn demo:production' 4040 'yarn cy:run --record --parallel --ci-build-id
+                    "${GITHUB_RUN_NUMBER}" --group "${GROUP_NAME}"'
