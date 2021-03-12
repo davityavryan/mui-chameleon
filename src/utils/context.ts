@@ -1,4 +1,4 @@
-import React, { createContext } from 'react';
+import { createContext } from 'react';
 
 import { ThemeOptions } from '@material-ui/core/styles';
 
@@ -10,6 +10,4 @@ export type TChameleonContext = {
     dispatch: any;
 };
 
-const ChameleonContext = createContext<TChameleonContext>(null);
-
-export default ChameleonContext;
+export const Context = createContext<TChameleonContext>(null);

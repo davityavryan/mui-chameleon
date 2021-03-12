@@ -3,9 +3,8 @@ import React, { useContext } from 'react';
 import { Button, IconButton, Paper } from '@material-ui/core';
 import { createMuiTheme } from '@material-ui/core/styles';
 
-import ChameleonContext from '../ChameleonContext/ChameleonContext';
-
 import { Logo } from '..';
+import { Context } from '../../utils';
 
 import useStyles from './Header.style';
 
@@ -17,7 +16,7 @@ interface IProps {
 }
 
 function Header({ isOpen, onToggleOpen, onReset, onSave }: IProps) {
-    const { state, dispatch } = useContext(ChameleonContext);
+    const { state, dispatch } = useContext(Context);
 
     const { palette } = createMuiTheme(state.theme);
 

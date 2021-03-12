@@ -6,7 +6,8 @@ import { dset } from 'dset';
 import { Box, Collapse } from '@material-ui/core';
 import { ThemeProvider as MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
-import { ChameleonContext, Editor, Header } from '../internal';
+import { Editor, Header } from '../internal';
+import { Context } from '../utils';
 
 import useStyles from './SideBarEditor.style';
 
@@ -20,7 +21,7 @@ interface IProps {
 function SideBarEditor({ open = false, onReset, onExpandToggle, onSave }: IProps) {
     const [isOpen, setIsOpen] = useState(open);
 
-    const { state, dispatch } = useContext(ChameleonContext);
+    const { state, dispatch } = useContext(Context);
 
     const editableTheme = createMuiTheme(state.theme);
 

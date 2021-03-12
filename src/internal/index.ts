@@ -1,5 +1,4 @@
 export { default as BooleanEditor } from './BooleanEditor/BooleanEditor';
-export { default as ChameleonContext } from './ChameleonContext/ChameleonContext';
 export { default as ColorPicker } from './ColorPicker/ColorPicker';
 export { default as Editor } from './Editor/Editor';
 export { default as FieldEditor } from './FieldEditor/FieldEditor';

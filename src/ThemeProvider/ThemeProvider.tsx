@@ -2,7 +2,7 @@ import React, { useReducer } from 'react';
 
 import { ThemeProvider as MuiThemeProvider, createMuiTheme, ThemeOptions } from '@material-ui/core/styles';
 
-import { ChameleonContext } from '../internal';
+import { Context } from '../utils';
 
 function reducer(state: any, action: any) {
     switch (action.type) {
@@ -30,9 +30,9 @@ function ThemeProvider({ theme, children }: IProps) {
     const [state, dispatch] = useReducer(reducer, { theme, originalTheme: theme });
 
     return (
-        <ChameleonContext.Provider value={{ state, dispatch }}>
+        <Context.Provider value={{ state, dispatch }}>
             <MuiThemeProvider theme={createMuiTheme(state.theme)}>{children}</MuiThemeProvider>
-        </ChameleonContext.Provider>
+        </Context.Provider>
     );
 }
 
