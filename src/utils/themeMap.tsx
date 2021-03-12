@@ -9,7 +9,7 @@ import {
     FormatTextdirectionRToL,
 } from '@material-ui/icons';
 
-import { BooleanEditor, ColorPicker, FieldEditor } from '../internal';
+import { BooleanEditor, ColorEditor, FieldEditor } from '../internal';
 
 import { TThemeItemType, TUnit } from '../types';
 
@@ -438,7 +438,7 @@ export const typesMap: TTypesMap = {
     soon: () => null,
     skip: () => null,
     boolean: (props) => <BooleanEditor {...props} />,
-    color: ({ value, onChange, ...props }) => <ColorPicker {...props} value={value} onChange={onChange} />,
+    color: ({ value, onChange, ...props }) => <ColorEditor {...props} value={value} onChange={onChange} />,
     number: ({ value, onChange, ...props }) => (
         <FieldEditor
             {...props}
@@ -464,7 +464,7 @@ export const typesMap: TTypesMap = {
                 min={0}
                 unit={newUnit as TUnit}
                 value={newValue}
-                formatter={(newValue) => `${Number(newValue)}${newUnit}`}
+                formatter={(newValue) => (newUnit === 'px' ? Number(newValue) : `${Number(newValue)}${newUnit}`)}
                 onChange={onChange}
             />
         );

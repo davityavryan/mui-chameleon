@@ -1,33 +1,23 @@
 import React, { Fragment, useCallback, useEffect, useState } from 'react';
 
-import { ColorChangeHandler, SketchPicker } from 'react-color';
+import { ColorChangeHandler, ChromePicker, ColorResult } from 'react-color';
 
-import { IconButton, Popover, ListItemText, ListItemSecondaryAction } from '@material-ui/core';
-
-import { themeKeyLabel } from '../../utils';
+import { IconButton, Popover } from '@material-ui/core';
 
 import useStyles from './ColorPicker.style';
 
 interface IProps {
-    value: string;
-    themeKey: any;
-    onChange: any;
+    color: string;
+    onChange: (color: string) => void;
 }
 
-// ColorPicker.propTypes = {
-//     value: PropTypes.string.isRequired,
-//     themeKey: PropTypes.string.isRequired,
-//     onChange: PropTypes.func.isRequired,
-// };
-
-function ColorPicker({ value, themeKey, onChange }: IProps) {
-    const [localValue, setLocalValue] = useState(value);
+function ColorPicker({ color, onChange }: IProps) {
+    const [localColorValue, setLocalColorValue] = useState(color);
     const [anchorEl, setAnchorEl] = useState(null);
 
-    const classes = useStyles({ color: localValue });
+    const classes = useStyles({ color: localColorValue });
 
     const open = Boolean(anchorEl);
-    const id = open ? 'simple-popover' : undefined;
 
     const handleToggleShowHide: React.MouseEventHandler<HTMLButtonElement> = (event) => {
         setAnchorEl(event.currentTarget);
@@ -37,7 +27,7 @@ function ColorPicker({ value, themeKey, onChange }: IProps) {
         setAnchorEl(null);
     };
 
-    const handleChange = useCallback<ColorChangeHandler>(
+    const handleChange = useCallback<(color: ColorResult) => string>(
         (color) => {
             const { r, g, b, a } = color.rgb;
 
@@ -47,16 +37,16 @@ function ColorPicker({ value, themeKey, onChange }: IProps) {
                 newColor = color.hex;
             }
 
-            setLocalValue(newColor);
+            setLocalColorValue(newColor);
 
             return newColor;
         },
-        [setLocalValue]
+        [setLocalColorValue]
     );
 
     const handleChangeComplete = useCallback<ColorChangeHandler>(
-        (color, event) => {
-            const newColor = handleChange(color, event);
+        (color) => {
+            const newColor = handleChange(color);
 
             onChange(newColor);
         },
@@ -65,36 +55,31 @@ function ColorPicker({ value, themeKey, onChange }: IProps) {
 
     // Set Color back from props to reflect outside changes
     useEffect(() => {
-        setLocalValue(value);
-    }, [value]);
+        setLocalColorValue(color);
+    }, [color]);
 
     return (
         <Fragment>
-            <ListItemText primary={themeKeyLabel(themeKey)} />
+            <IconButton onClick={handleToggleShowHide} edge="end">
+                <div className={classes.colorPicker} />
+            </IconButton>
 
-            <ListItemSecondaryAction>
-                <IconButton onClick={handleToggleShowHide} edge="end" aria-describedby={id}>
-                    <div className={classes.colorPicker} />
-                </IconButton>
-
-                <Popover
-                    id={id}
-                    className={classes.popover}
-                    open={open}
-                    anchorEl={anchorEl}
-                    onClose={handleClose}
-                    anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'right',
-                    }}
-                    transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                    }}
-                >
-                    <SketchPicker color={localValue} onChange={handleChange} onChangeComplete={handleChangeComplete} />
-                </Popover>
-            </ListItemSecondaryAction>
+            <Popover
+                className={classes.popover}
+                open={open}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'right',
+                }}
+                transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                }}
+            >
+                <ChromePicker color={localColorValue} onChange={handleChange} onChangeComplete={handleChangeComplete} />
+            </Popover>
         </Fragment>
     );
 }
