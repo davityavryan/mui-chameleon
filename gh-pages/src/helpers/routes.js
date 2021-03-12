@@ -1,6 +1,6 @@
 import { ButtonPage, NotFoundPage, TextFieldsPage, TypographyPage } from 'Pages';
 
-const ROUTES = {
+export const ROUTES = {
     // home: {
     //     path: '/',
     //     component: HomePage,
@@ -30,5 +30,3 @@ const ROUTES = {
         exact: true,
     },
 };
-
-export default ROUTES;

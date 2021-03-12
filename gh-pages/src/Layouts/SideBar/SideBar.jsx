@@ -10,7 +10,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
-import ROUTES from 'helpers/routes';
+import { ROUTES } from 'helpers';
 
 import useStyles from './SideBar.style';
 

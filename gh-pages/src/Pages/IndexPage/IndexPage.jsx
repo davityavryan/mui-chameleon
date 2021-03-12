@@ -17,7 +17,7 @@ import { MainLayout } from 'Layouts';
 
 import { Spinner } from 'Components';
 
-import ROUTES from 'helpers/routes';
+import { ROUTES } from 'helpers';
 
 import ClickMe from 'static/img/click-me.svg';
 
