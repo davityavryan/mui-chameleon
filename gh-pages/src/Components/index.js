@@ -9,5 +9,6 @@ const ErrorBoundaryFallback = lazy(() =>
     import(/* webpackChunkName: "component/error-boundary-fallback" */ './ErrorBoundaryFallback/ErrorBoundaryFallback')
 );
 const Frame = lazy(() => import(/* webpackChunkName: "component/frame" */ './Frame/Frame'));
+const Theme = lazy(() => import(/* webpackChunkName: "component/theme" */ 'Components/Theme/Theme'));
 
-export { ErrorBoundary, ErrorBoundaryFallback, Frame, Spinner };
+export { ErrorBoundary, ErrorBoundaryFallback, Frame, Spinner, Theme };

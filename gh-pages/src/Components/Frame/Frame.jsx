@@ -5,15 +5,17 @@ import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
-import { Spinner } from 'Components';
+import { Theme, Spinner } from 'Components';
 
 function Frame({ title, align, children }) {
     return (
         <Box mb={3}>
             {title && (
-                <Typography variant="h5" paragraph>
-                    {title}
-                </Typography>
+                <Theme>
+                    <Typography variant="h5" paragraph>
+                        {title}
+                    </Typography>
+                </Theme>
             )}
 
             <Paper>
