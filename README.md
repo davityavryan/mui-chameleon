@@ -22,6 +22,7 @@
 [![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/davityavryan/material-ui-chameleon.svg)](https://isitmaintained.com/project/davityavryan/material-ui-chameleon 'Average time to resolve an issue')
 
 [![Buy me a coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/davityavryan)
+
 </div>
 
 ## Installation
@@ -68,9 +69,9 @@ ReactDOM.render(<App />, document.querySelector('#app'));
 
 ## Acknowledgments
 
-- Logo Design by Zara Magumyan. See her [Dribbble](https://dribbble.com/zmagumyan) for more awesome designs.
-- Some bundling Tools and scripts are used from [Material-UI](https://github.com/mui-org/material-ui) packages. This makes my
-  job easier, faster and compatibility of this package better with Material-UI packages.
+-   Logo Design by Zara Magumyan. See her [Dribbble](https://dribbble.com/zmagumyan) for more awesome designs.
+-   Some bundling Tools and scripts are used from [Material-UI](https://github.com/mui-org/material-ui) packages. This
+    makes my job easier, faster and compatibility of this package better with Material-UI packages.
 
 ## License
 
