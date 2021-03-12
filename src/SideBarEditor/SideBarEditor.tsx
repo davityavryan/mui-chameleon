@@ -40,20 +40,24 @@ function SideBarEditor({ open = false, onReset, onExpandToggle, onSave }: IProps
     };
 
     const handleChange = (themeKey: any) => (newValue: any) => {
+        // TODO: fix performance issue here
         const dynamicThemeCopy = JSON.parse(JSON.stringify(state.theme));
 
         const parentKey = themeKey.replace(/^(.*)\.[^.]*$/, '$1');
         const parentDefaultValue = delve(defaultTheme, parentKey);
 
         if (Array.isArray(parentDefaultValue)) {
-            delve(dynamicThemeCopy, parentKey, parentDefaultValue);
-        } else if (parentDefaultValue.main !== undefined) {
-            if (themeKey !== 'main') {
+            // If item is an array and we are setting by specific index, rest should be set from default theme
+            dset(dynamicThemeCopy, parentKey, parentDefaultValue);
+            dset(dynamicThemeCopy, themeKey, newValue);
+        } else {
+            // Material-UI will fail if palette's color is changes without having `main`. Set from default
+            if (parentDefaultValue.main !== undefined && themeKey !== 'main') {
                 dset(dynamicThemeCopy, `${parentKey}.main`, parentDefaultValue.main);
             }
-        }
 
-        dset(dynamicThemeCopy, themeKey, newValue);
+            dset(dynamicThemeCopy, themeKey, newValue);
+        }
 
         dispatch({
             type: 'update',
