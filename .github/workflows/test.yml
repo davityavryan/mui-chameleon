@@ -10,10 +10,17 @@ jobs:
     build:
         runs-on: ubuntu-20.04
         strategy:
+            fail-fast: false
             matrix:
-                node: ['14', '12', '10'] # Refer to https://nodejs.org/en/about/releases/ for supported versions
+                experimental: [false] # Shadow CI Jobs
+                node: ['15', '14', '12', '10'] # Refer to https://nodejs.org/en/about/releases/ for supported versions
+#                TODO: enable on 2021-04-20 after release
+#                include:
+#                    - node: '16'
+#                      experimental: true
 
-        name: Node v${{ matrix.node }}
+        name: Test on Node v${{ matrix.node }}
+        continue-on-error: ${{ matrix.experimental }}
         steps:
             -   uses: actions/checkout@v2
 
