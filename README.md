@@ -14,11 +14,12 @@
 
 [![npm package](https://img.shields.io/npm/v/material-ui-chameleon/latest.svg)](https://www.npmjs.com/package/material-ui-chameleon)
 [![npm downloads](https://img.shields.io/npm/dm/material-ui-chameleon.svg)](https://www.npmjs.com/package/material-ui-chameleon)
+[![BundlePhobia](https://badgen.net/bundlephobia/minzip/material-ui-chameleon)](https://bundlephobia.com/result?p=material-ui-chameleon)
+[![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/davityavryan/material-ui-chameleon.svg)](https://isitmaintained.com/project/davityavryan/material-ui-chameleon 'Average time to resolve an issue')
+
 [![Dependencies](https://img.shields.io/david/davityavryan/material-ui-chameleon)](https://david-dm.org/davityavryan/material-ui-chameleon/master)
 [![DevDependencies](https://img.shields.io/david/dev/davityavryan/material-ui-chameleon)](https://david-dm.org/davityavryan/material-ui-chameleon/master?type=dev)
 [![PeerDependencies](https://img.shields.io/david/peer/davityavryan/material-ui-chameleon)](https://david-dm.org/davityavryan/material-ui-chameleon/master?type=peer)
-[![BundlePhobia](https://badgen.net/bundlephobia/minzip/material-ui-chameleon)](https://bundlephobia.com/result?p=material-ui-chameleon)
-[![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/davityavryan/material-ui-chameleon.svg)](https://isitmaintained.com/project/davityavryan/material-ui-chameleon 'Average time to resolve an issue')
 
 [![Github Action build](https://github.com/davityavryan/material-ui-chameleon/actions/workflows/build.yml/badge.svg)](https://github.com/davityavryan/material-ui-chameleon/actions/workflows/build.yml)
 [![Github Action test](https://github.com/davityavryan/material-ui-chameleon/actions/workflows/test.yml/badge.svg)](https://github.com/davityavryan/material-ui-chameleon/actions/workflows/test.yml)
