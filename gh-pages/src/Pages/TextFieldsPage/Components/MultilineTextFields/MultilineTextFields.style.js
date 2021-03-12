@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(({ spacing }) => ({
     root: {
-        '& .MuiTextField-root': {
+        '& > div > *': {
             margin: spacing(1),
             width: '25ch',
         },
