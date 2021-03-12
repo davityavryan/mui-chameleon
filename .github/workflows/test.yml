@@ -53,7 +53,7 @@ jobs:
                     cache-name: cache-node-${{ matrix.node }}-modules-gh-pages
                 with:
                     path: ./gh-pages/node_modules
-                    key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./hs-pages/yarn.lock') }}
+                    key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./gh-pages/yarn.lock') }}
                     restore-keys: |
                         ${{ runner.os }}-build-${{ env.cache-name }}-
 
