@@ -14,12 +14,6 @@ interface IProps {
     children?: JSX.Element;
 }
 
-// Section.propTypes = {
-//     title: PropTypes.string.isRequired,
-//     secondaryTitle: PropTypes.string,
-//     children: PropTypes.node,
-// };
-
 function Section({ title, secondaryTitle, children = null }: IProps) {
     const classes = useStyles();
 
