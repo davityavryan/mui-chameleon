@@ -13,7 +13,7 @@ jobs:
             fail-fast: false
             matrix:
                 experimental: [false] # Shadow CI Jobs
-                node: ['15', '14', '12', '10'] # Refer to https://nodejs.org/en/about/releases/ for supported versions
+                node: ['15', '14', '12'] # Refer to https://nodejs.org/en/about/releases/ for supported versions
 #                TODO: enable on 2021-04-20 after release
 #                include:
 #                    - node: '16'
