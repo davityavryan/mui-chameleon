@@ -30,13 +30,9 @@ function Parser({ item, itemKey, defaultValue, onChange, isTopLevel = false }: I
     }
 
     if (typeof item === 'object') {
-        const entries = Object.entries(item);
-
-        entries.sort(([key1], [key2]) => String(key1).localeCompare(String(key2)));
-
         return (
             <List className={classes.root} subheader={<li />}>
-                {entries.map(([nestedItemKey, nestedItem]) => {
+                {Object.entries(item).map(([nestedItemKey, nestedItem]) => {
                     const themeKey = `${itemKey}.${nestedItemKey}`;
 
                     if (typeof nestedItem !== 'object') {
