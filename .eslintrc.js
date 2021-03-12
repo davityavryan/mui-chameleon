@@ -1,11 +1,7 @@
 module.exports = {
-    parser: '@typescript-eslint/parser',
-    extends: ['plugin:prettier/recommended'],
-    parserOptions: {
-        ecmaVersion: 'esnext',
-        sourceType: 'module',
-        ecmaFeatures: {
-            jsx: true,
-        },
+    extends: ['plugin:@typescript-eslint/recommended', 'plugin:prettier/recommended'],
+    plugins: ['react-hooks', 'prettier'],
+    rules: {
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
     },
 };

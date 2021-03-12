@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-yarn pretty-quick --verbose --staged --pattern '**/*.ts{,x}' --pattern '**/*.js{,x}'
+yarn lint-staged

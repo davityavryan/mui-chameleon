@@ -1,0 +1,4 @@
+module.exports = {
+    '**/*.[tj]s?(x)': ['pretty-quick --verbose --staged', 'eslint --fix --ext .ts,.tsx,.js,.jsx'],
+    '*': 'prettier --write --ignore-unknown',
+};
