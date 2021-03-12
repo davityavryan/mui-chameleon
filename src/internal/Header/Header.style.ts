@@ -3,6 +3,10 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 const useStyles = makeStyles<Theme, { isDry: boolean; isOpen: boolean }>(({ spacing, transitions, shape }) =>
     createStyles({
         root: {
+            position: 'sticky',
+            top: spacing(),
+            zIndex: 1,
+
             display: 'flex',
             justifyContent: ({ isDry, isOpen }) => (isDry || !isOpen ? 'center' : 'space-between'),
             alignItems: 'center',
@@ -10,6 +14,7 @@ const useStyles = makeStyles<Theme, { isDry: boolean; isOpen: boolean }>(({ spac
             paddingRight: ({ isOpen }) => spacing(isOpen ? 2 : 1.25),
             margin: spacing(),
             borderRadius: ({ isOpen }) => (isOpen ? shape.borderRadius : '50%'),
+
             transition: transitions.create(['border-radius', 'padding']),
         },
     })
