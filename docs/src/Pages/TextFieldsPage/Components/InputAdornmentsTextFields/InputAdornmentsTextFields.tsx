@@ -29,7 +29,7 @@ function InputAdornmentsTextFields() {
         showPassword: false,
     });
 
-    const handleChange = (prop) => (event) => {
+    const handleChange: (prop: string) => React.ChangeEventHandler<HTMLInputElement> = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
     };
 
@@ -37,7 +37,7 @@ function InputAdornmentsTextFields() {
         setValues({ ...values, showPassword: !values.showPassword });
     };
 
-    const handleMouseDownPassword = (event) => {
+    const handleMouseDownPassword: React.MouseEventHandler = (event) => {
         event.preventDefault();
     };
 

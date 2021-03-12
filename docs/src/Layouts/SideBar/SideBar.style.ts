@@ -1,9 +1,9 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(({ breakpoints, spacing }) => {
     const drawerWidth = spacing(30);
 
-    return {
+    return createStyles({
         drawer: {
             [breakpoints.up('sm')]: {
                 width: drawerWidth,
@@ -13,7 +13,7 @@ const useStyles = makeStyles(({ breakpoints, spacing }) => {
         drawerPaper: {
             width: drawerWidth,
         },
-    };
+    });
 });
 
 export default useStyles;

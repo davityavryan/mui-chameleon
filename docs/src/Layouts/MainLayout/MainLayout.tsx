@@ -7,7 +7,11 @@ import { SideBar } from 'Layouts';
 
 import { ErrorBoundary } from 'Components';
 
-function MainLayout({ children }) {
+interface IProps {
+    children: JSX.Element | JSX.Element[];
+}
+
+function MainLayout({ children }: IProps) {
     return (
         <Fragment>
             <SideBar />

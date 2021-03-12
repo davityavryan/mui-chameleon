@@ -30,7 +30,7 @@ function SelectTextFields() {
     const classes = useStyles();
     const [currency, setCurrency] = React.useState('EUR');
 
-    const handleChange = (event) => {
+    const handleChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
         setCurrency(event.target.value);
     };
 

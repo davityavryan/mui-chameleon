@@ -10,7 +10,7 @@ function MultilineTextFields() {
     const classes = useStyles();
     const [value, setValue] = React.useState('Controlled');
 
-    const handleChange = (event) => {
+    const handleChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
         setValue(event.target.value);
     };
 

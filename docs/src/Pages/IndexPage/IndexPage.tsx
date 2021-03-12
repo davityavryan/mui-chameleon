@@ -1,8 +1,7 @@
 import React, { Suspense, useState } from 'react';
 import ReactDOM from 'react-dom';
 
-import { Route, Switch } from 'react-router';
-import { HashRouter } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Button from '@material-ui/core/Button';
@@ -10,6 +9,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { ThemeOptions } from '@material-ui/core/styles';
 
 import { ThemeProvider, SideBarEditor } from 'material-ui-chameleon';
 
@@ -30,7 +30,7 @@ function IndexPage() {
     const [isExpanded, setIsExpanded] = useState(false);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-    const handleThemeSave = (newTheme) => {
+    const handleThemeSave = (newTheme: ThemeOptions) => {
         setUpdatedTheme(newTheme);
         setIsDialogOpen(true);
     };

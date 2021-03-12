@@ -1,5 +1,4 @@
 import React, { memo, Suspense } from 'react';
-import PropTypes from 'prop-types';
 
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
@@ -7,7 +6,13 @@ import Typography from '@material-ui/core/Typography';
 
 import { Theme, Spinner } from 'Components';
 
-function Frame({ title, align, children }) {
+interface IProps {
+    title?: string;
+    align?: 'flex-start' | 'center' | 'flex-end';
+    children: JSX.Element | JSX.Element[];
+}
+
+function Frame({ title, align = 'center', children }: IProps) {
     return (
         <Box mb={3}>
             {title && (
@@ -32,16 +37,5 @@ function Frame({ title, align, children }) {
         </Box>
     );
 }
-
-Frame.propTypes = {
-    title: PropTypes.string,
-    align: PropTypes.oneOf(['flex-start', 'center', 'flex-end']),
-    children: PropTypes.node.isRequired,
-};
-
-Frame.defaultProps = {
-    align: 'center',
-    title: '',
-};
 
 export default memo(Frame);

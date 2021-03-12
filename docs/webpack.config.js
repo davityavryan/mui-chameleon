@@ -1,14 +1,14 @@
-const path = require('path');
+import path from 'path';
 
-const browserslist = require('browserslist');
+import browserslist from 'browserslist';
 
-const { ESBuildPlugin, ESBuildMinifyPlugin } = require('esbuild-loader');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+import { ESBuildPlugin, ESBuildMinifyPlugin } from 'esbuild-loader';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import CopyPlugin from 'copy-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 
-const here = (dir) => (dir ? path.resolve(__dirname, dir) : __dirname);
+const here = (dir) => (dir ? path.resolve(process.cwd(), dir) : process.cwd());
 
 function getBuildTarget() {
     const SUPPORTED_BUILD_TARGETS = ['es', 'chrome', 'edge', 'firefox', 'ios', 'node', 'safari'];
@@ -42,7 +42,7 @@ const devServerPackages = [
     'webpack-dev-server',
 ];
 
-module.exports = (env, args = {}) => {
+export default (env, args = {}) => {
     const { mode = 'development' } = args;
     const isProduction = mode === 'production';
 
@@ -51,7 +51,7 @@ module.exports = (env, args = {}) => {
         context: here(),
         target: 'web',
         entry: {
-            index: `${dirs.src}/index.js`,
+            index: `${dirs.src}/index.ts`,
         },
         output: {
             path: here(dirs.dist),
@@ -60,7 +60,7 @@ module.exports = (env, args = {}) => {
             sourceMapFilename: '[file].map',
         },
         resolve: {
-            extensions: ['.js', '.jsx'],
+            extensions: ['.ts', '.tsx', '.js', '.jsx'],
             modules: [here('./node_modules'), here(dirs.src)],
             alias: {
                 'material-ui-chameleon': here('../build'),
@@ -70,11 +70,11 @@ module.exports = (env, args = {}) => {
         module: {
             rules: [
                 {
-                    test: /\.jsx?$/,
+                    test: /\.[tj]sx?$/,
                     sideEffects: false,
                     loader: 'esbuild-loader',
                     options: {
-                        loader: 'jsx',
+                        loader: 'tsx',
                         target,
                     },
                 },

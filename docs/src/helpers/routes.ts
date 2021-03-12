@@ -1,6 +1,17 @@
+import React from 'react';
+
 import { ButtonPage, NotFoundPage, TextFieldsPage, TypographyPage } from 'Pages';
 
-export const ROUTES = {
+interface IRoutes {
+    [key: string]: {
+        path: string;
+        component: React.ComponentType;
+        exact: boolean;
+        navName?: string;
+    };
+}
+
+export const ROUTES: IRoutes = {
     // home: {
     //     path: '/',
     //     component: HomePage,

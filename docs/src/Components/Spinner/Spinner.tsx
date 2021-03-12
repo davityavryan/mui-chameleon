@@ -1,16 +1,25 @@
 import React, { memo } from 'react';
-import PropTypes from 'prop-types';
 
 import clsx from 'clsx';
 
-import Box from '@material-ui/core/Box';
+import Box, { BoxProps } from '@material-ui/core/Box';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import useStyles from './Spinner.style';
 
-function Spinner({ isFixed, hasBackDrop, onClose, ...other }) {
+interface IProps extends BoxProps {
+    isFixed?: boolean;
+    hasBackDrop?: boolean;
+    onClose?: () => void;
+}
+
+function Spinner({ isFixed = false, hasBackDrop = false, onClose, ...other }: IProps) {
     const classes = useStyles();
+
+    if (typeof onClose !== 'function') {
+        onClose = () => undefined;
+    }
 
     if (hasBackDrop) {
         return (
@@ -26,19 +35,5 @@ function Spinner({ isFixed, hasBackDrop, onClose, ...other }) {
         </Box>
     );
 }
-
-Spinner.propTypes = {
-    ...Box.propTypes,
-    isFixed: PropTypes.bool,
-    hasBackDrop: PropTypes.bool,
-    onClose: PropTypes.func,
-};
-
-Spinner.defaultProps = {
-    ...Box.defaultProps,
-    isFixed: false,
-    hasBackDrop: false,
-    onClose: () => undefined,
-};
 
 export default memo(Spinner);

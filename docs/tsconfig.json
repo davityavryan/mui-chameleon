@@ -1,0 +1,11 @@
+{
+    "extends": "../tsconfig.json",
+    "exclude": ["node_modules", "public"],
+    "include": ["src"],
+    "compilerOptions": {
+        "outDir": "public",
+        "baseUrl": "src",
+        "emitDeclarationOnly": false,
+        "noEmit": true
+    }
+}
