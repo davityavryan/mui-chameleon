@@ -34,17 +34,26 @@ function FieldEditor({
     const handleChange = useCallback(
         (event) => {
             clearTimeout(timer);
+            timer = null;
 
             const newValue: string = event.target.value;
 
-            setLocalValue(newValue);
-
             timer = setTimeout(() => {
+                timer = null;
                 onChange(formatter(newValue));
             }, 50);
+
+            setLocalValue(newValue);
         },
         [onChange, formatter]
     );
+
+    useEffect(() => {
+        // Update localValue if value is changed from outside(ex. reset)
+        if (timer === null && value !== localValue) {
+            setLocalValue(value);
+        }
+    }, [value, localValue]);
 
     useEffect(() => {
         return () => {
