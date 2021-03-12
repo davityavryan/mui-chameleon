@@ -24,31 +24,12 @@ function SideBarEditor({ open = false, onReset, onExpandToggle, onSave }: IProps
     const { state, dispatch } = useContext(Context);
 
     const editableTheme = createMuiTheme(state.theme);
+    const defaultTheme = useMemo(() => createMuiTheme({}), []);
 
     const classes = useStyles({
         isOpen,
         muiDirection: editableTheme.direction,
     });
-
-    const defaultTheme = useMemo(
-        () =>
-            createMuiTheme({
-                palette: {
-                    type: editableTheme.palette.type,
-                },
-                zIndex: {
-                    tooltip: editableTheme.zIndex.tooltip + 11,
-                },
-                overrides: {
-                    MuiPaper: {
-                        root: {
-                            fontSize: 16, // Do not instantiate font-size from `body`
-                        },
-                    },
-                },
-            }),
-        []
-    );
 
     const handleToggleOpen = () => {
         setIsOpen(!isOpen);
