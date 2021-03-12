@@ -1,5 +1,5 @@
 src
-gh-pages
+docs
 .browserslistrc
 babel.config.js
 copy-files.js

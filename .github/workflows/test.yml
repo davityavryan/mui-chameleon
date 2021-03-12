@@ -46,14 +46,14 @@ jobs:
                     restore-keys: |
                         ${{ runner.os }}-build-${{ env.cache-name }}-
 
-            -   name: Cache node modules for gh-pages
+            -   name: Cache node modules for docs
                 uses: actions/cache@v2
-                id: cache-gh-pages-modules
+                id: cache-docs-modules
                 env:
-                    cache-name: cache-node-${{ matrix.node }}-modules-gh-pages
+                    cache-name: cache-node-${{ matrix.node }}-modules-docs
                 with:
-                    path: ./gh-pages/node_modules
-                    key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./gh-pages/yarn.lock') }}
+                    path: ./docs/node_modules
+                    key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./docs/yarn.lock') }}
                     restore-keys: |
                         ${{ runner.os }}-build-${{ env.cache-name }}-
 
@@ -61,9 +61,9 @@ jobs:
                 if: steps.cache-modules.outputs.cache-hit != 'true'
                 run: yarn install --prefer-offline --frozen-lockfile
 
-            -   name: Install dependencies for gh-pages
-                if: steps.cache-gh-pages-modules.outputs.cache-hit != 'true'
-                run: yarn --cwd ./gh-pages install --prefer-offline --frozen-lockfile
+            -   name: Install dependencies for docs
+                if: steps.cache-docs-modules.outputs.cache-hit != 'true'
+                run: yarn --cwd ./docs install --prefer-offline --frozen-lockfile
 
             -   name: Build package
                 run: yarn build
@@ -75,5 +75,5 @@ jobs:
                     GROUP_NAME: node v${{ matrix.node }}
                     BABEL_ENV: test
                 run:
-                    yarn start-server-and-test 'yarn demo:production' 4040 'yarn cy:run --record --parallel --ci-build-id
+                    yarn start-server-and-test 'yarn docs:production' 4040 'yarn cy:run --record --parallel --ci-build-id
                     "${GITHUB_RUN_NUMBER}" --group "${GROUP_NAME}"'

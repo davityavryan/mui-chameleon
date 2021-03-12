@@ -25,5 +25,5 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 .env
 .env.test
 
-gh-pages/public/
+docs/public/
 build/
