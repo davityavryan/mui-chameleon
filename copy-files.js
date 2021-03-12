@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 const fs = require('fs');
 const path = require('path');
 
@@ -23,7 +25,7 @@ async function prependBanner(file, string) {
     }
 }
 
-async function addLicense(packageData) {
+async function addLicense() {
     const license = `/** @license Material-UI Chameleon v${packageData.version}
  *
  * This source code is licensed under the MIT license found in the
@@ -61,16 +63,18 @@ async function run() {
         await copyFileToBuild('LICENSE.md');
         await copyFileToBuild('README.md');
 
-        await addLicense(packageData);
+        await addLicense();
 
-        const { scripts, devDependencies, engines, ...packageDataOther } = packageData;
+        delete packageData.scripts;
+        delete packageData.devDependencies;
+        delete packageData.engines;
 
         const newPackageData = {
-            ...packageDataOther,
+            ...packageData,
             private: false,
             module: './esm/index.js',
             main: './index.js',
-            types: './types/index.d.ts',
+            types: './index.d.ts',
         };
 
         await fs.writeFileSync(path.resolve(buildPath, 'package.json'), JSON.stringify(newPackageData, null, 4));

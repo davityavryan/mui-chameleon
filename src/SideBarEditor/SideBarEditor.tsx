@@ -4,7 +4,7 @@ import delve from 'dlv';
 import { dset } from 'dset';
 
 import { Box, Collapse } from '@material-ui/core';
-import { ThemeProvider as MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider as MuiThemeProvider, createMuiTheme, ThemeOptions } from '@material-ui/core/styles';
 
 import { Editor, Header } from '../internal';
 import { Context } from '../utils';
@@ -15,7 +15,7 @@ interface IProps {
     open?: any;
     onReset?: any;
     onExpandToggle?: any;
-    onSave: any;
+    onSave: (newTheme: ThemeOptions) => void;
 }
 
 function SideBarEditor({ open = false, onReset, onExpandToggle, onSave }: IProps) {

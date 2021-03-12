@@ -23,7 +23,7 @@ function reducer(state: any, action: any) {
 
 interface IProps {
     theme: ThemeOptions;
-    children: React.ReactChildren;
+    children: JSX.Element | JSX.Element[];
 }
 
 function ThemeProvider({ theme, children }: IProps) {
