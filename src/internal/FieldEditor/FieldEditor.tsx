@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 
 import { InputAdornment, TextField, TextFieldProps } from '@material-ui/core';
 
@@ -31,16 +31,25 @@ function FieldEditor({
 
     const endAdornment = unit ? <InputAdornment position="end">{unit}</InputAdornment> : null;
 
-    const handleChange = useCallback((event) => {
-        clearTimeout(timer);
+    const handleChange = useCallback(
+        (event) => {
+            clearTimeout(timer);
 
-        const newValue: string = event.target.value;
+            const newValue: string = event.target.value;
 
-        setLocalValue(newValue);
+            setLocalValue(newValue);
 
-        timer = setTimeout(() => {
-            onChange(formatter(newValue));
-        }, 50);
+            timer = setTimeout(() => {
+                onChange(formatter(newValue));
+            }, 50);
+        },
+        [onChange, formatter]
+    );
+
+    useEffect(() => {
+        return () => {
+            clearTimeout(timer);
+        };
     }, []);
 
     return (
