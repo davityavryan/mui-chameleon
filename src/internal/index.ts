@@ -4,6 +4,7 @@ export { default as ColorPicker } from './ColorPicker/ColorPicker';
 export { default as Editor } from './Editor/Editor';
 export { default as FontSizeEditor } from './FontSizeEditor/FontSizeEditor';
 export { default as FieldEditor } from './FieldEditor/FieldEditor';
+export { default as FontWeightEditor } from './FontWeightEditor/FontWeightEditor';
 export { default as Header } from './Header/Header';
 export { default as LetterSpacingEditor } from './LetterSpacingEditor/LetterSpacingEditor';
 export { default as Logo } from './Logo/Logo';
