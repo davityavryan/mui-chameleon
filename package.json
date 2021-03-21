@@ -30,6 +30,7 @@
         "pretest:open": "yarn install --prefer-offline --frozen-lockfile",
         "preformat:fix": "yarn install --prefer-offline --frozen-lockfile",
         "preformat:check": "yarn install --prefer-offline --frozen-lockfile",
+        "predocs:deploy": "yarn build",
         "prepublishOnly": "yarn build",
         "postbuild": "./copy-files.js",
         "postinstall": "husky install"
