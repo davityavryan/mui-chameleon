@@ -5,6 +5,7 @@ import browserslist from 'browserslist';
 import { ESBuildPlugin, ESBuildMinifyPlugin } from 'esbuild-loader';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
+import DefinePlugin from 'webpack/lib/DefinePlugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 
@@ -129,6 +130,9 @@ export default (env, args = {}) => {
                     useShortDoctype: true,
                 },
             }),
+            new DefinePlugin({
+                'process.env.NODE_ENV': JSON.stringify(mode),
+            }),
             new ESBuildPlugin(),
             !isProduction && new ReactRefreshWebpackPlugin(),
         ].filter(Boolean),
@@ -192,6 +196,7 @@ export default (env, args = {}) => {
             children: false,
             modules: false,
             entrypoints: false,
+            errorDetails: true,
             excludeAssets: /\.(jpe?g|png|webp|gif|ogg|m4a|mp4|webm|svg|ico|cur|eot|ttf|woff|woff2|map|LICENSE)$/i, // hiding images, fonts
         },
         devServer: {
