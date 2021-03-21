@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, memo } from 'react';
 
 import { ListItemText, ListItemSecondaryAction } from '@material-ui/core';
 
@@ -7,8 +7,8 @@ import { themeKeyLabel } from '../../utils';
 
 interface IProps {
     value: string;
-    themeKey: any;
-    onChange: any;
+    themeKey: string;
+    onChange: (color: string) => void;
 }
 
 function ColorEditor({ value, themeKey, onChange }: IProps) {
@@ -23,4 +23,4 @@ function ColorEditor({ value, themeKey, onChange }: IProps) {
     );
 }
 
-export default ColorEditor;
+export default memo(ColorEditor);

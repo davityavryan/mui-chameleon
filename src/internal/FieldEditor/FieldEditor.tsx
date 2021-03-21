@@ -3,17 +3,18 @@ import React, { memo, useCallback, useEffect, useState } from 'react';
 import { InputAdornment, TextField, TextFieldProps } from '@material-ui/core';
 
 import { TUnit } from '../../types';
-import { themeKeyLabel, TThemeMap } from '../../utils';
+import { themeKeyLabel } from '../../utils';
 
 let timer: number;
 
-type TProps = TextFieldProps & {
-    themeKey: keyof TThemeMap;
+export type TFieldEditorProps = Omit<TextFieldProps, 'onChange'> & {
+    themeKey: string;
     step?: number;
     min?: number;
     max?: number;
-    formatter?: (value: string) => any;
+    formatter?: (value: string) => string | number;
     unit?: TUnit;
+    onChange: (newValue: string | number) => void;
 };
 
 function FieldEditor({
@@ -26,7 +27,7 @@ function FieldEditor({
     unit,
     formatter = (newValue) => newValue,
     ...props
-}: TProps) {
+}: TFieldEditorProps) {
     const [localValue, setLocalValue] = useState(value);
 
     const endAdornment = unit ? <InputAdornment position="end">{unit}</InputAdornment> : null;

@@ -13,10 +13,10 @@ import useStyles from './Parser.style';
 const defaultTheme = createMuiTheme();
 
 interface IProps {
-    item: any;
-    itemKey: any;
-    defaultValue: any;
-    onChange: any;
+    item: unknown;
+    itemKey: string;
+    defaultValue: Record<string, unknown>;
+    onChange: (themeKey: string) => (newValue: unknown) => void;
     isTopLevel?: boolean;
 }
 

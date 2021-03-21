@@ -10,8 +10,8 @@ import { themeMap, TThemeMapItem } from '../../utils';
 
 interface IProps {
     theme: Theme;
-    defaultTheme: any;
-    onChange: any;
+    defaultTheme: Theme;
+    onChange: (themeKey: string) => (newValue: unknown) => void;
 }
 
 function Editor({ theme, defaultTheme, onChange }: IProps) {

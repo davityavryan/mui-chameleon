@@ -2,9 +2,9 @@ import React, { useReducer } from 'react';
 
 import { ThemeProvider as MuiThemeProvider, createMuiTheme, ThemeOptions } from '@material-ui/core/styles';
 
-import { Context } from '../utils';
+import { Context, TAction, TState } from '../utils';
 
-function reducer(state: any, action: any) {
+function reducer(state: TState, action: TAction) {
     switch (action.type) {
         case 'reset': {
             return {

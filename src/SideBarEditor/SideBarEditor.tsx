@@ -12,9 +12,9 @@ import { Context } from '../utils';
 import useStyles from './SideBarEditor.style';
 
 interface IProps {
-    open?: any;
-    onReset?: any;
-    onExpandToggle?: any;
+    open?: boolean;
+    onReset?: () => void;
+    onExpandToggle?: (isOpen: boolean) => void;
     onSave: (newTheme: ThemeOptions) => void;
 }
 
@@ -39,7 +39,7 @@ function SideBarEditor({ open = false, onReset, onExpandToggle, onSave }: IProps
         }
     };
 
-    const handleChange = (themeKey: any) => (newValue: any) => {
+    const handleChange = (themeKey: string) => (newValue: unknown) => {
         // TODO: fix performance issue here
         const dynamicThemeCopy = JSON.parse(JSON.stringify(state.theme));
 

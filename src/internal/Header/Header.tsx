@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
 import { Button, IconButton, Paper } from '@material-ui/core';
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createMuiTheme, ThemeOptions } from '@material-ui/core/styles';
 
 import { Logo } from '..';
 import { Context } from '../../utils';
@@ -9,9 +9,9 @@ import { Context } from '../../utils';
 import useStyles from './Header.style';
 
 interface IProps {
-    onToggleOpen: any;
-    onReset?: any;
-    onSave: any;
+    onToggleOpen: (event: React.MouseEvent<HTMLButtonElement>) => void;
+    onReset?: () => void;
+    onSave: (updatedTheme: ThemeOptions) => void;
     isOpen: boolean;
 }
 

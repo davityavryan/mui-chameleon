@@ -9,7 +9,14 @@ import {
     FormatTextdirectionRToL,
 } from '@material-ui/icons';
 
-import { BooleanEditor, ColorEditor, FieldEditor } from '../internal';
+import {
+    BooleanEditor,
+    ColorEditor,
+    FieldEditor,
+    FontSizeEditor,
+    LetterSpacingEditor,
+    NumberEditor,
+} from '../internal';
 
 import { TThemeItemType, TUnit } from '../types';
 
@@ -424,10 +431,10 @@ export const themeMap: TThemeMap = {
     },
 };
 
-type TProps = TThemeMapItem & {
-    value: any;
-    themeKey: any;
-    onChange: any;
+type TProps<V = any> = TThemeMapItem & {
+    value: V;
+    themeKey: string;
+    onChange: (newValue: V) => void;
 };
 
 type TTypesMap = {
@@ -437,57 +444,16 @@ type TTypesMap = {
 export const typesMap: TTypesMap = {
     soon: () => null,
     skip: () => null,
-    boolean: (props) => <BooleanEditor {...props} />,
-    color: ({ value, onChange, ...props }) => <ColorEditor {...props} value={value} onChange={onChange} />,
-    number: ({ value, onChange, ...props }) => (
-        <FieldEditor
-            {...props}
-            type="number"
-            formatter={(newValue) => Number(newValue)}
-            value={value}
-            onChange={onChange}
-        />
-    ),
-    easing: ({ value, onChange, ...props }) => <FieldEditor {...props} value={value} onChange={onChange} />,
-    fontFamily: ({ value, onChange, ...props }) => <FieldEditor {...props} value={value} onChange={onChange} />,
-    fontWeight: ({ value, onChange, ...props }) => <FieldEditor {...props} value={value} onChange={onChange} />,
-    fontSize: ({ value, onChange, unit = 'px', ...props }) => {
-        const matches = typeof value === 'string' && value.match(/^([\d.]*)(px|rem|em)$/);
-        const newUnit = matches ? matches[2] : unit;
-        const newValue = matches ? Number(matches[1]) : value;
-
-        return (
-            <FieldEditor
-                {...props}
-                type="number"
-                step={newUnit === 'px' ? 1 : 0.1}
-                min={0}
-                unit={newUnit as TUnit}
-                value={newValue}
-                formatter={(newValue) => (newUnit === 'px' ? Number(newValue) : `${Number(newValue)}${newUnit}`)}
-                onChange={onChange}
-            />
-        );
-    },
-    lineHeight: ({ value, onChange, ...props }) => <FieldEditor {...props} value={value} onChange={onChange} />,
-    letterSpacing: ({ value, onChange, unit = 'px', ...props }) => {
-        const matches = typeof value === 'string' && value.match(/^([\d.]*)(px|rem|em)$/);
-        const newUnit = matches ? matches[2] : unit;
-        const newValue = matches ? Number(matches[1]) : value;
-
-        return (
-            <FieldEditor
-                {...props}
-                type="number"
-                step={newUnit === 'px' ? 1 : 0.1}
-                unit={newUnit as TUnit}
-                value={newValue}
-                formatter={(newValue) => `${Number(newValue)}${newUnit}`}
-                onChange={onChange}
-            />
-        );
-    },
-    textTransform: ({ value, onChange, ...props }) => <FieldEditor {...props} value={value} onChange={onChange} />,
-    text: ({ value, onChange, ...props }) => <FieldEditor {...props} value={value} onChange={onChange} />,
-    shadow: ({ value, onChange, ...props }) => <FieldEditor {...props} value={value} onChange={onChange} />,
+    boolean: BooleanEditor,
+    color: ColorEditor,
+    number: NumberEditor,
+    easing: FieldEditor,
+    fontFamily: FieldEditor,
+    fontWeight: FieldEditor,
+    fontSize: FontSizeEditor,
+    lineHeight: FieldEditor,
+    letterSpacing: LetterSpacingEditor,
+    textTransform: FieldEditor,
+    text: FieldEditor,
+    shadow: FieldEditor,
 };

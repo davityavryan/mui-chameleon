@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, memo } from 'react';
 
 import { IconButton, ListItemText, ListItemSecondaryAction } from '@material-ui/core';
 
@@ -8,7 +8,7 @@ interface IProps {
     options?: string[]; // FIXME: not optional
     icons?: React.ElementType[]; // FIXME: not optional
     value: string;
-    themeKey: any;
+    themeKey: string;
     onChange: (value: string) => void;
 }
 
@@ -32,4 +32,4 @@ function BooleanEditor({ options, icons, value, themeKey, onChange }: IProps) {
     );
 }
 
-export default BooleanEditor;
+export default memo(BooleanEditor);
