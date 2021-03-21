@@ -442,7 +442,6 @@ type TTypesMap = {
 };
 
 export const typesMap: TTypesMap = {
-    soon: () => null,
     skip: () => null,
     boolean: BooleanEditor,
     color: ColorEditor,

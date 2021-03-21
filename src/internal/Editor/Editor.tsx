@@ -26,10 +26,6 @@ function Editor({ theme, defaultTheme, onChange }: IProps) {
                     return null;
                 }
 
-                if (mapItem && mapItemType === 'soon') {
-                    return <Section key={themeKey} title={themeKey} secondaryTitle="Coming soon" />;
-                }
-
                 if (typeof themeItem === 'object') {
                     return (
                         <Section key={themeKey} title={themeKey}>
