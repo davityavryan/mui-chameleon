@@ -13,6 +13,12 @@ const useStyles = makeStyles(({ breakpoints, spacing }) => {
         drawerPaper: {
             width: drawerWidth,
         },
+        nested: {
+            paddingLeft: spacing(4),
+        },
+        doubleNested: {
+            paddingLeft: spacing(6),
+        },
     });
 });
 
