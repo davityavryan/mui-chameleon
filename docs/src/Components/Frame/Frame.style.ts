@@ -16,6 +16,8 @@ const useStyles = makeStyles(({ shape, spacing, palette, shadows }) =>
         topBar: {
             padding: spacing(1, 2),
             backgroundColor: palette.action.hover,
+            borderTopLeftRadius: shape.borderRadius,
+            borderTopRightRadius: shape.borderRadius,
 
             borderBottomWidth: 1,
             borderBottomStyle: 'solid',
