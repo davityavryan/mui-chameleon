@@ -71,4 +71,4 @@ jobs:
                     GROUP_NAME: node v${{ matrix.node }}
                     BABEL_ENV: test
                 run:
-                    yarn test --record --parallel --ci-build-id "${GITHUB_RUN_NUMBER}" --group "${GROUP_NAME}"'
+                    yarn test --record --parallel --ci-build-id "${GITHUB_RUN_NUMBER}" --group "${GROUP_NAME}"
