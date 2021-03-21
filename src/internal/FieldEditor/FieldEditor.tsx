@@ -5,7 +5,7 @@ import { InputAdornment, TextField, TextFieldProps } from '@material-ui/core';
 import { TUnit } from '../../types';
 import { themeKeyLabel, TThemeMap } from '../../utils';
 
-let timer: NodeJS.Timer;
+let timer: number;
 
 type TProps = TextFieldProps & {
     themeKey: keyof TThemeMap;
