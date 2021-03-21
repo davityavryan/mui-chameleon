@@ -5,9 +5,9 @@ import browserslist from 'browserslist';
 import { ESBuildPlugin, ESBuildMinifyPlugin } from 'esbuild-loader';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
-import DefinePlugin from 'webpack/lib/DefinePlugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
+import webpack from 'webpack';
 
 const here = (dir) => (dir ? path.resolve(process.cwd(), dir) : process.cwd());
 
@@ -130,7 +130,7 @@ export default (env, args = {}) => {
                     useShortDoctype: true,
                 },
             }),
-            new DefinePlugin({
+            new webpack.DefinePlugin({
                 'process.env.NODE_ENV': JSON.stringify(mode),
             }),
             new ESBuildPlugin(),
