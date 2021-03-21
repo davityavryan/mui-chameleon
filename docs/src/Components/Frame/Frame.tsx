@@ -1,10 +1,11 @@
-import React, { memo, Suspense } from 'react';
+import React, { memo } from 'react';
 
 import Box from '@material-ui/core/Box';
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
-import { Theme, Spinner } from 'Components';
+import { ErrorBoundary, Theme } from 'Components';
+
+import useStyles from './Frame.style';
 
 interface IProps {
     title?: string;
@@ -13,8 +14,10 @@ interface IProps {
 }
 
 function Frame({ title, align = 'center', children }: IProps) {
+    const classes = useStyles();
+
     return (
-        <Box mb={3}>
+        <div className={classes.root}>
             {title && (
                 <Theme>
                     <Typography variant="h5" paragraph>
@@ -23,18 +26,18 @@ function Frame({ title, align = 'center', children }: IProps) {
                 </Theme>
             )}
 
-            <Paper>
-                <Box py={1} px={2} bgcolor="action.hover" borderRadius="shape.borderRadius">
+            <div className={classes.frame}>
+                <div className={classes.topBar}>
                     <Box display="inline-block" bgcolor="error.main" borderRadius="50%" p={0.5} mr={0.5} />
                     <Box display="inline-block" bgcolor="warning.main" borderRadius="50%" p={0.5} mr={0.5} />
                     <Box display="inline-block" bgcolor="success.main" borderRadius="50%" p={0.5} mr={0.5} />
-                </Box>
+                </div>
 
                 <Box display="flex" flexDirection="column" alignItems={align} p={3}>
-                    <Suspense fallback={<Spinner />}>{children}</Suspense>
+                    <ErrorBoundary>{children}</ErrorBoundary>
                 </Box>
-            </Paper>
-        </Box>
+            </div>
+        </div>
     );
 }
 
