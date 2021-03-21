@@ -27,7 +27,6 @@ const plugins = [
         },
         'core',
     ],
-    // See https://material-ui.com/guides/minimizing-bundle-size/
     [
         'babel-plugin-import',
         {
