@@ -41,7 +41,6 @@ const plugins = [
 ];
 
 module.exports = {
-    ignore: ['**/*.unit.{ts,tsx}', '**/*.e2e.{ts,tsx}'],
     presets: defaultPresets,
     plugins: [
         ['@babel/plugin-proposal-object-rest-spread', { loose: true }],
