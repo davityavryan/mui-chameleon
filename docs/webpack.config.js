@@ -2,7 +2,7 @@ import path from 'path';
 
 import browserslist from 'browserslist';
 
-import { ESBuildPlugin, ESBuildMinifyPlugin } from 'esbuild-loader';
+import { ESBuildMinifyPlugin } from 'esbuild-loader';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
@@ -133,7 +133,6 @@ export default (env, args = {}) => {
             new webpack.DefinePlugin({
                 'process.env.NODE_ENV': JSON.stringify(mode),
             }),
-            new ESBuildPlugin(),
             !isProduction && new ReactRefreshWebpackPlugin(),
         ].filter(Boolean),
         optimization: {
