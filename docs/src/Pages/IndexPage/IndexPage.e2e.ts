@@ -1,8 +1,8 @@
-/// <reference types="cypress" />
+import '../../../../cypress'; // Add custom commands
 
 context('Home page', () => {
     beforeEach(() => {
-        cy.visit('/');
+        cy.visit('http://localhost:4040/');
     });
 
     describe('should', () => {

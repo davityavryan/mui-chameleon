@@ -21,10 +21,10 @@ function BooleanEditor({ options, icons, value, themeKey, onChange }: IProps) {
 
     return (
         <Fragment>
-            <ListItemText primary={themeKeyLabel(themeKey)} />
+            <ListItemText data-testid="boolean-editor-label" primary={themeKeyLabel(themeKey)} />
 
             <ListItemSecondaryAction>
-                <IconButton onClick={handleClick} edge="end">
+                <IconButton data-testid="boolean-editor-toggle" onClick={handleClick} edge="end">
                     <Icon />
                 </IconButton>
             </ListItemSecondaryAction>
