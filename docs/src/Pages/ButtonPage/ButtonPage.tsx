@@ -1,55 +1,28 @@
-import React from 'react';
-
-import Button from '@material-ui/core/Button';
+import React, { Fragment } from 'react';
 
 import { Frame } from 'Components';
 
-import useStyles from './ButtonPage.style';
+import { BasicButtons, ButtonsSizes, ButtonsWithIcons, IconButtons } from './Components';
 
 function ButtonPage() {
-    const classes = useStyles();
-
     return (
-        <Frame title="Buttons">
-            <div className={classes.buttons}>
-                <Button variant="text">Default</Button>
-                <Button variant="text" color="primary">
-                    Primary
-                </Button>
-                <Button variant="text" color="secondary">
-                    Secondary
-                </Button>
-                <Button variant="text" color="secondary" disabled>
-                    Disabled
-                </Button>
-            </div>
+        <Fragment>
+            <Frame title="Buttons">
+                <BasicButtons />
+            </Frame>
 
-            <div className={classes.buttons}>
-                <Button variant="outlined">Default</Button>
-                <Button variant="outlined" color="primary">
-                    Primary
-                </Button>
-                <Button variant="outlined" color="secondary">
-                    Secondary
-                </Button>
-                <Button variant="outlined" color="secondary" disabled>
-                    Disabled
-                </Button>
-            </div>
+            <Frame title="Button sizes">
+                <ButtonsSizes />
+            </Frame>
 
-            <div className={classes.buttons}>
-                <Button variant="contained">Default</Button>
-                <Button variant="contained" color="primary">
-                    Primary
-                </Button>
-                <Button variant="contained" color="secondary">
-                    Secondary
-                </Button>
-                <Button variant="contained" color="secondary" disabled>
-                    Disabled
-                </Button>
-            </div>
-        </Frame>
+            <Frame title="Button with icons and label">
+                <ButtonsWithIcons />
+            </Frame>
+
+            <Frame title="Icon buttons">
+                <IconButtons />
+            </Frame>
+        </Fragment>
     );
 }
 

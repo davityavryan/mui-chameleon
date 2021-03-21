@@ -12,11 +12,8 @@ const InputAdornmentsTextFields = lazy(
 const MultilineTextFields = lazy(
     () => import(/* webpackChunkName: "component/text-field/multiline" */ './MultilineTextFields/MultilineTextFields')
 );
-const SelectTextFields = lazy(
-    () => import(/* webpackChunkName: "component/text-field/select" */ './SelectTextFields/SelectTextFields')
-);
 const VariantsTextFields = lazy(
     () => import(/* webpackChunkName: "component/text-field/variants" */ './VariantsTextFields/VariantsTextFields')
 );
 
-export { IconsTextFields, InputAdornmentsTextFields, MultilineTextFields, SelectTextFields, VariantsTextFields };
+export { IconsTextFields, InputAdornmentsTextFields, MultilineTextFields, VariantsTextFields };

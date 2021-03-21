@@ -14,19 +14,18 @@ import { ThemeOptions } from '@material-ui/core/styles';
 import { ThemeProvider, SideBarEditor } from 'material-ui-chameleon';
 
 import { MainLayout } from 'Layouts';
-
 import { Theme, Spinner } from 'Components';
-
 import { ROUTES } from 'helpers';
-
-import ClickMe from 'static/img/click-me.svg';
+import ClickMeImage from 'static/img/click-me.svg';
 
 import useStyles from './IndexPage.style';
+
+const initialTheme = {};
 
 function IndexPage() {
     const classes = useStyles();
 
-    const [updatedTheme, setUpdatedTheme] = useState({});
+    const [updatableTheme, setUpdatedTheme] = useState(initialTheme);
     const [isExpanded, setIsExpanded] = useState(false);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -49,11 +48,11 @@ function IndexPage() {
                 <MainLayout>
                     <CssBaseline />
 
-                    <ThemeProvider theme={{}}>
+                    <ThemeProvider theme={updatableTheme}>
                         <Suspense fallback={<Spinner isFixed />}>
                             <Switch>
-                                {Object.entries(ROUTES).map(([routeKey, { path, exact, component }]) => (
-                                    <Route key={routeKey} path={path} exact={exact} component={component} />
+                                {Object.entries(ROUTES).map(([routeKey, route]) => (
+                                    <Route key={routeKey} {...route} />
                                 ))}
                             </Switch>
                         </Suspense>
@@ -61,7 +60,7 @@ function IndexPage() {
                         <SideBarEditor onSave={handleThemeSave} onExpandToggle={handleExpandToggle} />
                     </ThemeProvider>
 
-                    {!isExpanded && <ClickMe className={classes.clickMe} />}
+                    {!isExpanded && <ClickMeImage className={classes.clickMe} />}
 
                     <Dialog
                         open={isDialogOpen}
@@ -72,7 +71,7 @@ function IndexPage() {
                     >
                         <DialogTitle id="theme-dialog-title">New theme</DialogTitle>
                         <DialogContent>
-                            <pre>{JSON.stringify(updatedTheme, null, 4)}</pre>
+                            <pre>{JSON.stringify(updatableTheme, null, 4)}</pre>
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={handleCloseDialog}>Close</Button>

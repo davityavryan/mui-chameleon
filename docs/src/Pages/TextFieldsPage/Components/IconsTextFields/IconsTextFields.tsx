@@ -42,7 +42,7 @@ function IconsTextFields() {
                 }}
             />
             <div className={classes.margin}>
-                <Grid container spacing={1} alignItems="flex-end">
+                <Grid spacing={1} alignItems="flex-end" container>
                     <Grid item>
                         <AccountCircle />
                     </Grid>

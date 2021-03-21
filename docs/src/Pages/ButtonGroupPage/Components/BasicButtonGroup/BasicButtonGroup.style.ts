@@ -2,7 +2,7 @@ import { makeStyles, createStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(({ spacing }) =>
     createStyles({
-        buttons: {
+        root: {
             '& > *': {
                 marginRight: spacing(2),
                 marginBottom: spacing(2),

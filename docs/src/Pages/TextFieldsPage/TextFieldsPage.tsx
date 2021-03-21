@@ -2,13 +2,7 @@ import React, { Fragment } from 'react';
 
 import { Frame } from 'Components';
 
-import {
-    IconsTextFields,
-    InputAdornmentsTextFields,
-    MultilineTextFields,
-    SelectTextFields,
-    VariantsTextFields,
-} from './Components';
+import { IconsTextFields, InputAdornmentsTextFields, MultilineTextFields, VariantsTextFields } from './Components';
 
 function TextFieldsPage() {
     return (
@@ -19,10 +13,6 @@ function TextFieldsPage() {
 
             <Frame title="Multiline">
                 <MultilineTextFields />
-            </Frame>
-
-            <Frame title="Select">
-                <SelectTextFields />
             </Frame>
 
             <Frame title="Icons">
