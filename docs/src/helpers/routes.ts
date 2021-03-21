@@ -9,6 +9,7 @@ import {
     ProgressPage,
     RadioPage,
     SelectsPage,
+    SignInPage,
     SlidersPage,
     SwitchesPage,
     TablesPage,
@@ -66,6 +67,11 @@ export const ROUTES = {
     select: {
         path: '/select',
         component: SelectsPage,
+        exact: true,
+    },
+    signIn: {
+        path: '/examples/sign-in',
+        component: SignInPage,
         exact: true,
     },
     sliders: {

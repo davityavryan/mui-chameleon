@@ -1,4 +1,5 @@
 import { lazy } from 'react';
+import SignIn from './SignInPage/SignInPage';
 
 const AlertsPage = lazy(() => import(/* webpackChunkName: "pages/alerts" */ 'Pages/AlertsPage/AlertsPage'));
 const ButtonPage = lazy(() => import(/* webpackChunkName: "pages/button" */ 'Pages/ButtonPage/ButtonPage'));
@@ -14,6 +15,7 @@ const NotFoundPage = lazy(() => import(/* webpackChunkName: "pages/not-found" */
 const ProgressPage = lazy(() => import(/* webpackChunkName: "pages/progress" */ './ProgressPage/ProgressPage'));
 const RadioPage = lazy(() => import(/* webpackChunkName: "pages/radio" */ './RadioPage/RadioPage'));
 const SelectsPage = lazy(() => import(/* webpackChunkName: "pages/selects" */ './SelectsPage/SelectsPage'));
+const SignInPage = lazy(() => import(/* webpackChunkName: "pages/sign-in" */ './SignInPage/SignInPage'));
 const SlidersPage = lazy(() => import(/* webpackChunkName: "pages/sliders" */ './SlidersPage/SlidersPage'));
 const SwitchesPage = lazy(() => import(/* webpackChunkName: "pages/switches" */ './SwitchesPage/SwitchesPage'));
 const TablesPage = lazy(() => import(/* webpackChunkName: "pages/table" */ './TablesPage/TablesPage'));
@@ -34,6 +36,7 @@ export {
     ProgressPage,
     RadioPage,
     SelectsPage,
+    SignInPage,
     SlidersPage,
     SwitchesPage,
     TablesPage,

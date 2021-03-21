@@ -81,4 +81,13 @@ export const MENU = {
             },
         ],
     },
+    examples: {
+        label: 'Examples',
+        routes: [
+            {
+                label: 'SignIn',
+                route: ROUTES.signIn,
+            },
+        ],
+    },
 };
