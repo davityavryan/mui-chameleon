@@ -24,10 +24,6 @@ jobs:
         steps:
             -   uses: actions/checkout@v2
 
-            # TODO: use static server instead of Webpack
-            -   name: Increase file limit
-                run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-
             -   name: Setup node
                 uses: actions/setup-node@v2.1.5
                 with:
@@ -75,5 +71,4 @@ jobs:
                     GROUP_NAME: node v${{ matrix.node }}
                     BABEL_ENV: test
                 run:
-                    yarn start-server-and-test 'yarn docs:production' 4040 'yarn cy:run --record --parallel --ci-build-id
-                    "${GITHUB_RUN_NUMBER}" --group "${GROUP_NAME}"'
+                    yarn test --record --parallel --ci-build-id "${GITHUB_RUN_NUMBER}" --group "${GROUP_NAME}"'
