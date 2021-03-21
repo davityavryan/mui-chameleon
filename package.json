@@ -9,9 +9,9 @@
     "scripts": {
         "start": "NODE_ENV=development yarn build:esm --source-maps -w",
         "build": "NODE_ENV=production yarn build:esm && yarn build:es && yarn build:cjs && tsc",
-        "build:cjs": "BABEL_ENV=cjs babel --config-file ./babel.config.js -x '.ts,.tsx' ./src --out-dir ./build",
-        "build:esm": "BABEL_ENV=esm babel --config-file ./babel.config.js -x '.ts,.tsx' ./src --out-dir ./build/esm",
-        "build:es": "BABEL_ENV=es babel --config-file ./babel.config.js -x '.ts,.tsx' ./src --out-dir ./build/es",
+        "build:cjs": "BABEL_ENV=cjs babel --config-file ./babel.config.js --ignore **/*.unit.ts --ignore **/*.unit.tsx -x '.ts,.tsx' ./src --out-dir ./build",
+        "build:esm": "BABEL_ENV=esm babel --config-file ./babel.config.js --ignore **/*.unit.ts --ignore **/*.unit.tsx -x '.ts,.tsx' ./src --out-dir ./build/esm",
+        "build:es": "BABEL_ENV=es babel --config-file ./babel.config.js --ignore **/*.unit.ts --ignore **/*.unit.tsx -x '.ts,.tsx' ./src --out-dir ./build/es",
         "format:check": "eslint --ext .tsx,.ts . && prettier --check .",
         "docs:start": "yarn --cwd ./docs start",
         "docs:build": "yarn --cwd ./docs build",

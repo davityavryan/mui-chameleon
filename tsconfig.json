@@ -1,5 +1,5 @@
 {
-    "exclude": ["node_modules", "build"],
+    "exclude": ["node_modules", "build", "src/**/*.unit.ts", "src/**/*.unit.tsx"],
     "include": ["src"],
     "compilerOptions": {
         "outDir": "build",
