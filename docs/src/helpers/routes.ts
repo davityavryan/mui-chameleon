@@ -1,9 +1,12 @@
 import {
     AlertsPage,
+    BottomNavigationPage,
+    BreadcrumbsPage,
     ButtonPage,
     ButtonGroupPage,
     CheckboxPage,
     DateTimePage,
+    DrawerPage,
     FloatingActionButtonPage,
     NotFoundPage,
     ProgressPage,
@@ -24,6 +27,16 @@ export const ROUTES = {
         component: AlertsPage,
         exact: true,
     },
+    bottomNavigation: {
+        path: '/bottom-navigation',
+        component: BottomNavigationPage,
+        exact: true,
+    },
+    breadcrumbs: {
+        path: '/breadcrumbs',
+        component: BreadcrumbsPage,
+        exact: true,
+    },
     button: {
         path: '/button',
         component: ButtonPage,
@@ -42,6 +55,11 @@ export const ROUTES = {
     dateTime: {
         path: '/date-time',
         component: DateTimePage,
+        exact: true,
+    },
+    drawer: {
+        path: '/drawer',
+        component: DrawerPage,
         exact: true,
     },
     floatingActionButton: {

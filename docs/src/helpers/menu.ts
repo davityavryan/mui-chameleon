@@ -50,6 +50,23 @@ export const MENU = {
             },
         ],
     },
+    navigation: {
+        label: 'Navigation',
+        routes: [
+            {
+                label: 'Bottom Navigation',
+                route: ROUTES.bottomNavigation,
+            },
+            {
+                label: 'Breadcrumbs',
+                route: ROUTES.breadcrumbs,
+            },
+            {
+                label: 'Drawer',
+                route: ROUTES.drawer,
+            },
+        ],
+    },
     feedback: {
         label: 'Feedback',
         routes: [

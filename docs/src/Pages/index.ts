@@ -1,13 +1,19 @@
 import { lazy } from 'react';
-import SignIn from './SignInPage/SignInPage';
 
-const AlertsPage = lazy(() => import(/* webpackChunkName: "pages/alerts" */ 'Pages/AlertsPage/AlertsPage'));
-const ButtonPage = lazy(() => import(/* webpackChunkName: "pages/button" */ 'Pages/ButtonPage/ButtonPage'));
+const AlertsPage = lazy(() => import(/* webpackChunkName: "pages/alerts" */ './AlertsPage/AlertsPage'));
+const BottomNavigationPage = lazy(
+    () => import(/* webpackChunkName: "pages/bottom-navigation" */ './BottomNavigationPage/BottomNavigationPage')
+);
+const BreadcrumbsPage = lazy(
+    () => import(/* webpackChunkName: "pages/breadcrumbs" */ './BreadcrumbsPage/BreadcrumbsPage')
+);
+const ButtonPage = lazy(() => import(/* webpackChunkName: "pages/button" */ './ButtonPage/ButtonPage'));
 const ButtonGroupPage = lazy(
-    () => import(/* webpackChunkName: "pages/button-group" */ 'Pages/ButtonGroupPage/ButtonGroupPage')
+    () => import(/* webpackChunkName: "pages/button-group" */ './ButtonGroupPage/ButtonGroupPage')
 );
 const CheckboxPage = lazy(() => import(/* webpackChunkName: "pages/checkbox" */ './CheckboxPage/CheckboxPage'));
 const DateTimePage = lazy(() => import(/* webpackChunkName: "pages/date-time" */ './DateTimePage/DateTimePage'));
+const DrawerPage = lazy(() => import(/* webpackChunkName: "pages/drawer" */ './DrawerPage/DrawerPage'));
 const FloatingActionButtonPage = lazy(
     () => import(/* webpackChunkName: "pages/fab" */ './FloatingActionButtonPage/FloatingActionButtonPage')
 );
@@ -27,10 +33,13 @@ const TypographyPage = lazy(() => import(/* webpackChunkName: "pages/typography"
 
 export {
     AlertsPage,
+    BottomNavigationPage,
+    BreadcrumbsPage,
     ButtonPage,
     ButtonGroupPage,
     CheckboxPage,
     DateTimePage,
+    DrawerPage,
     FloatingActionButtonPage,
     NotFoundPage,
     ProgressPage,
