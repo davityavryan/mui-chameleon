@@ -1,19 +1,19 @@
 import React, { memo } from 'react';
 
-import Box from '@material-ui/core/Box';
+import Box, { BoxProps } from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 
 import { ErrorBoundary, Theme } from 'Components';
 
 import useStyles from './Frame.style';
 
-interface IProps {
+interface IProps extends BoxProps {
     title?: string;
     align?: 'flex-start' | 'center' | 'flex-end';
     children: JSX.Element | JSX.Element[];
 }
 
-function Frame({ title, align = 'center', children }: IProps) {
+function Frame({ title, align = 'center', children, ...boxProps }: IProps) {
     const classes = useStyles();
 
     return (
@@ -33,7 +33,7 @@ function Frame({ title, align = 'center', children }: IProps) {
                     <Box display="inline-block" bgcolor="success.main" borderRadius="50%" p={0.5} mr={0.5} />
                 </div>
 
-                <Box display="flex" flexDirection="column" alignItems={align} p={3}>
+                <Box position="relative" display="flex" flexDirection="column" alignItems={align} p={3} {...boxProps}>
                     <ErrorBoundary>{children}</ErrorBoundary>
                 </Box>
             </div>
