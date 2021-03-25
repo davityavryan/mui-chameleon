@@ -61,7 +61,7 @@ function SideBar() {
 
                 <Divider />
 
-                <List component="div">
+                <List component="div" dense>
                     {menuEntries.map(([topKey, { label: topLabel, routes }]) => (
                         <Fragment key={topKey}>
                             <ListItem onClick={handleToggleMenu(topKey)} button>
@@ -71,7 +71,7 @@ function SideBar() {
                             </ListItem>
 
                             <Collapse in={openedMenus[topKey]} timeout="auto" unmountOnExit>
-                                <List component="div" disablePadding>
+                                <List component="div" disablePadding dense>
                                     {routes.map(({ label, route }) => (
                                         <ListItem
                                             key={route.path}
