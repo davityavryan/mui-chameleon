@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
 import delve from 'dlv';
 import { dset } from 'dset';
@@ -24,20 +24,25 @@ function SideBarEditor({ open = false, onReset, onExpandToggle, onSave }: IProps
     const { state, dispatch } = useContext(Context);
 
     const editableTheme = createMuiTheme(state.theme);
-    const defaultTheme = useMemo(() => createMuiTheme({}), []);
+    const defaultTheme = useMemo(
+        () =>
+            createMuiTheme({
+                palette: {
+                    type: editableTheme.palette.type,
+                },
+            }),
+        [editableTheme.palette.type]
+    );
 
-    const classes = useStyles({
-        isOpen,
-        muiDirection: editableTheme.direction,
-    });
+    const classes = useStyles({ isOpen });
 
-    const handleToggleOpen = () => {
+    const handleToggleOpen = useCallback(() => {
         setIsOpen(!isOpen);
 
         if (typeof onExpandToggle === 'function') {
             onExpandToggle(!isOpen);
         }
-    };
+    }, [isOpen]);
 
     const handleChange = (themeKey: string) => (newValue: unknown) => {
         // TODO: fix performance issue here
