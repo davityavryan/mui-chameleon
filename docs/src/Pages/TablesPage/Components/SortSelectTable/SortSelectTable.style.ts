@@ -22,7 +22,7 @@ const useToolbarStyles = makeStyles(({ spacing, palette }) =>
     })
 );
 
-const useStyles = makeStyles(({ spacing }) =>
+const useStyles = makeStyles(
     createStyles({
         visuallyHidden: {
             border: 0,

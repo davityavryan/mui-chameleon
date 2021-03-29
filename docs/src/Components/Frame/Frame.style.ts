@@ -1,18 +1,18 @@
-import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { makeStyles, createStyles, ThemeOptions, Theme } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(({ shape, spacing, palette, shadows }) =>
+const useStyles = makeStyles<Theme, ThemeOptions>(({ shape, spacing, palette, transitions }) =>
     createStyles({
         root: {
             '& + $root': {
                 marginTop: spacing(4),
             },
         },
-        frame: {
+        frame: ({ shadows }) => ({
             borderRadius: shape.borderRadius,
-            boxShadow: shadows[2],
+            boxShadow: shadows[4],
             backgroundColor: palette.background.default,
             color: palette.text.primary,
-        },
+        }),
         topBar: {
             padding: spacing(1, 2),
             backgroundColor: palette.action.hover,

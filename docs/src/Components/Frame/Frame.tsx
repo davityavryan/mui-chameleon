@@ -4,6 +4,7 @@ import Box, { BoxProps } from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 
 import { ErrorBoundary, Theme } from 'Components';
+import { useDocsTheme } from 'helpers';
 
 import useStyles from './Frame.style';
 
@@ -14,7 +15,9 @@ interface IProps extends BoxProps {
 }
 
 function Frame({ title, align = 'center', children, ...boxProps }: IProps) {
-    const classes = useStyles();
+    const { shadows } = useDocsTheme();
+
+    const classes = useStyles({ shadows });
 
     return (
         <div className={classes.root}>
