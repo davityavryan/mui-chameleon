@@ -14,10 +14,9 @@ jobs:
             matrix:
                 experimental: [false] # Shadow CI Jobs
                 node: ['15', '14', '12'] # Refer to https://nodejs.org/en/about/releases/ for supported versions
-#                TODO: enable on 2021-04-20 after release
-#                include:
-#                    - node: '16'
-#                      experimental: true
+                include:
+                    - node: '16'
+                      experimental: true
 
         name: Test on Node v${{ matrix.node }}
         continue-on-error: ${{ matrix.experimental }}
