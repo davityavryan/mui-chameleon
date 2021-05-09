@@ -1,6 +1,6 @@
 import { makeStyles, createStyles, ThemeOptions, Theme } from '@material-ui/core/styles';
 
-const useStyles = makeStyles<Theme, ThemeOptions>(({ shape, spacing, palette, transitions }) =>
+const useStyles = makeStyles<Theme, ThemeOptions>(({ shape, spacing, palette }) =>
     createStyles({
         root: {
             '& + $root': {
