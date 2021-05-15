@@ -14,6 +14,7 @@ import {
     ColorEditor,
     FieldEditor,
     FontSizeEditor,
+    FontWeightEditor,
     LetterSpacingEditor,
     NumberEditor,
 } from '../internal';
@@ -448,7 +449,7 @@ export const typesMap: TTypesMap = {
     number: NumberEditor,
     easing: FieldEditor,
     fontFamily: FieldEditor,
-    fontWeight: FieldEditor,
+    fontWeight: FontWeightEditor,
     fontSize: FontSizeEditor,
     lineHeight: FieldEditor,
     letterSpacing: LetterSpacingEditor,
