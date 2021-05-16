@@ -8,7 +8,7 @@
     "sideEffects": false,
     "scripts": {
         "start": "NODE_ENV=development yarn build:esm --source-maps -w",
-        "build": "NODE_ENV=production yarn build:esm && yarn build:es && yarn build:cjs && tsc",
+        "build": "NODE_ENV=production yarn build:esm && yarn build:es && yarn build:cjs && tsc -p tsconfig.build.json",
         "build:cjs": "TARGET=cjs babel --config-file ./babel.config.js --ignore **/*.unit.ts --ignore **/*.unit.tsx -x '.ts,.tsx' ./src --out-dir ./build",
         "build:esm": "TARGET=esm babel --config-file ./babel.config.js --ignore **/*.unit.ts --ignore **/*.unit.tsx -x '.ts,.tsx' ./src --out-dir ./build/esm",
         "build:es": "TARGET=es babel --config-file ./babel.config.js --ignore **/*.unit.ts --ignore **/*.unit.tsx -x '.ts,.tsx' ./src --out-dir ./build/es",

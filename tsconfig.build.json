@@ -1,0 +1,8 @@
+{
+    "extends": "./tsconfig.json",
+    "exclude": ["node_modules", "build", "src/**/*.unit.ts", "src/**/*.unit.tsx"],
+    "compilerOptions": {
+        "declaration": true,
+        "emitDeclarationOnly": true
+    }
+}

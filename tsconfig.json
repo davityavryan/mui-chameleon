@@ -1,5 +1,5 @@
 {
-    "exclude": ["node_modules", "build", "src/**/*.unit.ts", "src/**/*.unit.tsx"],
+    "exclude": ["node_modules", "build"],
     "include": ["src"],
     "compilerOptions": {
         "outDir": "build",
@@ -7,7 +7,6 @@
         "target": "ESNext",
         "module": "ESNext",
         "lib": ["DOM", "DOM.Iterable", "ESNext"],
-        "declaration": true,
         "strict": true,
         "strictNullChecks": false,
         "skipLibCheck": true,
@@ -17,7 +16,6 @@
         "moduleResolution": "Node",
         "resolveJsonModule": true,
         "isolatedModules": true,
-        "emitDeclarationOnly": true,
         "jsx": "react"
     }
 }
