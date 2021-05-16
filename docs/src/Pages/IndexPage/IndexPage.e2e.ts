@@ -1,5 +1,3 @@
-import '../../../../cypress'; // Add custom commands
-
 context('Home page', () => {
     beforeEach(() => {
         cy.visit('http://localhost:4040/');

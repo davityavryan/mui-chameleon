@@ -3,10 +3,6 @@
 # Dependency directories
 node_modules/
 
-# Cypress
-cypress/screenshots/
-cypress/videos/
-
 # Coverage directory used by tools like istanbul
 .nyc_output/
 coverage/

@@ -34,9 +34,7 @@ jobs:
                 env:
                     cache-name: cache-node-${{ matrix.node }}-modules
                 with:
-                    path: |
-                        ./node_modules
-                        ~/.cache/Cypress
+                    path: ./node_modules
                     key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./yarn.lock') }}
                     restore-keys: |
                         ${{ runner.os }}-build-${{ env.cache-name }}-
@@ -64,10 +62,5 @@ jobs:
                 run: yarn build
 
             -   name: Run tests
-                env:
-                    CYPRESS_WATCH_FOR_FILE_CHANGES: false
-                    CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-                    GROUP_NAME: node v${{ matrix.node }}
-                    BABEL_ENV: test
                 run:
-                    yarn test --record --parallel --ci-build-id "${GITHUB_RUN_NUMBER}" --group "${GROUP_NAME}"
+                    yarn test

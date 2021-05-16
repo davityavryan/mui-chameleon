@@ -4,7 +4,6 @@
 .vscode/
 .github/
 .husky/
-cypress/
 *.ignore
 
 src
@@ -22,7 +21,6 @@ docs
 .prettierrc.json
 babel.config.js
 copy-files.js
-cypress.json
 renovate.json
 tsconfig.json
 yarn.lock

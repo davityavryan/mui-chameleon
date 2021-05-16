@@ -1,6 +1,6 @@
 {
-    "extends": ["plugin:@typescript-eslint/recommended", "plugin:prettier/recommended", "plugin:cypress/recommended"],
-    "plugins": ["react-hooks", "prettier", "cypress"],
+    "extends": ["plugin:@typescript-eslint/recommended", "plugin:prettier/recommended"],
+    "plugins": ["react-hooks", "prettier"],
     "rules": {
         "@typescript-eslint/explicit-module-boundary-types": "off"
     }

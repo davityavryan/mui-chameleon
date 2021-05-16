@@ -23,7 +23,6 @@
 
 [![Github Action build](https://github.com/davityavryan/material-ui-chameleon/actions/workflows/build.yml/badge.svg)](https://github.com/davityavryan/material-ui-chameleon/actions/workflows/build.yml?branch=master&event=push)
 [![Github Action test](https://github.com/davityavryan/material-ui-chameleon/actions/workflows/test.yml/badge.svg)](https://github.com/davityavryan/material-ui-chameleon/actions/workflows/test.yml?branch=master&event=push)
-[![Cypress dashboard](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/99caai/master&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/99caai/runs)
 
 [![Buy me a coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/davityavryan)
 
