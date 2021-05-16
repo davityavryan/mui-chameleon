@@ -1,6 +1,13 @@
 {
-    "extends": ["plugin:@typescript-eslint/recommended", "plugin:prettier/recommended"],
-    "plugins": ["react-hooks", "prettier"],
+    "extends": [
+        "plugin:@typescript-eslint/recommended",
+        "plugin:prettier/recommended",
+        "plugin:jest-playwright/recommended"
+    ],
+    "env": {
+        "jest/globals": true
+    },
+    "plugins": ["react-hooks", "prettier", "jest"],
     "rules": {
         "@typescript-eslint/explicit-module-boundary-types": "off"
     }

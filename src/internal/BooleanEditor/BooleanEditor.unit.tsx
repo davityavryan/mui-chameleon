@@ -1,35 +1,44 @@
 import React from 'react';
 
-import { mount } from '@cypress/react';
-
-import '../../../cypress'; // Add custom commands
+import { cleanup, fireEvent, render } from '@testing-library/react';
 
 import BooleanEditor from './BooleanEditor';
 
-describe('BooleanEditor should', () => {
-    const themeKey = 'parents-parent.parent.child';
+afterEach(cleanup);
 
-    const Icon0 = () => <span id="icon0">icon-left</span>;
-    const Icon1 = () => <span id="icon1">icon-right</span>;
+const themeKey = 'parents-parent.parent.child';
 
-    const options = ['left', 'right'];
-    const icons = [Icon0, Icon1];
+const Icon0 = () => <span data-testid="icon0">icon-left</span>;
+const Icon1 = () => <span data-testid="icon1">icon-right</span>;
 
-    beforeEach(() => {
-        const onChange = cy.spy().as('onChange');
+const options = ['left', 'right'];
+const icons = [Icon0, Icon1];
 
-        mount(
-            <BooleanEditor options={options} icons={icons} value={options[0]} themeKey={themeKey} onChange={onChange} />
-        );
-    });
+test('BooleanEditor should have correct label', async () => {
+    const onChange = jest.fn();
 
-    it('have correct label', () => {
-        cy.getByTestId('boolean-editor-label').should('exist').should('have.text', 'Child');
-    });
+    const { findByTestId, queryByTestId } = render(
+        <BooleanEditor options={options} icons={icons} value={options[0]} themeKey={themeKey} onChange={onChange} />
+    );
 
-    it('change value on icon click', () => {
-        cy.getByTestId('boolean-editor-toggle').should('exist').click();
+    expect(onChange).not.toHaveBeenCalled();
 
-        cy.get('@onChange').should('have.been.calledOnce').and('have.been.calledWithExactly', options[1]);
-    });
+    expect(queryByTestId('icon0')).not.toBeNull();
+
+    expect((await findByTestId('boolean-editor-label')).textContent).toEqual('Child');
+});
+
+test('BooleanEditor should change value on icon click', async () => {
+    const onChange = jest.fn();
+
+    const { findByTestId } = render(
+        <BooleanEditor options={options} icons={icons} value={options[1]} themeKey={themeKey} onChange={onChange} />
+    );
+
+    const toggleElement = await findByTestId('boolean-editor-toggle');
+
+    fireEvent.click(toggleElement);
+
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange).toHaveBeenCalledWith(options[0]);
 });

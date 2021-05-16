@@ -3,6 +3,8 @@ declare module '*.svg' {
     export default value;
 }
 
-declare const process: NodeJS.Process = {
-    NODE_ENV: 'development' | 'production',
-};
+declare const process: {
+    env: {
+        NODE_ENV: 'development' | 'production' | 'test';
+    };
+} & NodeJS.Process;

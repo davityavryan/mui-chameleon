@@ -62,5 +62,7 @@ jobs:
                 run: yarn build
 
             -   name: Run tests
-                run:
-                    yarn test
+                env:
+                    CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+                    NODE_ENV: test
+                run: yarn test:coverage && yarn codecov

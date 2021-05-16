@@ -7,6 +7,7 @@
         "target": "ESNext",
         "module": "ESNext",
         "lib": ["DOM", "DOM.Iterable", "ESNext"],
+        "types": ["jest"],
         "strict": true,
         "strictNullChecks": false,
         "skipLibCheck": true,

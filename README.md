@@ -23,6 +23,7 @@
 
 [![Github Action build](https://github.com/davityavryan/material-ui-chameleon/actions/workflows/build.yml/badge.svg)](https://github.com/davityavryan/material-ui-chameleon/actions/workflows/build.yml?branch=master&event=push)
 [![Github Action test](https://github.com/davityavryan/material-ui-chameleon/actions/workflows/test.yml/badge.svg)](https://github.com/davityavryan/material-ui-chameleon/actions/workflows/test.yml?branch=master&event=push)
+[![codecov](https://codecov.io/gh/davityavryan/material-ui-chameleon/branch/master/graph/badge.svg?token=FCLZL0XTXM)](https://codecov.io/gh/davityavryan/material-ui-chameleon)
 
 [![Buy me a coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/davityavryan)
 

@@ -36,7 +36,7 @@ const plugins = [
     ],
 ];
 
-if (process.env.BABEL_ENV !== 'test') {
+if (process.env.NODE_ENV !== 'test') {
     plugins.push(['babel-plugin-react-remove-properties', { properties: ['data-testid'] }]);
 }
 
