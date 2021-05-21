@@ -64,7 +64,7 @@
         "babel-plugin-react-remove-properties": "^0.3.0",
         "codecov": "^3.8.2",
         "csstype": "^3.0.7",
-        "dotenv": "^9.0.2",
+        "dotenv": "^10.0.0",
         "esbuild": "^0.11.21",
         "eslint": "^7.26.0",
         "eslint-config-prettier": "^8.3.0",
