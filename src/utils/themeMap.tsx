@@ -19,7 +19,7 @@ import {
     NumberEditor,
 } from '../internal';
 
-import { TThemeItemType, TUnit } from '../types';
+import { TThemeItemType, TUnit, TValue } from '../types';
 
 export type TThemeMapItem = {
     type: TThemeItemType;
@@ -432,7 +432,7 @@ export const themeMap: TThemeMap = {
     },
 };
 
-type TProps<V = any> = TThemeMapItem & {
+type TProps<V = TValue> = TThemeMapItem & {
     value: V;
     themeKey: string;
     onChange: (newValue: V) => void;

@@ -1,9 +1,14 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback, useContext, useEffect, useState } from 'react';
 
 import { InputAdornment, TextField, TextFieldProps } from '@material-ui/core';
 
-import { TUnit } from '../../types';
-import { themeKeyLabel } from '../../utils';
+import { createMuiTheme } from '@material-ui/core/styles';
+
+import { TUnit, TValue } from '../../types';
+
+import { Context, makeConvertValueFromUnitToUnit, themeKeyLabel, toUnitless } from '../../utils';
+
+import { UnitSet } from '../index';
 
 let timer: number;
 
@@ -14,6 +19,7 @@ export type TFieldEditorProps = Omit<TextFieldProps, 'onChange'> & {
     max?: number;
     formatter?: (value: string) => string | number;
     unit?: TUnit;
+    unitSet?: TUnit[];
     onChange: (newValue: string | number) => void;
 };
 
@@ -25,12 +31,30 @@ function FieldEditor({
     max = Infinity,
     onChange,
     unit,
+    unitSet,
     formatter = (newValue) => newValue,
     ...props
 }: TFieldEditorProps) {
-    const [localValue, setLocalValue] = useState(value);
+    const [localValue, setLocalValue] = useState<TValue>(value);
+    const { state } = useContext(Context);
+    const { typography } = createMuiTheme(state.theme);
 
-    const endAdornment = unit ? <InputAdornment position="end">{unit}</InputAdornment> : null;
+    const convertValueFromUnitToUnit = makeConvertValueFromUnitToUnit(typography.fontSize);
+
+    const handleUnitChange = (newUnit: TUnit) => {
+        const newValue = convertValueFromUnitToUnit(localValue, unit, newUnit);
+
+        timer = setTimeout(() => {
+            setLocalValue(toUnitless(newValue));
+            onChange(newValue);
+        }, 50);
+    };
+
+    const endAdornment = unit ? (
+        <InputAdornment position="end">
+            <UnitSet unit={unit} units={unitSet} onChange={handleUnitChange} />
+        </InputAdornment>
+    ) : null;
 
     const handleChange = useCallback(
         (event) => {
@@ -52,7 +76,7 @@ function FieldEditor({
     useEffect(() => {
         // Update localValue if value is changed from outside(ex. reset)
         if (timer === null && value !== localValue) {
-            setLocalValue(value);
+            setLocalValue(value as string);
         }
     }, [value, localValue]);
 

@@ -1,20 +1,25 @@
 import React, { memo } from 'react';
 
-import { TUnit } from '../../types';
+import { TUnit, TUnitLetterSpacing } from '../../types';
 
 import FieldEditor, { TFieldEditorProps } from '../FieldEditor/FieldEditor';
 
+import { getUnit, toUnitless } from '../../utils';
+
+// TODO: Add "normal" as value?
+const unitSet: TUnitLetterSpacing[] = ['px', 'rem', 'em', 'normal'];
+
 function LetterSpacingEditor({ value, onChange, unit = 'px', ...props }: TFieldEditorProps) {
-    const matches = typeof value === 'string' && value.match(/^([\d.]*)(px|rem|em)$/);
-    const newUnit = matches ? matches[2] : unit;
-    const newValue = matches ? Number(matches[1]) : value;
+    const newUnit = (getUnit(value) || unit) as TUnit;
+    const newValue = value === '' ? value : toUnitless(value);
 
     return (
         <FieldEditor
             {...props}
-            type="number"
+            type="string"
             step={newUnit === 'px' ? 1 : 0.1}
-            unit={newUnit as TUnit}
+            unit={newUnit}
+            unitSet={unitSet}
             value={newValue}
             formatter={(newValue) => `${Number(newValue)}${newUnit}`}
             onChange={onChange}
