@@ -75,7 +75,13 @@ function Parser({ item, itemKey, defaultValue, onChange, isTopLevel = false }: I
 
     return (
         <ListItem className={classes.listItem}>
-            <Component {...props} value={item} themeKey={itemKey} onChange={onChange(itemKey)} />
+            <Component
+                {...props}
+                value={item}
+                themeKey={itemKey}
+                onChange={onChange(itemKey)}
+                defaultValue={defaultValue}
+            />
         </ListItem>
     );
 }

@@ -12,7 +12,9 @@ import { UnitSet } from '../index';
 
 let timer: number;
 
-export type TFieldEditorProps = Omit<TextFieldProps, 'onChange'> & {
+export type TFieldEditorProps = Omit<TextFieldProps, 'value' | 'onChange'> & {
+    value: TValue;
+    defaultValue?: TValue;
     themeKey: string;
     step?: number;
     min?: number;
@@ -25,6 +27,7 @@ export type TFieldEditorProps = Omit<TextFieldProps, 'onChange'> & {
 
 function FieldEditor({
     value,
+    defaultValue,
     themeKey,
     step = 1,
     min = -Infinity,
@@ -75,7 +78,7 @@ function FieldEditor({
 
     useEffect(() => {
         // Update localValue if value is changed from outside(ex. reset)
-        if (timer === null && value !== localValue) {
+        if (value !== localValue) {
             setLocalValue(value as string);
         }
     }, [value, localValue]);

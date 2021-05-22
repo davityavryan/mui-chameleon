@@ -33,6 +33,15 @@ function SideBarEditor({ open = false, onReset, onExpandToggle, onSave }: IProps
                 palette: {
                     type: editableTheme.palette.type,
                 },
+            }),
+        [editableTheme.palette.type]
+    );
+    const sidebarTheme = useMemo(
+        () =>
+            createMuiTheme({
+                palette: {
+                    type: editableTheme.palette.type,
+                },
                 typography: {
                     button: {
                         textTransform: 'none',
@@ -91,7 +100,7 @@ function SideBarEditor({ open = false, onReset, onExpandToggle, onSave }: IProps
     }, [open]);
 
     return (
-        <MuiThemeProvider theme={defaultTheme}>
+        <MuiThemeProvider theme={sidebarTheme}>
             <div className={classes.root} data-testid="side-bar-editor">
                 <Header
                     isOpen={isOpen}

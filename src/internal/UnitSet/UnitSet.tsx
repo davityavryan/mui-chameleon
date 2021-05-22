@@ -13,9 +13,9 @@ export type TUnitSetProps = {
 function UnitSet({ unit, units, onChange }: TUnitSetProps) {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
-    //FIXME: Add unitSet everywhere
+    // TODO: Add unitSet everywhere
     if (units === undefined) {
-        console.warn('FIXME');
+        console.warn('TODO');
         return <Fragment>{unit}</Fragment>;
     }
 
@@ -29,6 +29,7 @@ function UnitSet({ unit, units, onChange }: TUnitSetProps) {
 
     const handleMenuItemClick = (value: TUnit) => () => {
         onChange(value);
+        setAnchorEl(null);
     };
 
     return (

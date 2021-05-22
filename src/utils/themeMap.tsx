@@ -31,7 +31,7 @@ export type TThemeMapItem = {
     icons?: React.ElementType[];
 };
 
-// FIXME: ThemeOptions or Theme?
+// TODO: ThemeOptions or Theme?
 export type TThemeMap = {
     [key in keyof ThemeOptions]:
         | TThemeMapItem
@@ -434,6 +434,7 @@ export const themeMap: TThemeMap = {
 
 type TProps<V = TValue> = TThemeMapItem & {
     value: V;
+    defaultValue: V;
     themeKey: string;
     onChange: (newValue: V) => void;
 };

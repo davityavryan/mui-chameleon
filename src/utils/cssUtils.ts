@@ -2,26 +2,15 @@
 // From https://github.com/KyleAMathews/convert-css-length
 import { TUnit, TValue } from '../types';
 
-const notNumberUnits: TUnit[] = ['normal'];
-
 export function makeConvertValueFromUnitToUnit(baseFontSize: number) {
     return (value: TValue, fromUnit: TUnit, toUnit: TUnit) => {
-        // From number units to NOT number unit
-        if (notNumberUnits.includes(toUnit)) {
-            return toUnit;
-        }
-
-        // From number  NOT number unit to number unit
-        if (notNumberUnits.includes(fromUnit)) {
-            value = baseFontSize;
-        }
-
         if (value === '') {
             return value;
         }
 
         // Optimize for cases where `from` and `to` units are accidentally the same.
         if (fromUnit === toUnit) {
+            console.log(222, `${value}${fromUnit}`);
             return `${value}${fromUnit}`;
         }
 
@@ -48,7 +37,7 @@ export function makeConvertValueFromUnitToUnit(baseFontSize: number) {
             }
         }
 
-        return parseFloat(outputLength.toFixed(5)) + toUnit;
+        return parseFloat(outputLength) + toUnit;
     };
 }
 
@@ -61,8 +50,5 @@ export function getUnit(value: TValue) {
 
 // Emulate the sass function "unitless"
 export function toUnitless(value: TValue | number) {
-    if (notNumberUnits.includes(value)) {
-        return value;
-    }
     return parseFloat(value);
 }
