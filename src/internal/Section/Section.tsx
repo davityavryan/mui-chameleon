@@ -1,9 +1,10 @@
 import React from 'react';
 
-import { ExpansionPanel, ExpansionPanelSummary, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 
 import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons';
 
+import { Accordion, AccordionSummary } from '..';
 import { themeKeyLabel } from '../../utils';
 
 import useStyles from './Section.style';
@@ -18,8 +19,8 @@ function Section({ title, secondaryTitle, children = null }: IProps) {
     const classes = useStyles();
 
     return (
-        <ExpansionPanel TransitionProps={{ mountOnEnter: true, unmountOnExit: true }}>
-            <ExpansionPanelSummary
+        <Accordion TransitionProps={{ mountOnEnter: true, unmountOnExit: true }}>
+            <AccordionSummary
                 classes={{ root: classes.summaryRoot, content: classes.summaryContent }}
                 expandIcon={Boolean(children) ? <ExpandMoreIcon /> : null}
                 disabled={!Boolean(children)}
@@ -31,10 +32,10 @@ function Section({ title, secondaryTitle, children = null }: IProps) {
                         {secondaryTitle}
                     </Typography>
                 )}
-            </ExpansionPanelSummary>
+            </AccordionSummary>
 
             {children && <div>{children}</div>}
-        </ExpansionPanel>
+        </Accordion>
     );
 }
 

@@ -2,9 +2,9 @@ import React, { Fragment, memo } from 'react';
 
 import delve from 'dlv';
 
-import { Theme, ExpansionPanel } from '@material-ui/core';
+import { Theme } from '@material-ui/core';
 
-import { Section, Parser } from '..';
+import { Accordion, Section, Parser } from '..';
 
 import { themeMap, TThemeMapItem } from '../../utils';
 
@@ -40,7 +40,7 @@ function Editor({ theme, defaultTheme, onChange }: IProps) {
                 }
 
                 return (
-                    <ExpansionPanel key={themeKey}>
+                    <Accordion key={themeKey}>
                         <Parser
                             item={themeItem}
                             itemKey={themeKey}
@@ -48,7 +48,7 @@ function Editor({ theme, defaultTheme, onChange }: IProps) {
                             onChange={onChange}
                             isTopLevel
                         />
-                    </ExpansionPanel>
+                    </Accordion>
                 );
             })}
         </Fragment>

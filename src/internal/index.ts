@@ -1,3 +1,5 @@
+export { default as Accordion } from './Accordion/Accordion';
+export { default as AccordionSummary } from './AccordionSummary/AccordionSummary';
 export { default as BooleanEditor } from './BooleanEditor/BooleanEditor';
 export { default as ColorEditor } from './ColorEditor/ColorEditor';
 export { default as ColorPicker } from './ColorPicker/ColorPicker';
