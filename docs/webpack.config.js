@@ -196,7 +196,7 @@ export default (env, args = {}) => {
             modules: false,
             entrypoints: false,
             errorDetails: true,
-            excludeAssets: /\.(jpe?g|png|webp|gif|ogg|m4a|mp4|webm|svg|ico|cur|eot|ttf|woff|woff2|map|LICENSE)$/i, // hiding images, fonts
+            excludeAssets: /\.(jpe?g|png|webp|gif|svg|ico|cur|eot|ttf|woff|woff2|map|DS_Store|LICENSE)$/i, // hiding images, fonts
         },
         devServer: {
             port: 4040,

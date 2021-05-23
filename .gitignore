@@ -18,8 +18,7 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 # dotenv environment variables file
 .envrc
-.env
-.env.test
+.env.*
 
 docs/public/
 build/

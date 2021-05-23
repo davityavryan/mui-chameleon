@@ -6,5 +6,7 @@ declare module '*.svg' {
 declare const process: {
     env: {
         NODE_ENV: 'development' | 'production' | 'test';
+
+        TEST_BROWSER: 'chromium' | 'firefox' | 'webkit';
     };
 } & NodeJS.Process;
