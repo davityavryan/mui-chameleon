@@ -1,20 +1,21 @@
 import React, { memo } from 'react';
 
-import { TUnit, TUnitSize } from '../../types';
+import { TUnit } from '../../types';
 
 import FieldEditor, { TFieldEditorProps } from '../FieldEditor/FieldEditor';
 
 import { getUnit, toUnitless } from '../../utils';
 
-const unitSet: TUnitSize[] = ['px', 'rem', 'em'];
+const unitSet: TUnit[] = ['px', 'rem', 'em', '%'];
 
-function LetterSpacingEditor({ value, defaultValue, onChange, unit = 'em', ...props }: TFieldEditorProps) {
-    const newValue = value || defaultValue;
+function BorderRadiusEditor({ value, defaultValue, onChange, unit = 'px', ...props }: TFieldEditorProps) {
+    const newValue = value ?? defaultValue;
     const newUnit = (getUnit(newValue) || unit) as TUnit;
 
     return (
         <FieldEditor
             {...props}
+            type="number"
             step={newUnit === 'px' ? 1 : 0.1}
             unit={newUnit}
             unitSet={unitSet}
@@ -25,4 +26,4 @@ function LetterSpacingEditor({ value, defaultValue, onChange, unit = 'em', ...pr
     );
 }
 
-export default memo(LetterSpacingEditor);
+export default memo(BorderRadiusEditor);

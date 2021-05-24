@@ -1,6 +1,7 @@
 export { default as Accordion } from './Accordion/Accordion';
 export { default as AccordionSummary } from './AccordionSummary/AccordionSummary';
 export { default as BooleanEditor } from './BooleanEditor/BooleanEditor';
+export { default as BorderRadiusEditor } from './BorderRadiusEditor/BorderRadiusEditor';
 export { default as ColorEditor } from './ColorEditor/ColorEditor';
 export { default as ColorPicker } from './ColorPicker/ColorPicker';
 export { default as Editor } from './Editor/Editor';

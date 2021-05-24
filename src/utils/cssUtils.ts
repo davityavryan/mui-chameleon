@@ -8,9 +8,17 @@ export function makeConvertValueFromUnitToUnit(baseFontSize: number) {
             return value;
         }
 
+        // TODO: Add comments after approval, add unit test for those cases
+        if (toUnit === '%') {
+            return `${value}%`;
+        }
+
+        if (fromUnit === '%') {
+            return `${value}${toUnit}`;
+        }
+
         // Optimize for cases where `from` and `to` units are accidentally the same.
         if (fromUnit === toUnit) {
-            console.log(222, `${value}${fromUnit}`);
             return `${value}${fromUnit}`;
         }
 

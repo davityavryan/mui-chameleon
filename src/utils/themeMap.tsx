@@ -17,6 +17,7 @@ import {
     FontWeightEditor,
     LetterSpacingEditor,
     NumberEditor,
+    BorderRadiusEditor,
 } from '../internal';
 
 import { TThemeItemType, TUnit, TValue } from '../types';
@@ -49,7 +50,7 @@ export type TThemeMap = {
 export const themeMap: TThemeMap = {
     shape: {
         borderRadius: {
-            type: 'number',
+            type: 'borderRadius',
             min: 0,
             unit: 'px',
         },
@@ -446,6 +447,7 @@ type TTypesMap = {
 export const typesMap: TTypesMap = {
     skip: () => null,
     boolean: BooleanEditor,
+    borderRadius: BorderRadiusEditor,
     color: ColorEditor,
     number: NumberEditor,
     easing: FieldEditor,
