@@ -2,11 +2,14 @@ import React, { useCallback, useContext, useEffect, useMemo, useState } from 're
 
 import delve from 'dlv';
 import { dset } from 'dset';
+import { Property } from 'csstype';
 
 import { Box, Collapse } from '@material-ui/core';
+
 import { ThemeProvider as MuiThemeProvider, createMuiTheme, ThemeOptions } from '@material-ui/core/styles';
 
 import { Editor, Header } from '../internal';
+
 import { Context } from '../utils';
 
 import useStyles from './SideBarEditor.style';
@@ -29,6 +32,27 @@ function SideBarEditor({ open = false, onReset, onExpandToggle, onSave }: IProps
             createMuiTheme({
                 palette: {
                     type: editableTheme.palette.type,
+                },
+            }),
+        [editableTheme.palette.type]
+    );
+    const sidebarTheme = useMemo(
+        () =>
+            createMuiTheme({
+                palette: {
+                    type: editableTheme.palette.type,
+                },
+                typography: {
+                    button: {
+                        textTransform: 'none',
+                    },
+                },
+                overrides: {
+                    MuiPopover: {
+                        root: {
+                            zIndex: `${editableTheme.zIndex.tooltip + 11} !important` as Property.ZIndex, // more than the highest zIndex
+                        },
+                    },
                 },
             }),
         [editableTheme.palette.type]
@@ -76,7 +100,7 @@ function SideBarEditor({ open = false, onReset, onExpandToggle, onSave }: IProps
     }, [open]);
 
     return (
-        <MuiThemeProvider theme={defaultTheme}>
+        <MuiThemeProvider theme={sidebarTheme}>
             <div className={classes.root} data-testid="side-bar-editor">
                 <Header
                     isOpen={isOpen}

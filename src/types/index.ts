@@ -12,4 +12,8 @@ export type TThemeItemType =
     | 'letterSpacing'
     | 'skip'; // FIXME: remove?
 
-export type TUnit = 'px' | 'em' | 'rem' | 'ms' | 's'; // FIXME: get from Material
+export type TUnit = TUnitDuration | TUnitSize;
+export type TUnitSize = 'px' | 'em' | 'rem';
+export type TUnitDuration = 'ms' | 's';
+
+export type TValue = any;
