@@ -16,6 +16,6 @@ export type TThemeItemType =
 export type TUnit = TUnitDuration | TUnitSize | TUnitRadius;
 export type TUnitSize = 'px' | 'em' | 'rem';
 export type TUnitDuration = 'ms' | 's';
-export type TUnitRadius = '%';
+export type TUnitRadius = TUnitSize | '%';
 
 export type TValue = any;
