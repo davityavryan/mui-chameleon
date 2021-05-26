@@ -9,7 +9,7 @@ module.exports = {
     // The root of source code
     roots: ['<rootDir>/src', '<rootDir>/docs'],
 
-    setupFiles: ['<rootDir>/.jest/set-env-vars.js'],
+    setupFiles: ['<rootDir>/.jest/set-env-vars.js', '<rootDir>/.jest/jest.globals.js'],
 
     coverageDirectory: '<rootDir>/coverage',
     collectCoverageFrom: ['<rootDir>/src/**/*.{ts,tsx}', '!<rootDir>/src/**/*.d.ts'],
