@@ -2,6 +2,7 @@
 .vscode/
 .husky/
 .github/
+coverage/
 
 *.ignore*
 
