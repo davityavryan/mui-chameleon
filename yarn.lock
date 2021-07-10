@@ -1786,7 +1786,7 @@
     semver "^7.3.5"
     tsutils "^3.21.0"
 
-"@typescript-eslint/experimental-utils@4.28.0", "@typescript-eslint/experimental-utils@^4.0.1":
+"@typescript-eslint/experimental-utils@4.28.0":
   version "4.28.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/experimental-utils/-/experimental-utils-4.28.0.tgz#13167ed991320684bdc23588135ae62115b30ee0"
   integrity sha512-9XD9s7mt3QWMk82GoyUpc/Ji03vz4T5AYlHF9DcoFNfJ/y3UAclRsfGiE2gLfXtyC+JRA3trR7cR296TEb1oiQ==
@@ -2908,19 +2908,17 @@ eslint-config-prettier@^8.3.0:
   resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.3.0.tgz#f7471b20b6fe8a9a9254cc684454202886a2dd7a"
   integrity sha512-BgZuLUSeKzvlL/VUjx/Yb787VQ26RU3gGjA3iiFvdsp/2bMfVIWUVP7tjxtjS0e+HP409cPlPvNkQloz8C91ew==
 
-eslint-plugin-jest-playwright@^0.3.3:
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jest-playwright/-/eslint-plugin-jest-playwright-0.3.3.tgz#245b406570bb3f3b7aaca899f4f59ebf81e1b754"
-  integrity sha512-YUieCpzlI25iQEzwNh7hMfHvehX+ElGA0KNsVsJH+/ERU/FuDd/bALTVZfP53FSLD1lSaLUI1nvzFXdrw7As8g==
+eslint-plugin-jest-playwright@^0.4.0:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jest-playwright/-/eslint-plugin-jest-playwright-0.4.1.tgz#5cae26348b9713b2d41d7e61e7d964aed084c942"
+  integrity sha512-sQ+grZ57ExRd5Sx8gFZ9GvE/BEFYMzc5Gu35o1KuY/ofhpqnxfwEHyV5vUIngyRSSDRBEDdZMdk+XjruiOnzHw==
   dependencies:
-    eslint-plugin-jest "^24.3.6"
+    eslint-plugin-playwright "^0.4.0"
 
-eslint-plugin-jest@^24.3.6:
-  version "24.3.6"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-24.3.6.tgz#5f0ca019183c3188c5ad3af8e80b41de6c8e9173"
-  integrity sha512-WOVH4TIaBLIeCX576rLcOgjNXqP+jNlCiEmRgFTfQtJ52DpwnIQKAVGlGPAN7CZ33bW6eNfHD6s8ZbEUTQubJg==
-  dependencies:
-    "@typescript-eslint/experimental-utils" "^4.0.1"
+eslint-plugin-playwright@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-playwright/-/eslint-plugin-playwright-0.4.0.tgz#0e8dc9805a7e33a6596621a2193b32f13639c325"
+  integrity sha512-hGI5AETIpgQaNCm9oBAIEZYunuZ6M4rgZYVKrheuOaOcVfmW7z3muZnk0G6gOFHAux1t2fJx+10nWP868sw5TA==
 
 eslint-plugin-prettier@^3.3.1:
   version "3.4.0"
