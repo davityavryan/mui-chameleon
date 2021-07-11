@@ -4,9 +4,6 @@
         "plugin:prettier/recommended",
         "plugin:jest-playwright/recommended"
     ],
-    "env": {
-        "jest/globals": true
-    },
     "plugins": ["react-hooks", "prettier", "jest"],
     "rules": {
         "@typescript-eslint/explicit-module-boundary-types": "off"

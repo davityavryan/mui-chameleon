@@ -1,4 +1,7 @@
 {
-    "**/*.[tj]s?(x)": ["pretty-quick --verbose --staged", "eslint --fix --ext .ts,.tsx,.js,.jsx"],
+    "**/*.[tj]s?(x)": [
+        "pretty-quick --verbose --staged",
+        "eslint --fix --ext .ts,.tsx,.js,.jsx --cache --cache-location node_modules/.cache/eslint"
+    ],
     "*": "prettier --write --ignore-unknown"
 }
