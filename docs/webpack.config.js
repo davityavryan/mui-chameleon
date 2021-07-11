@@ -201,13 +201,9 @@ export default (env, args = {}) => {
         devServer: {
             port: 4040,
             hot: true,
-            contentBase: here(dirs.dist),
+            // contentBase: here(dirs.dist),
             compress: true,
             historyApiFallback: true,
-            overlay: {
-                warnings: true,
-                errors: true,
-            },
         },
     };
 };
