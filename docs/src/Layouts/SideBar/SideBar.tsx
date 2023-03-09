@@ -1,7 +1,5 @@
 import React, { Fragment, memo, useCallback, useState } from 'react';
 
-import { entries } from 'type-assert-object';
-
 import { Link, matchPath, useLocation } from 'react-router-dom';
 
 import Collapse from '@material-ui/core/Collapse';
@@ -17,7 +15,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 
-import { MENU } from 'helpers';
+import { entries, MENU } from 'helpers';
 
 import useStyles from './SideBar.style';
 
