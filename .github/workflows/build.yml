@@ -8,19 +8,19 @@ on:
 
 jobs:
     build:
-        runs-on: ubuntu-20.04
-        name: Build on Node v14
+        runs-on: ubuntu-22.04
+        name: Build on Node LTS
         steps:
-            -   uses: actions/checkout@v2
+            -   uses: actions/checkout@v3
 
             -   name: Setup node
-                uses: actions/setup-node@v2.2.0
+                uses: actions/setup-node@v3
                 with:
-                    node-version: '14'
+                    node-version: 'lts/*'
                     cache: 'yarn'
 
             -   name: Cache node modules
-                uses: actions/cache@v2
+                uses: actions/cache@v3
                 id: cache-modules
                 env:
                     cache-name: cache-node-${{ matrix.node }}-modules

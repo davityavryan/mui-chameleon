@@ -7,18 +7,18 @@ on:
 
 jobs:
     eslint:
-        runs-on: ubuntu-20.04
+        runs-on: ubuntu-22.04
         steps:
-            -   uses: actions/checkout@v2
+            -   uses: actions/checkout@v3
 
             -   name: Setup node
-                uses: actions/setup-node@v2.2.0
+                uses: actions/setup-node@v3
                 with:
-                    node-version: '14'
+                    node-version: 'lts/*'
                     cache: 'yarn'
 
             -   name: Cache node modules
-                uses: actions/cache@v2
+                uses: actions/cache@v3
                 id: cache-modules
                 env:
                     cache-name: cache-node-${{ matrix.node }}-modules
@@ -33,10 +33,9 @@ jobs:
                 run: yarn install --prefer-offline --frozen-lockfile
 
             -   name: Eslint check and annotate
-                uses: sibiraj-s/action-eslint@v1.1.3
+                uses: sibiraj-s/action-eslint@v2
                 with:
-                    eslintArgs: '--ignore-path .gitignore --quiet'
+                    eslint-args: '--ignore-path .gitignore --quiet'
                     extensions: 'js, jsx, ts, tsx'
                     annotations: true
-                env:
-                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                    github-token: ${{ secrets.GITHUB_TOKEN }}
