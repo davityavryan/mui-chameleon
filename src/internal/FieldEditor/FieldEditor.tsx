@@ -1,12 +1,10 @@
-import React, { memo, useCallback, useContext, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 
 import { InputAdornment, TextField, TextFieldProps } from '@material-ui/core';
 
-import { createMuiTheme } from '@material-ui/core/styles';
-
 import { TUnit, TValue } from '../../types';
 
-import { Context, makeConvertValueFromUnitToUnit, themeKeyLabel, toUnitless } from '../../utils';
+import { themeKeyLabel, toUnitless } from '../../utils';
 
 import { UnitSet } from '../index';
 
@@ -39,17 +37,12 @@ function FieldEditor({
     ...props
 }: TFieldEditorProps) {
     const [localValue, setLocalValue] = useState<TValue>(value);
-    const { state } = useContext(Context);
-    const { typography } = createMuiTheme(state.theme);
-
-    const convertValueFromUnitToUnit = makeConvertValueFromUnitToUnit(typography.fontSize);
 
     const handleUnitChange = (newUnit: TUnit) => {
-        const newValue = convertValueFromUnitToUnit(localValue, unit, newUnit);
+        const newValue = value ? `${toUnitless(value)}${newUnit}` : '';
 
         timer = setTimeout(() => {
-            setLocalValue(toUnitless(newValue));
-            onChange(newValue);
+            onChange(formatter(newValue));
         }, 50);
     };
 
@@ -76,6 +69,12 @@ function FieldEditor({
         [onChange, formatter]
     );
 
+    const handleBlur = () => {
+        if (value === '') {
+            onChange(formatter(defaultValue));
+        }
+    };
+
     useEffect(() => {
         // Update localValue if value is changed from outside(ex. reset)
         if (value !== localValue) {
@@ -100,6 +99,7 @@ function FieldEditor({
             label={themeKeyLabel(themeKey)}
             onChange={handleChange}
             inputProps={{ step, min, max }}
+            onBlur={handleBlur}
             fullWidth
         />
     );

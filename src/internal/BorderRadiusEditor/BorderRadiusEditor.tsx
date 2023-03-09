@@ -1,26 +1,30 @@
 import React, { memo, useCallback } from 'react';
 
-import { TUnit, TUnitSize, TValue } from '../../types';
+import { TUnit, TUnitRadius, TValue } from '../../types';
 
 import FieldEditor, { TFieldEditorProps } from '../FieldEditor/FieldEditor';
 
 import { getUnit, toUnitless } from '../../utils';
 
-const unitSet: TUnitSize[] = ['px', 'rem', 'em'];
+const unitSet: TUnitRadius[] = ['px', 'rem', 'em', '%'];
 
-function LetterSpacingEditor({ value, defaultValue, onChange, unit = 'em', ...props }: TFieldEditorProps) {
-    const newValue = toUnitless(value) || value;
+function BorderRadiusEditor({ value, defaultValue, onChange, unit = 'px', ...props }: TFieldEditorProps) {
+    const newValue = value ? toUnitless(value) : value;
     //FIXME: Remove newUnit logic after getUnit regex fix
     const newUnit = (newValue ? getUnit(value) || unit : unit) as TUnit;
 
     const handleFormatter = useCallback(
         (formatterValue: TValue) => {
-            if (formatterValue === '') {
-                return formatterValue;
+            const formatterUnit = getUnit(formatterValue);
+            if (Number(formatterValue)) {
+                if (formatterUnit === '' || newUnit === 'px') {
+                    return Number(formatterValue);
+                }
+                return `${Number(formatterValue)}${newUnit}`;
             }
 
-            if (Number(formatterValue)) {
-                return `${Number(formatterValue)}${newUnit}`;
+            if (formatterUnit === 'px' && formatterValue) {
+                return toUnitless(formatterValue);
             }
 
             return formatterValue;
@@ -31,15 +35,16 @@ function LetterSpacingEditor({ value, defaultValue, onChange, unit = 'em', ...pr
     return (
         <FieldEditor
             {...props}
-            value={newValue}
+            type="number"
             defaultValue={defaultValue}
             step={newUnit === 'px' ? 1 : 0.1}
-            unit={newUnit}
+            unit={newUnit || unit}
             unitSet={unitSet}
+            value={newValue}
             formatter={handleFormatter}
             onChange={onChange}
         />
     );
 }
 
-export default memo(LetterSpacingEditor);
+export default memo(BorderRadiusEditor);
