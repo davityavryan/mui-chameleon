@@ -1,38 +1,36 @@
-import React, { Fragment, memo, useCallback, useState } from 'react';
+import React, { Fragment, useCallback, useState } from 'react';
 
-import { Link, matchPath, useLocation } from 'react-router-dom';
+import { Link as RouterLink, matchPath, useLocation } from 'react-router-dom';
 
-import Collapse from '@material-ui/core/Collapse';
-import Drawer from '@material-ui/core/Drawer';
-import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import MUILink from '@material-ui/core/Link';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
+import { Box, Collapse, Typography, Divider, Link, List, ListItem, ListItemText, useTheme } from '@mui/material';
 
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
+import { ExpandLess, ExpandMore } from '@mui/icons-material';
 
 import { entries, MENU } from 'helpers';
 
-import useStyles from './SideBar.style';
+import { StyledDrawer } from './SideBar.style';
 
-type IOpenedMenus = {
+type OpenedMenus = {
     [K in keyof typeof MENU]: boolean;
 };
 
 function SideBar() {
-    const classes = useStyles();
+    const theme = useTheme();
 
     const menuEntries = entries(MENU);
 
-    const [openedMenus, setOpenedMenus] = useState<IOpenedMenus>(
-        menuEntries.reduce((combiner, [key]) => ({ ...combiner, [key]: true }), {} as IOpenedMenus)
+    const [openedMenus, setOpenedMenus] = useState<OpenedMenus>(
+        menuEntries.reduce((combiner, [key]) => ({ ...combiner, [key]: true }), {} as OpenedMenus)
     );
 
     const location = useLocation();
+
+    const navStyles = {
+        [theme.breakpoints.up('sm')]: {
+            width: theme.spacing(32),
+            flexShrink: 0,
+        },
+    };
 
     const handleToggleMenu = useCallback(
         (key: keyof typeof MENU) => () => {
@@ -45,17 +43,17 @@ function SideBar() {
     );
 
     return (
-        <nav className={classes.drawer} aria-label="mailbox folders">
-            <Drawer classes={{ paper: classes.drawerPaper }} variant="permanent" open>
-                <MUILink component={Link} to="/" color="textPrimary" underline="none">
+        <Box component="nav" sx={navStyles} aria-label="mailbox folders">
+            <StyledDrawer variant="permanent" open>
+                <Link component={RouterLink} to="/" color="textPrimary" underline="none">
                     <Box display="flex" alignItems="center" px={2} py={1}>
                         <Box pr={1}>
-                            <img width="32" height="32" src="img/logo.svg" alt="Material-UI Chameleon" />
+                            <img width="32" height="32" src="img/logo.svg" alt="MUI Chameleon" />
                         </Box>
 
                         <Typography>Material UI Chameleon</Typography>
                     </Box>
-                </MUILink>
+                </Link>
 
                 <Divider />
 
@@ -73,10 +71,10 @@ function SideBar() {
                                     {routes.map(({ label, route }) => (
                                         <ListItem
                                             key={route.path}
-                                            component={Link}
-                                            className={classes.doubleNested}
+                                            component={RouterLink}
                                             to={route.path}
                                             selected={!!matchPath(location.pathname, route.path)}
+                                            sx={{ pl: 6 }}
                                             button
                                         >
                                             <ListItemText primary={label} />
@@ -87,9 +85,9 @@ function SideBar() {
                         </Fragment>
                     ))}
                 </List>
-            </Drawer>
-        </nav>
+            </StyledDrawer>
+        </Box>
     );
 }
 
-export default memo(SideBar);
+export default SideBar;

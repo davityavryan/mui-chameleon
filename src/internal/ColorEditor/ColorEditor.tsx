@@ -1,17 +1,17 @@
-import React, { Fragment, memo } from 'react';
+import React, { Fragment } from 'react';
 
-import { ListItemText, ListItemSecondaryAction } from '@material-ui/core';
+import { ListItemText, ListItemSecondaryAction } from '@mui/material';
 
-import { ColorPicker } from '../../internal';
-import { themeKeyLabel } from '../../utils';
+import ColorPicker from '../ColorPicker/ColorPicker';
+import { themeKeyLabel } from '../../utils/themeKeyLabel';
 
-interface IProps {
+interface Props {
     value: string;
     themeKey: string;
     onChange: (color: string) => void;
 }
 
-function ColorEditor({ value, themeKey, onChange }: IProps) {
+function ColorEditor({ value, themeKey, onChange }: Props) {
     return (
         <Fragment>
             <ListItemText primary={themeKeyLabel(themeKey)} />
@@ -23,4 +23,4 @@ function ColorEditor({ value, themeKey, onChange }: IProps) {
     );
 }
 
-export default memo(ColorEditor);
+export default ColorEditor;

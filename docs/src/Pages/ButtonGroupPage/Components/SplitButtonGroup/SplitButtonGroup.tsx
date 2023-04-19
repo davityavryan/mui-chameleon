@@ -1,15 +1,8 @@
 import React, { Fragment } from 'react';
 
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Grow from '@material-ui/core/Grow';
-import Paper from '@material-ui/core/Paper';
-import Popper from '@material-ui/core/Popper';
-import MenuItem from '@material-ui/core/MenuItem';
-import MenuList from '@material-ui/core/MenuList';
+import { Button, ButtonGroup, ClickAwayListener, Grow, Paper, Popper, MenuItem, MenuList } from '@mui/material';
 
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import { ArrowDropDown } from '@mui/icons-material';
 
 const options = ['Create a merge commit', 'Squash and merge', 'Rebase and merge'];
 
@@ -31,7 +24,7 @@ function SplitButtonGroup() {
         setOpen((prevOpen) => !prevOpen);
     };
 
-    const handleClose = (event: React.MouseEvent<Document, MouseEvent>) => {
+    const handleClose: (event: MouseEvent | TouchEvent) => void = (event) => {
         if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
             return;
         }
@@ -52,7 +45,7 @@ function SplitButtonGroup() {
                     aria-haspopup="menu"
                     onClick={handleToggle}
                 >
-                    <ArrowDropDownIcon />
+                    <ArrowDropDown />
                 </Button>
             </ButtonGroup>
             <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>

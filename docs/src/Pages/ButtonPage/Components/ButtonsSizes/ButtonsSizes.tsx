@@ -1,24 +1,18 @@
 import React from 'react';
 
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
+import { Button, IconButton, Stack } from '@mui/material';
 
-import DeleteIcon from '@material-ui/icons/Delete';
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
-
-import useStyles from './ButtonsSizes.style';
+import { ArrowDownward, Delete } from '@mui/icons-material';
 
 function ButtonsSizes() {
-    const classes = useStyles();
-
     return (
-        <div className={classes.root}>
-            <div>
+        <Stack spacing={2} direction="column">
+            <Stack spacing={2} direction="row">
                 <Button size="small">Small</Button>
                 <Button size="medium">Medium</Button>
                 <Button size="large">Large</Button>
-            </div>
-            <div>
+            </Stack>
+            <Stack spacing={2} direction="row">
                 <Button variant="outlined" size="small" color="primary">
                     Small
                 </Button>
@@ -28,8 +22,8 @@ function ButtonsSizes() {
                 <Button variant="outlined" size="large" color="primary">
                     Large
                 </Button>
-            </div>
-            <div>
+            </Stack>
+            <Stack spacing={2} direction="row">
                 <Button variant="contained" size="small" color="primary">
                     Small
                 </Button>
@@ -39,22 +33,22 @@ function ButtonsSizes() {
                 <Button variant="contained" size="large" color="primary">
                     Large
                 </Button>
-            </div>
-            <div>
+            </Stack>
+            <Stack spacing={2} direction="row">
                 <IconButton aria-label="delete" size="small">
-                    <ArrowDownwardIcon fontSize="inherit" />
+                    <ArrowDownward fontSize="inherit" />
                 </IconButton>
                 <IconButton aria-label="delete">
-                    <DeleteIcon fontSize="small" />
+                    <Delete fontSize="small" />
                 </IconButton>
                 <IconButton aria-label="delete">
-                    <DeleteIcon />
+                    <Delete />
                 </IconButton>
                 <IconButton aria-label="delete">
-                    <DeleteIcon fontSize="large" />
+                    <Delete fontSize="large" />
                 </IconButton>
-            </div>
-        </div>
+            </Stack>
+        </Stack>
     );
 }
 

@@ -1,39 +1,22 @@
-import React, { useReducer } from 'react';
+import React, { useEffect } from 'react';
 
-import { ThemeProvider as MuiThemeProvider, createMuiTheme, ThemeOptions } from '@material-ui/core/styles';
+import { ThemeProvider as MuiThemeProvider, createTheme, ThemeOptions } from '@mui/material';
 
-import { Context, TAction, TState } from '../utils';
+import { useStore } from '../utils';
 
-function reducer(state: TState, action: TAction) {
-    switch (action.type) {
-        case 'reset': {
-            return {
-                ...state,
-                theme: JSON.parse(JSON.stringify(state.originalTheme)),
-            };
-        }
-        case 'update': {
-            return {
-                ...state,
-                theme: action.payload,
-            };
-        }
-    }
-}
-
-interface IProps {
+interface Props {
     theme: ThemeOptions;
     children: JSX.Element | JSX.Element[];
 }
 
-function ThemeProvider({ theme, children }: IProps) {
-    const [state, dispatch] = useReducer(reducer, { theme, originalTheme: theme });
+function ThemeProvider({ theme, children }: Props) {
+    const [state, actions] = useStore();
 
-    return (
-        <Context.Provider value={{ state, dispatch }}>
-            <MuiThemeProvider theme={createMuiTheme(state.theme)}>{children}</MuiThemeProvider>
-        </Context.Provider>
-    );
+    useEffect(() => {
+        actions.setTheme(theme, { ...theme });
+    }, []);
+
+    return <MuiThemeProvider theme={createTheme(state.theme)}>{children}</MuiThemeProvider>;
 }
 
 export default ThemeProvider;

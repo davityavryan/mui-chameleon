@@ -1,47 +1,70 @@
-import React, { memo } from 'react';
+import React from 'react';
 
-import Box, { BoxProps } from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
+import { Box, BoxProps, ThemeProvider, Typography, Theme as MuiTheme, SxProps, useTheme } from '@mui/material';
 
-import { ErrorBoundary, Theme } from 'Components';
-import { useDocsTheme } from 'helpers';
+import { ErrorBoundary, DocsTheme } from 'Components';
 
-import useStyles from './Frame.style';
-
-interface IProps extends BoxProps {
+interface Props extends BoxProps {
     title?: string;
     align?: 'flex-start' | 'center' | 'flex-end';
     children: JSX.Element | JSX.Element[];
 }
 
-function Frame({ title, align = 'center', children, ...boxProps }: IProps) {
-    const { shadows } = useDocsTheme();
+function Frame({ title, align = 'center', children, ...boxProps }: Props) {
+    const theme = useTheme();
 
-    const classes = useStyles({ shadows });
+    const frameStyles: SxProps<MuiTheme> = ({ shadows, shape }) => ({
+        borderRadius: `${shape.borderRadius}px`,
+        boxShadow: shadows[4],
+        backgroundColor: theme.palette.background.default,
+        color: theme.palette.text.primary,
+    });
+
+    const topBarStyles: SxProps<MuiTheme> = ({ palette, spacing, shape }) => ({
+        padding: spacing(1, 2),
+        backgroundColor: palette.mode === 'light' ? palette.grey[100] : palette.grey[900],
+        borderTopLeftRadius: `${shape.borderRadius}px`,
+        borderTopRightRadius: `${shape.borderRadius}px`,
+
+        borderBottomWidth: 1,
+        borderBottomStyle: 'solid',
+        borderBottomColor: palette.action.hover,
+    });
 
     return (
-        <div className={classes.root}>
+        <Box mb={2}>
             {title && (
-                <Theme>
+                <DocsTheme mode={theme.palette.mode}>
                     <Typography variant="h5" paragraph>
                         {title}
                     </Typography>
-                </Theme>
+                </DocsTheme>
             )}
 
-            <div className={classes.frame}>
-                <div className={classes.topBar}>
-                    <Box display="inline-block" bgcolor="error.main" borderRadius="50%" p={0.5} mr={0.5} />
-                    <Box display="inline-block" bgcolor="warning.main" borderRadius="50%" p={0.5} mr={0.5} />
-                    <Box display="inline-block" bgcolor="success.main" borderRadius="50%" p={0.5} mr={0.5} />
-                </div>
+            <DocsTheme mode={theme.palette.mode}>
+                <Box sx={frameStyles}>
+                    <Box sx={topBarStyles}>
+                        <Box display="inline-block" bgcolor="error.main" borderRadius="50%" p={0.5} mr={0.5} />
+                        <Box display="inline-block" bgcolor="warning.main" borderRadius="50%" p={0.5} mr={0.5} />
+                        <Box display="inline-block" bgcolor="success.main" borderRadius="50%" p={0.5} mr={0.5} />
+                    </Box>
 
-                <Box position="relative" display="flex" flexDirection="column" alignItems={align} p={3} {...boxProps}>
-                    <ErrorBoundary>{children}</ErrorBoundary>
+                    <Box
+                        position="relative"
+                        display="flex"
+                        flexDirection="column"
+                        alignItems={align}
+                        p={3}
+                        {...boxProps}
+                    >
+                        <ErrorBoundary>
+                            <ThemeProvider theme={theme}>{children}</ThemeProvider>
+                        </ErrorBoundary>
+                    </Box>
                 </Box>
-            </div>
-        </div>
+            </DocsTheme>
+        </Box>
     );
 }
 
-export default memo(Frame);
+export default Frame;

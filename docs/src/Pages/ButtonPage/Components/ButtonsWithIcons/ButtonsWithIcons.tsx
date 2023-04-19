@@ -1,39 +1,31 @@
 import React from 'react';
 
-import Button from '@material-ui/core/Button';
+import { Button, Stack } from '@mui/material';
 
-import DeleteIcon from '@material-ui/icons/Delete';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import KeyboardVoiceIcon from '@material-ui/icons/KeyboardVoice';
-import SaveIcon from '@material-ui/icons/Save';
-import SendIcon from '@material-ui/icons/Send';
-
-import useStyles from './ButtonsWithIcons.style';
+import { Delete, CloudUpload, KeyboardVoice, Save, Send } from '@mui/icons-material';
 
 function ButtonsWithIcons() {
-    const classes = useStyles();
-
     return (
-        <div className={classes.root}>
-            <Button variant="contained" color="secondary" startIcon={<DeleteIcon />}>
+        <Stack spacing={2} direction="row">
+            <Button variant="contained" color="secondary" startIcon={<Delete />}>
                 Delete
             </Button>
-            <Button variant="contained" color="primary" endIcon={<SendIcon />}>
+            <Button variant="contained" color="primary" endIcon={<Send />}>
                 Send
             </Button>
-            <Button variant="contained" color="default" startIcon={<CloudUploadIcon />}>
+            <Button variant="contained" color="success" startIcon={<CloudUpload />}>
                 Upload
             </Button>
-            <Button variant="contained" color="secondary" startIcon={<KeyboardVoiceIcon />} disabled>
+            <Button variant="contained" color="secondary" startIcon={<KeyboardVoice />} disabled>
                 Talk
             </Button>
-            <Button variant="contained" color="primary" size="small" startIcon={<SaveIcon />}>
+            <Button variant="contained" color="primary" size="small" startIcon={<Save />}>
                 Save
             </Button>
-            <Button variant="contained" color="primary" size="large" startIcon={<SaveIcon />}>
+            <Button variant="contained" color="primary" size="large" startIcon={<Save />}>
                 Save
             </Button>
-        </div>
+        </Stack>
     );
 }
 

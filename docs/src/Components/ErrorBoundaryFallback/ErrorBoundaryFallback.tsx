@@ -1,21 +1,22 @@
-import React, { Fragment, memo } from 'react';
+import React, { Fragment } from 'react';
 
-import Typography from '@material-ui/core/Typography';
+import { Box, Typography } from '@mui/material';
 
-import useStyles from './ErrorBoundaryFallback.style';
-
-interface IProps {
+interface Props {
     message?: string;
     error?: Error;
     info?: React.ErrorInfo;
 }
 
-function ErrorBoundaryFallback({ message, error, info }: IProps) {
-    const classes = useStyles();
-
+function ErrorBoundaryFallback({ message, error, info }: Props) {
     if (message === undefined) {
         message = 'Sorry, something went wrong. Please try again later.';
     }
+
+    const preStyles = {
+        whiteSpace: 'pre-wrap',
+        color: 'red',
+    };
 
     return (
         <Fragment>
@@ -29,12 +30,20 @@ function ErrorBoundaryFallback({ message, error, info }: IProps) {
 
             {process.env.NODE_ENV !== 'production' && (
                 <h4>
-                    {error && <pre className={classes.pre}>{error.stack}</pre>}
-                    {info && <pre className={classes.pre}>{info.componentStack}</pre>}
+                    {error && (
+                        <Box component="pre" sx={preStyles}>
+                            {error.stack}
+                        </Box>
+                    )}
+                    {info && (
+                        <Box component="pre" sx={preStyles}>
+                            {info.componentStack}
+                        </Box>
+                    )}
                 </h4>
             )}
         </Fragment>
     );
 }
 
-export default memo(ErrorBoundaryFallback);
+export default ErrorBoundaryFallback;

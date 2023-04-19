@@ -2,18 +2,18 @@ import React from 'react';
 
 import { ErrorBoundaryFallback } from 'Components';
 
-interface IProps {
+interface Props {
     FallbackComponent?: React.ElementType;
     children?: JSX.Element | JSX.Element[];
 }
 
-interface IState {
+interface State {
     error?: Error;
 }
 
 // TODO: Sentry
-class ErrorBoundary extends React.Component<IProps, IState> {
-    constructor(props: IProps) {
+class ErrorBoundary extends React.Component<Props, State> {
+    constructor(props: Props) {
         super(props);
 
         this.state = {

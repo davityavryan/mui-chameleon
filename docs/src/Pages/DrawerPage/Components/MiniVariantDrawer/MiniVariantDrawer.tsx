@@ -1,32 +1,99 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
-import clsx from 'clsx';
+import {
+    Box,
+    Drawer as MuiDrawer,
+    AppBar as MuiAppBar,
+    AppBarProps as MuiAppBarProps,
+    Toolbar,
+    List,
+    Typography,
+    Divider,
+    IconButton,
+    ListItem,
+    ListItemButton,
+    ListItemIcon,
+    ListItemText,
+    styled,
+    useTheme,
+    Theme,
+    CSSObject,
+} from '@mui/material';
 
-import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import { useTheme } from '@material-ui/core/styles';
+import { Inbox, Mail, Menu, ChevronLeft, ChevronRight } from '@mui/icons-material';
 
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import MenuIcon from '@material-ui/icons/Menu';
+const drawerWidth = 240;
 
-import useStyles from './MiniVariantDrawer.style';
+const openedMixin = (theme: Theme): CSSObject => ({
+    width: drawerWidth,
+    transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+    }),
+    overflowX: 'hidden',
+});
 
-function MiniVariantDrawer() {
-    const classes = useStyles();
+const closedMixin = (theme: Theme): CSSObject => ({
+    transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+    }),
+    overflowX: 'hidden',
+    width: `calc(${theme.spacing(7)} + 1px)`,
+    [theme.breakpoints.up('sm')]: {
+        width: `calc(${theme.spacing(8)} + 1px)`,
+    },
+});
 
+const DrawerHeader = styled('div')(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+}));
+
+interface AppBarProps extends MuiAppBarProps {
+    open?: boolean;
+}
+
+const AppBar = styled(MuiAppBar, {
+    shouldForwardProp: (prop) => prop !== 'open',
+})<AppBarProps>(({ theme, open }) => ({
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+    }),
+    ...(open && {
+        marginLeft: drawerWidth,
+        width: `calc(100% - ${drawerWidth}px)`,
+        transition: theme.transitions.create(['width', 'margin'], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
+    }),
+}));
+
+const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(({ theme, open }) => ({
+    width: drawerWidth,
+    flexShrink: 0,
+    whiteSpace: 'nowrap',
+    boxSizing: 'border-box',
+    ...(open && {
+        ...openedMixin(theme),
+        '& .MuiDrawer-paper': openedMixin(theme),
+    }),
+    ...(!open && {
+        ...closedMixin(theme),
+        '& .MuiDrawer-paper': closedMixin(theme),
+    }),
+}));
+
+export default function MiniDrawer() {
+    const container = useRef(null);
     const theme = useTheme();
-
     const [open, setOpen] = React.useState(false);
 
     const handleDrawerOpen = () => {
@@ -38,69 +105,85 @@ function MiniVariantDrawer() {
     };
 
     return (
-        <div className={classes.root}>
-            <AppBar
-                position="absolute"
-                className={clsx(classes.appBar, {
-                    [classes.appBarShift]: open,
-                })}
-            >
+        <Box ref={container} sx={{ display: 'flex' }}>
+            <AppBar position="absolute" open={open}>
                 <Toolbar>
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
                         onClick={handleDrawerOpen}
                         edge="start"
-                        className={clsx(classes.menuButton, {
-                            [classes.hide]: open,
-                        })}
+                        sx={{
+                            marginRight: 5,
+                            ...(open && { display: 'none' }),
+                        }}
                     >
-                        <MenuIcon />
+                        <Menu />
                     </IconButton>
-                    <Typography variant="h6" noWrap>
+                    <Typography variant="h6" noWrap component="div">
                         Mini variant drawer
                     </Typography>
                 </Toolbar>
             </AppBar>
-            <Drawer
-                variant="permanent"
-                className={clsx(classes.drawer, {
-                    [classes.drawerOpen]: open,
-                    [classes.drawerClose]: !open,
-                })}
-                classes={{
-                    paper: clsx(classes.staticDrawer, {
-                        [classes.drawerOpen]: open,
-                        [classes.drawerClose]: !open,
-                    }),
-                }}
-            >
-                <div className={classes.toolbar}>
+            <Drawer variant="persistent" open={open} container={container.current}>
+                <DrawerHeader>
                     <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+                        {theme.direction === 'rtl' ? <ChevronRight /> : <ChevronLeft />}
                     </IconButton>
-                </div>
+                </DrawerHeader>
                 <Divider />
                 <List>
                     {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                            <ListItemText primary={text} />
+                        <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+                            <ListItemButton
+                                sx={{
+                                    minHeight: 48,
+                                    justifyContent: open ? 'initial' : 'center',
+                                    px: 2.5,
+                                }}
+                            >
+                                <ListItemIcon
+                                    sx={{
+                                        minWidth: 0,
+                                        mr: open ? 3 : 'auto',
+                                        justifyContent: 'center',
+                                    }}
+                                >
+                                    {index % 2 === 0 ? <Inbox /> : <Mail />}
+                                </ListItemIcon>
+                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                            </ListItemButton>
                         </ListItem>
                     ))}
                 </List>
                 <Divider />
                 <List>
                     {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                            <ListItemText primary={text} />
+                        <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+                            <ListItemButton
+                                sx={{
+                                    minHeight: 48,
+                                    justifyContent: open ? 'initial' : 'center',
+                                    px: 2.5,
+                                }}
+                            >
+                                <ListItemIcon
+                                    sx={{
+                                        minWidth: 0,
+                                        mr: open ? 3 : 'auto',
+                                        justifyContent: 'center',
+                                    }}
+                                >
+                                    {index % 2 === 0 ? <Inbox /> : <Mail />}
+                                </ListItemIcon>
+                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                            </ListItemButton>
                         </ListItem>
                     ))}
                 </List>
             </Drawer>
-            <main className={classes.content}>
-                <div className={classes.toolbar} />
+            <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+                <DrawerHeader />
                 <Typography paragraph>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
                     et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum facilisis leo vel. Risus at
@@ -123,9 +206,7 @@ function MiniVariantDrawer() {
                     eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam
                     ultrices sagittis orci a.
                 </Typography>
-            </main>
-        </div>
+            </Box>
+        </Box>
     );
 }
-
-export default MiniVariantDrawer;

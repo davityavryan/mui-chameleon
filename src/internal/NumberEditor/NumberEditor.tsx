@@ -1,13 +1,13 @@
-import React, { memo } from 'react';
+import React from 'react';
 
-import FieldEditor, { TFieldEditorProps } from '../FieldEditor/FieldEditor';
+import FieldEditor, { FieldEditorProps } from '../FieldEditor/FieldEditor';
 
-type TProps = TFieldEditorProps & {
+type Props = FieldEditorProps & {
     formatter?: (value: string) => number;
 };
 
-function NumberEditor(props: TProps) {
+function NumberEditor(props: Props) {
     return <FieldEditor {...props} type="number" formatter={(newValue) => Number(newValue)} />;
 }
 
-export default memo(NumberEditor);
+export default NumberEditor;

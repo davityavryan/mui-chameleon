@@ -1,39 +1,49 @@
-import React, { memo } from 'react';
+import React from 'react';
 
-import clsx from 'clsx';
+import { Box, BoxProps, Backdrop, CircularProgress, useTheme } from '@mui/material';
 
-import Box, { BoxProps } from '@material-ui/core/Box';
-import Backdrop from '@material-ui/core/Backdrop';
-import CircularProgress from '@material-ui/core/CircularProgress';
-
-import useStyles from './Spinner.style';
-
-interface IProps extends BoxProps {
+interface Props extends BoxProps {
     isFixed?: boolean;
     hasBackDrop?: boolean;
     onClose?: () => void;
 }
 
-function Spinner({ isFixed = false, hasBackDrop = false, onClose, ...other }: IProps) {
-    const classes = useStyles();
+function Spinner({ isFixed = false, hasBackDrop = false, onClose, ...other }: Props) {
+    const { zIndex } = useTheme();
 
     if (typeof onClose !== 'function') {
         onClose = () => undefined;
     }
 
+    let spinnerStyles = {
+        display: 'inline-flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexGrow: 1,
+    };
+
+    if (isFixed) {
+        spinnerStyles = Object.assign(spinnerStyles, {
+            position: 'fixed',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+        });
+    }
+
     if (hasBackDrop) {
         return (
-            <Backdrop className={classes.backdrop} onClick={onClose} open>
+            <Box component={Backdrop} sx={{ zIndex: zIndex.modal }} onClick={onClose} open>
                 <CircularProgress />
-            </Backdrop>
+            </Box>
         );
     }
 
     return (
-        <Box className={clsx(classes.spinner, isFixed && classes.isFixed)} {...other}>
+        <Box sx={spinnerStyles} {...other}>
             <CircularProgress />
         </Box>
     );
 }
 
-export default memo(Spinner);
+export default Spinner;

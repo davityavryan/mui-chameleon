@@ -1,29 +1,44 @@
-import React, { memo } from 'react';
+import React, { useCallback } from 'react';
 
-import { TUnit, TUnitSize } from '../../types';
+import { getUnit, toUnitless } from '@mui/material/styles/cssUtils';
 
-import FieldEditor, { TFieldEditorProps } from '../FieldEditor/FieldEditor';
+import { Unit, UnitSize, Value } from '../../types';
+import FieldEditor, { FieldEditorProps } from '../FieldEditor/FieldEditor';
 
-import { getUnit, toUnitless } from '../../utils';
+const unitSet: UnitSize[] = ['px', 'rem', 'em'];
 
-const unitSet: TUnitSize[] = ['px', 'rem', 'em'];
+function LetterSpacingEditor({ value, defaultValue, onChange, unit = 'em', ...props }: FieldEditorProps) {
+    const newValue = toUnitless(value) || value;
+    //FIXME: Remove newUnit logic after getUnit regex fix
+    const newUnit = (newValue ? getUnit(value) || unit : unit) as Unit;
 
-function LetterSpacingEditor({ value, defaultValue, onChange, unit = 'em', ...props }: TFieldEditorProps) {
-    const newValue = value || defaultValue;
-    const newUnit = (getUnit(newValue) || unit) as TUnit;
+    const handleFormatter = useCallback(
+        (formatterValue: Value) => {
+            if (formatterValue === '') {
+                return formatterValue;
+            }
+
+            if (Number(formatterValue)) {
+                return `${Number(formatterValue)}${newUnit}`;
+            }
+
+            return formatterValue;
+        },
+        [newUnit]
+    );
 
     return (
         <FieldEditor
             {...props}
-            type="number"
+            value={newValue}
+            defaultValue={defaultValue}
             step={newUnit === 'px' ? 1 : 0.1}
             unit={newUnit}
             unitSet={unitSet}
-            value={toUnitless(newValue)}
-            formatter={(newValue) => (newValue === '' ? defaultValue : `${Number(newValue)}${newUnit}`)}
+            formatter={handleFormatter}
             onChange={onChange}
         />
     );
 }
 
-export default memo(LetterSpacingEditor);
+export default LetterSpacingEditor;

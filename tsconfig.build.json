@@ -1,6 +1,6 @@
 {
     "extends": "./tsconfig.json",
-    "exclude": ["node_modules", "build", "src/**/*.unit.ts", "src/**/*.unit.tsx"],
+    "exclude": ["./node_modules", "./dist", "./src/**/*.unit.ts", "./src/**/*.unit.tsx"],
     "compilerOptions": {
         "declaration": true,
         "emitDeclarationOnly": true

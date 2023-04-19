@@ -1,31 +1,25 @@
 import React from 'react';
 
-import IconButton from '@material-ui/core/IconButton';
+import { IconButton, Stack } from '@mui/material';
 
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import AlarmIcon from '@material-ui/icons/Alarm';
-import DeleteIcon from '@material-ui/icons/Delete';
-
-import useStyles from './IconButtons.style';
+import { AddShoppingCart, Alarm, Delete } from '@mui/icons-material';
 
 function IconButtons() {
-    const classes = useStyles();
-
     return (
-        <div className={classes.root}>
+        <Stack spacing={2} direction="row">
             <IconButton aria-label="delete">
-                <DeleteIcon />
+                <Delete />
             </IconButton>
             <IconButton aria-label="delete" disabled color="primary">
-                <DeleteIcon />
+                <Delete />
             </IconButton>
             <IconButton color="secondary" aria-label="add an alarm">
-                <AlarmIcon />
+                <Alarm />
             </IconButton>
             <IconButton color="primary" aria-label="add to shopping cart">
-                <AddShoppingCartIcon />
+                <AddShoppingCart />
             </IconButton>
-        </div>
+        </Stack>
     );
 }
 

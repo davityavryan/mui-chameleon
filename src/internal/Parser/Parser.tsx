@@ -2,27 +2,25 @@ import React from 'react';
 
 import delve from 'dlv';
 
-import { List, ListItem, ListSubheader } from '@material-ui/core';
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createTheme } from '@mui/material/styles';
 
-import { themeMap, typesMap, themeKeyLabel } from '../../utils';
+import { themeMap, typesMap } from '../../utils';
+import { themeKeyLabel } from '../../utils/themeKeyLabel';
 
-import useStyles from './Parser.style';
+import { StyledListSubHeader, StyledList, StyledLi, StyledUl, StyledListItem } from './Parser.style';
 
 // TODO: separate theme for this file? :/
-const defaultTheme = createMuiTheme();
+const defaultTheme = createTheme();
 
-interface IProps {
+interface Props {
     item: unknown;
     itemKey: string;
     defaultValue: Record<string, unknown>;
-    onChange: (themeKey: string) => (newValue: unknown) => void;
+    onChange: <V>(themeKey: string) => (newValue: V) => void;
     isTopLevel?: boolean;
 }
 
-function Parser({ item, itemKey, defaultValue, onChange, isTopLevel = false }: IProps) {
-    const classes = useStyles({ isTopLevel });
-
+function Parser({ item, itemKey, defaultValue, onChange, isTopLevel = false }: Props) {
     const mapItem = delve(themeMap, itemKey);
 
     if (typeof item === 'function' || (mapItem && mapItem.type === 'skip')) {
@@ -31,7 +29,7 @@ function Parser({ item, itemKey, defaultValue, onChange, isTopLevel = false }: I
 
     if (typeof item === 'object') {
         return (
-            <List className={classes.root} subheader={<li />}>
+            <StyledList subheader={<li />}>
                 {Object.entries(item).map(([nestedItemKey, nestedItem]) => {
                     const themeKey = `${itemKey}.${nestedItemKey}`;
 
@@ -48,11 +46,9 @@ function Parser({ item, itemKey, defaultValue, onChange, isTopLevel = false }: I
                     }
 
                     return (
-                        <li key={themeKey} className={classes.listSection}>
-                            <ul className={classes.ul}>
-                                <ListSubheader className={classes.listSubHeader}>
-                                    {themeKeyLabel(themeKey)}
-                                </ListSubheader>
+                        <StyledLi key={themeKey}>
+                            <StyledUl>
+                                <StyledListSubHeader>{themeKeyLabel(themeKey)}</StyledListSubHeader>
 
                                 <Parser
                                     key={themeKey}
@@ -61,11 +57,11 @@ function Parser({ item, itemKey, defaultValue, onChange, isTopLevel = false }: I
                                     defaultValue={delve(defaultTheme, themeKey)}
                                     onChange={onChange}
                                 />
-                            </ul>
-                        </li>
+                            </StyledUl>
+                        </StyledLi>
                     );
                 })}
-            </List>
+            </StyledList>
         );
     }
 
@@ -74,7 +70,7 @@ function Parser({ item, itemKey, defaultValue, onChange, isTopLevel = false }: I
     const Component = typesMap[type];
 
     return (
-        <ListItem className={classes.listItem}>
+        <StyledListItem isTopLevel={isTopLevel}>
             <Component
                 {...props}
                 value={item}
@@ -82,7 +78,7 @@ function Parser({ item, itemKey, defaultValue, onChange, isTopLevel = false }: I
                 onChange={onChange(itemKey)}
                 defaultValue={defaultValue}
             />
-        </ListItem>
+        </StyledListItem>
     );
 }
 

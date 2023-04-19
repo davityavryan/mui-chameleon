@@ -1,55 +1,52 @@
 import React from 'react';
 
-import { ThemeOptions } from '@material-ui/core/styles';
+import { ThemeOptions } from '@mui/material';
 
-import {
-    Brightness4Rounded,
-    BrightnessHighRounded,
-    FormatTextdirectionLToR,
-    FormatTextdirectionRToL,
-} from '@material-ui/icons';
+import Brightness4Rounded from '@mui/icons-material/Brightness4Rounded';
+import BrightnessHighRounded from '@mui/icons-material/BrightnessHighRounded';
+import FormatTextdirectionLToR from '@mui/icons-material/FormatTextdirectionLToR';
+import FormatTextdirectionRToL from '@mui/icons-material/FormatTextdirectionRToL';
 
-import {
-    BooleanEditor,
-    ColorEditor,
-    FieldEditor,
-    FontSizeEditor,
-    FontWeightEditor,
-    LetterSpacingEditor,
-    NumberEditor,
-} from '../internal';
+import BooleanEditor from '../internal/BooleanEditor/BooleanEditor';
+import BorderRadiusEditor from '../internal/BorderRadiusEditor/BorderRadiusEditor';
+import ColorEditor from '../internal/ColorEditor/ColorEditor';
+import FieldEditor from '../internal/FieldEditor/FieldEditor';
+import FontSizeEditor from '../internal/FontSizeEditor/FontSizeEditor';
+import FontWeightEditor from '../internal/FontWeightEditor/FontWeightEditor';
+import LetterSpacingEditor from '../internal/LetterSpacingEditor/LetterSpacingEditor';
+import NumberEditor from '../internal/NumberEditor/NumberEditor';
 
-import { TThemeItemType, TUnit, TValue } from '../types';
+import { ThemeItemType, Unit, Value } from '../types';
 
-export type TThemeMapItem = {
-    type: TThemeItemType;
+export type ThemeMapItem = {
+    type: ThemeItemType;
     min?: number;
     max?: number;
-    unit?: TUnit;
+    unit?: Unit;
     step?: number;
     options?: string[];
     icons?: React.ElementType[];
 };
 
-// TODO: ThemeOptions or Theme?
-export type TThemeMap = {
+// TODO: ThemeOptions or DocsTheme?
+export type ThemeMap = {
     [key in keyof ThemeOptions]:
-        | TThemeMapItem
-        | TThemeMapItem[]
+        | ThemeMapItem
+        | ThemeMapItem[]
         | {
               [subKey in keyof ThemeOptions[key]]:
-                  | TThemeMapItem
-                  | TThemeMapItem[]
+                  | ThemeMapItem
+                  | ThemeMapItem[]
                   | {
-                        [subSubKey: string]: TThemeMapItem;
+                        [subSubKey: string]: ThemeMapItem;
                     };
           };
 };
 
-export const themeMap: TThemeMap = {
+export const themeMap: ThemeMap = {
     shape: {
         borderRadius: {
-            type: 'number',
+            type: 'borderRadius',
             min: 0,
             unit: 'px',
         },
@@ -93,9 +90,11 @@ export const themeMap: TThemeMap = {
         icons: [FormatTextdirectionLToR, FormatTextdirectionRToL],
     },
     mixins: { type: 'skip' },
-    overrides: { type: 'skip' },
+    components: { type: 'skip' },
+    unstable_sxConfig: { type: 'skip' },
+    unstable_strictMode: { type: 'skip' },
     palette: {
-        type: {
+        mode: {
             type: 'boolean',
             options: ['light', 'dark'],
             icons: [Brightness4Rounded, BrightnessHighRounded],
@@ -217,7 +216,6 @@ export const themeMap: TThemeMap = {
             step: 0.1,
         },
     },
-    props: { type: 'skip' },
     shadows: [
         { type: 'shadow' },
         { type: 'shadow' },
@@ -432,20 +430,21 @@ export const themeMap: TThemeMap = {
     },
 };
 
-type TProps<V = TValue> = TThemeMapItem & {
+type Props<V = Value> = ThemeMapItem & {
     value: V;
     defaultValue: V;
     themeKey: string;
     onChange: (newValue: V) => void;
 };
 
-type TTypesMap = {
-    [key: string]: React.FunctionComponent<TProps>;
+type TypesMap = {
+    [key: string]: React.FunctionComponent<Props>;
 };
 
-export const typesMap: TTypesMap = {
+export const typesMap: TypesMap = {
     skip: () => null,
     boolean: BooleanEditor,
+    borderRadius: BorderRadiusEditor,
     color: ColorEditor,
     number: NumberEditor,
     easing: FieldEditor,

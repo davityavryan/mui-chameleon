@@ -1,18 +1,19 @@
 import React from 'react';
 
-import clsx from 'clsx';
-
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import ListItemText from '@material-ui/core/ListItemText';
-import Select from '@material-ui/core/Select';
-import Checkbox from '@material-ui/core/Checkbox';
-import Chip from '@material-ui/core/Chip';
-import { useTheme, Theme } from '@material-ui/core/styles';
-
-import useStyles from './MultipleSelect.style';
+import {
+    Box,
+    Input,
+    InputLabel,
+    MenuItem,
+    FormControl,
+    ListItemText,
+    Select,
+    Checkbox,
+    Chip,
+    useTheme,
+    Theme,
+    SelectChangeEvent,
+} from '@mui/material';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -45,37 +46,36 @@ function getStyles(name: string, personName: string[], { typography }: Theme) {
 }
 
 function MultipleSelect() {
-    const classes = useStyles();
     const theme = useTheme();
     const [personName, setPersonName] = React.useState<string[]>([]);
 
-    const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    const handleChange = (event: SelectChangeEvent<string[]>) => {
         setPersonName(event.target.value as string[]);
     };
 
-    const handleChangeMultiple = (event: React.ChangeEvent<{ value: unknown }>) => {
-        const { options } = event.target as HTMLSelectElement;
-        const value: string[] = [];
-        for (let i = 0, l = options.length; i < l; i += 1) {
-            if (options[i].selected) {
-                value.push(options[i].value);
-            }
-        }
-        setPersonName(value);
+    const handleChangeMultiple = (event: SelectChangeEvent<typeof personName>) => {
+        const {
+            target: { value },
+        } = event;
+
+        setPersonName(
+            // On autofill we get a stringified value.
+            typeof value === 'string' ? value.split(',') : value
+        );
     };
 
     return (
         <div>
-            <FormControl className={classes.formControl}>
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
                 <InputLabel id="demo-mutiple-name-label">Name</InputLabel>
                 <Select
                     labelId="demo-mutiple-name-label"
                     id="demo-mutiple-name"
-                    multiple
                     value={personName}
                     onChange={handleChange}
                     input={<Input />}
                     MenuProps={MenuProps}
+                    multiple
                 >
                     {names.map((name) => (
                         <MenuItem key={name} value={name} style={getStyles(name, personName, theme)}>
@@ -84,7 +84,7 @@ function MultipleSelect() {
                     ))}
                 </Select>
             </FormControl>
-            <FormControl className={classes.formControl}>
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
                 <InputLabel id="demo-mutiple-checkbox-label">Tag</InputLabel>
                 <Select
                     labelId="demo-mutiple-checkbox-label"
@@ -104,7 +104,7 @@ function MultipleSelect() {
                     ))}
                 </Select>
             </FormControl>
-            <FormControl className={classes.formControl}>
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
                 <InputLabel id="demo-mutiple-chip-label">Chip</InputLabel>
                 <Select
                     labelId="demo-mutiple-chip-label"
@@ -114,11 +114,11 @@ function MultipleSelect() {
                     onChange={handleChange}
                     input={<Input id="select-multiple-chip" />}
                     renderValue={(selected) => (
-                        <div className={classes.chips}>
+                        <Box display="flex" flexWrap="wrap">
                             {(selected as string[]).map((value) => (
-                                <Chip key={value} label={value} className={classes.chip} />
+                                <Chip sx={{ display: 'flex', flexWrap: 'wrap' }} key={value} label={value} />
                             ))}
-                        </div>
+                        </Box>
                     )}
                     MenuProps={MenuProps}
                 >
@@ -129,7 +129,7 @@ function MultipleSelect() {
                     ))}
                 </Select>
             </FormControl>
-            <FormControl className={clsx(classes.formControl, classes.noLabel)}>
+            <FormControl sx={{ m: 1, mt: 3, minWidth: 120 }}>
                 <Select
                     multiple
                     displayEmpty
@@ -156,18 +156,18 @@ function MultipleSelect() {
                     ))}
                 </Select>
             </FormControl>
-            <FormControl className={classes.formControl}>
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
                 <InputLabel shrink htmlFor="select-multiple-native">
                     Native
                 </InputLabel>
                 <Select
-                    multiple
-                    native
                     value={personName}
                     onChange={handleChangeMultiple}
                     inputProps={{
                         id: 'select-multiple-native',
                     }}
+                    multiple
+                    native
                 >
                     {names.map((name) => (
                         <option key={name} value={name}>

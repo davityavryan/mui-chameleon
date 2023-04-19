@@ -1,10 +1,11 @@
-import React, { Fragment, memo } from 'react';
+import React, { Fragment } from 'react';
 
-import { IconButton, ListItemText, ListItemSecondaryAction } from '@material-ui/core';
+import { IconButton, ListItemText, ListItemSecondaryAction } from '@mui/material';
 
-import { themeKeyLabel } from '../../utils';
+// Do not import from Utils in order not to create cycle
+import { themeKeyLabel } from '../../utils/themeKeyLabel';
 
-interface IProps {
+interface Props {
     options?: string[]; // FIXME: not optional
     icons?: React.ElementType[]; // FIXME: not optional
     value: string;
@@ -12,7 +13,7 @@ interface IProps {
     onChange: (value: string) => void;
 }
 
-function BooleanEditor({ options, icons, value, themeKey, onChange }: IProps) {
+function BooleanEditor({ options, icons, value, themeKey, onChange }: Props) {
     const handleClick = () => {
         onChange(value === options[0] ? options[1] : options[0]);
     };
@@ -32,4 +33,4 @@ function BooleanEditor({ options, icons, value, themeKey, onChange }: IProps) {
     );
 }
 
-export default memo(BooleanEditor);
+export default BooleanEditor;

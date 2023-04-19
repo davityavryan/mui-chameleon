@@ -1,8 +1,15 @@
 const target = process.env.TARGET || 'cjs';
 
 const presets = ['@babel/preset-typescript', '@babel/preset-react'];
+const importPaths = {
+    base: '@mui/base',
+    material: '@mui/material',
+    system: '@mui/system',
+    utils: '@mui/utils',
+    icons: '@mui/icons-material',
+};
 
-// We release a ES version of Material-UI Chameleon.
+// We release a ES version of MUI Chameleon.
 // It's something that matches the latest official supported features of JavaScript.
 // Nothing more (stage-1, etc), nothing less (require, etc).
 if (target !== 'es') {
@@ -15,32 +22,20 @@ const plugins = [
     '@babel/plugin-transform-object-assign', // for IE 11 support
     '@babel/plugin-transform-react-constant-elements',
 
-    // See https://material-ui.com/guides/minimizing-bundle-size/
-    [
+    // See https://mui.com/material-ui/guides/minimizing-bundle-size/
+    ...Object.entries(importPaths).map(([name, path]) => [
         'babel-plugin-import',
         {
-            libraryName: '@material-ui/core',
+            libraryName: path,
             libraryDirectory: target === 'cjs' ? '' : 'esm',
             camel2DashComponentName: false,
         },
-        'core',
-    ],
-    [
-        'babel-plugin-import',
-        {
-            libraryName: '@material-ui/icons',
-            libraryDirectory: target === 'cjs' ? '' : 'esm',
-            camel2DashComponentName: false,
-        },
-        'icons',
-    ],
+        name,
+    ]),
 ];
 
 if (process.env.NODE_ENV !== 'test') {
     plugins.push(['babel-plugin-react-remove-properties', { properties: ['data-testid'] }]);
 }
 
-module.exports = {
-    presets,
-    plugins,
-};
+export default { presets, plugins };

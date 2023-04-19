@@ -1,28 +1,21 @@
 import React, { useCallback } from 'react';
 
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import { BottomNavigation, BottomNavigationAction } from '@mui/material';
 
-import RestoreIcon from '@material-ui/icons/Restore';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
-
-import useStyles from './BasicBottomNavigation.style';
+import { Restore, Favorite, LocationOn } from '@mui/icons-material';
 
 function BasicBottomNavigation() {
-    const classes = useStyles();
-
     const [value, setValue] = React.useState(0);
 
-    const handleChange = useCallback((event, newValue) => {
+    const handleChange = useCallback((event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
     }, []);
 
     return (
-        <BottomNavigation value={value} onChange={handleChange} showLabels className={classes.root}>
-            <BottomNavigationAction label="Recent" icon={<RestoreIcon />} />
-            <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-            <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
+        <BottomNavigation sx={{ width: '100%', maxWidth: 500 }} value={value} onChange={handleChange} showLabels>
+            <BottomNavigationAction label="Recent" icon={<Restore />} />
+            <BottomNavigationAction label="Favorites" icon={<Favorite />} />
+            <BottomNavigationAction label="Nearby" icon={<LocationOn />} />
         </BottomNavigation>
     );
 }

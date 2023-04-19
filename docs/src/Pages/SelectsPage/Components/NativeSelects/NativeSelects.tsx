@@ -1,21 +1,14 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 
-import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import NativeSelect from '@material-ui/core/NativeSelect';
-
-import useStyles from './NativeSelects.style';
+import { InputLabel, FormHelperText, FormControl, Select, SelectChangeEvent, NativeSelect } from '@mui/material';
 
 function NativeSelects() {
-    const classes = useStyles();
-    const [state, setState] = React.useState<{ age: string | number; name: string }>({
+    const [state, setState] = React.useState<{ age: string; name: string }>({
         age: '',
         name: 'hai',
     });
 
-    const handleChange = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
+    const handleChange = (event: SelectChangeEvent | ChangeEvent<HTMLSelectElement>) => {
         const name = event.target.name as keyof typeof state;
         setState({
             ...state,
@@ -25,7 +18,7 @@ function NativeSelects() {
 
     return (
         <div>
-            <FormControl className={classes.formControl}>
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
                 <InputLabel htmlFor="age-native-simple">Age</InputLabel>
                 <Select
                     native
@@ -42,7 +35,7 @@ function NativeSelects() {
                     <option value={30}>Thirty</option>
                 </Select>
             </FormControl>
-            <FormControl className={classes.formControl}>
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
                 <InputLabel htmlFor="age-native-helper">Age</InputLabel>
                 <NativeSelect
                     value={state.age}
@@ -59,13 +52,13 @@ function NativeSelects() {
                 </NativeSelect>
                 <FormHelperText>Some important helper text</FormHelperText>
             </FormControl>
-            <FormControl className={classes.formControl}>
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
                 <NativeSelect
                     value={state.age}
                     onChange={handleChange}
                     name="age"
-                    className={classes.selectEmpty}
                     inputProps={{ 'aria-label': 'age' }}
+                    sx={{ mt: 2 }}
                 >
                     <option value="">None</option>
                     <option value={10}>Ten</option>
@@ -74,7 +67,7 @@ function NativeSelects() {
                 </NativeSelect>
                 <FormHelperText>Without label</FormHelperText>
             </FormControl>
-            <FormControl className={classes.formControl}>
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
                 <InputLabel shrink htmlFor="age-native-label-placeholder">
                     Age
                 </InputLabel>
@@ -93,7 +86,7 @@ function NativeSelects() {
                 </NativeSelect>
                 <FormHelperText>Label + placeholder</FormHelperText>
             </FormControl>
-            <FormControl className={classes.formControl} disabled>
+            <FormControl sx={{ m: 1, minWidth: 120 }} disabled>
                 <InputLabel htmlFor="name-native-disabled">Name</InputLabel>
                 <NativeSelect
                     value={state.name}
@@ -114,7 +107,7 @@ function NativeSelects() {
                 </NativeSelect>
                 <FormHelperText>Disabled</FormHelperText>
             </FormControl>
-            <FormControl className={classes.formControl} error>
+            <FormControl sx={{ m: 1, minWidth: 120 }} error>
                 <InputLabel htmlFor="name-native-error">Name</InputLabel>
                 <NativeSelect
                     value={state.name}
@@ -134,7 +127,7 @@ function NativeSelects() {
                 </NativeSelect>
                 <FormHelperText>Error</FormHelperText>
             </FormControl>
-            <FormControl className={classes.formControl}>
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
                 <InputLabel htmlFor="uncontrolled-native">Name</InputLabel>
                 <NativeSelect
                     defaultValue={30}
@@ -149,13 +142,13 @@ function NativeSelects() {
                 </NativeSelect>
                 <FormHelperText>Uncontrolled</FormHelperText>
             </FormControl>
-            <FormControl className={classes.formControl}>
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
                 <NativeSelect
-                    className={classes.selectEmpty}
                     value={state.age}
                     name="age"
                     onChange={handleChange}
                     inputProps={{ 'aria-label': 'age' }}
+                    sx={{ mt: 2 }}
                 >
                     <option value="" disabled>
                         Placeholder
@@ -166,7 +159,7 @@ function NativeSelects() {
                 </NativeSelect>
                 <FormHelperText>Placeholder</FormHelperText>
             </FormControl>
-            <FormControl required className={classes.formControl}>
+            <FormControl required sx={{ m: 1, minWidth: 120 }}>
                 <InputLabel htmlFor="age-native-required">Age</InputLabel>
                 <Select
                     native
@@ -184,7 +177,7 @@ function NativeSelects() {
                 </Select>
                 <FormHelperText>Required</FormHelperText>
             </FormControl>
-            <FormControl variant="outlined" className={classes.formControl}>
+            <FormControl variant="outlined" sx={{ m: 1, minWidth: 120 }}>
                 <InputLabel htmlFor="outlined-age-native-simple">Age</InputLabel>
                 <Select
                     native
@@ -202,7 +195,7 @@ function NativeSelects() {
                     <option value={30}>Thirty</option>
                 </Select>
             </FormControl>
-            <FormControl variant="filled" className={classes.formControl}>
+            <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
                 <InputLabel htmlFor="filled-age-native-simple">Age</InputLabel>
                 <Select
                     native

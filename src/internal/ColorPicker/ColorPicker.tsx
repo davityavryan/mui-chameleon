@@ -2,20 +2,19 @@ import React, { Fragment, useCallback, useEffect, useState } from 'react';
 
 import { ColorChangeHandler, ChromePicker, ColorResult } from 'react-color';
 
-import { IconButton, Popover } from '@material-ui/core';
+import { IconButton, Popover, useTheme } from '@mui/material';
 
-import useStyles from './ColorPicker.style';
+import { StyledColorPicker } from './ColorPicker.style';
 
-interface IProps {
+interface Props {
     color: string;
     onChange: (color: string) => void;
 }
 
-function ColorPicker({ color, onChange }: IProps) {
+function ColorPicker({ color, onChange }: Props) {
+    const theme = useTheme();
     const [localColorValue, setLocalColorValue] = useState(color);
     const [anchorEl, setAnchorEl] = useState(null);
-
-    const classes = useStyles({ color: localColorValue });
 
     const open = Boolean(anchorEl);
 
@@ -61,11 +60,13 @@ function ColorPicker({ color, onChange }: IProps) {
     return (
         <Fragment>
             <IconButton onClick={handleToggleShowHide} edge="end">
-                <div className={classes.colorPicker} />
+                <StyledColorPicker color={color} />
             </IconButton>
 
             <Popover
-                className={classes.popover}
+                sx={{
+                    zIndex: `${theme.zIndex.tooltip + 11} !important`, // more than the highest zIndex
+                }}
                 open={open}
                 anchorEl={anchorEl}
                 onClose={handleClose}

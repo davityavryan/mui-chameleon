@@ -1,16 +1,8 @@
 import React from 'react';
 
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import Checkbox from '@material-ui/core/Checkbox';
-
-import useStyles from './CheckboxesGroup.style';
+import { Box, FormLabel, FormControl, FormGroup, FormControlLabel, FormHelperText, Checkbox } from '@mui/material';
 
 function CheckboxesGroup() {
-    const classes = useStyles();
     const [state, setState] = React.useState({
         gilad: true,
         jason: false,
@@ -25,8 +17,8 @@ function CheckboxesGroup() {
     const error = [gilad, jason, antoine].filter((v) => v).length !== 2;
 
     return (
-        <div className={classes.root}>
-            <FormControl component="fieldset" className={classes.formControl}>
+        <Box display="flex">
+            <FormControl sx={{ m: 3 }} component="fieldset">
                 <FormLabel component="legend">Assign responsibility</FormLabel>
                 <FormGroup>
                     <FormControlLabel
@@ -44,7 +36,7 @@ function CheckboxesGroup() {
                 </FormGroup>
                 <FormHelperText>Be careful</FormHelperText>
             </FormControl>
-            <FormControl required error={error} component="fieldset" className={classes.formControl}>
+            <FormControl sx={{ m: 3 }} required error={error} component="fieldset">
                 <FormLabel component="legend">Pick two</FormLabel>
                 <FormGroup>
                     <FormControlLabel
@@ -62,7 +54,7 @@ function CheckboxesGroup() {
                 </FormGroup>
                 <FormHelperText>You can display an error</FormHelperText>
             </FormControl>
-        </div>
+        </Box>
     );
 }
 

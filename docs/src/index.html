@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+    <head>
+        <meta charset="UTF-8" />
+        <title>MUI Chameleon</title>
+
+        <meta name="description" content="MUI theme editor" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png" />
+        <link rel="manifest" href="manifest.json" />
+        <link rel="mask-icon" href="img/favicon/safari-pinned-tab.svg" color="#5bbad5" />
+        <link rel="shortcut icon" href="img/favicon/favicon.ico" />
+        <meta name="msapplication-TileColor" content="#ffffff" />
+        <meta name="msapplication-config" content="img/favicon/browserconfig.xml" />
+        <meta name="theme-color" content="#ffffff" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+        <script type="module" src="index.tsx"></script>
+    </head>
+
+    <body>
+        <noscript>
+            <p>For full functionality of this site it is necessary to enable JavaScript.</p>
+            <p>
+                Here are the
+                <a href="https://www.enable-javascript.com/"
+                    >instructions how to enable JavaScript in your web browser.</a
+                >
+            </p>
+        </noscript>
+        <div id="root">
+            <style>
+                body {
+                    background-color: #fafafa;
+                }
+
+                #root {
+                    display: flex;
+                    min-height: 100vh;
+                }
+
+                .j6v5fg1 {
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+
+                    width: 40px;
+                    height: 40px;
+                    margin: -20px 0 0 -20px;
+
+                    opacity: 0;
+                }
+
+                .j10lubw8 {
+                    animation: mui-progress-circular-rotate 1.4s linear infinite;
+                    animation-name: jfkdi1n;
+                    animation-delay: 300ms;
+                }
+
+                .jvtfs4r {
+                    color: #1976d2;
+                }
+
+                .jovpot2 {
+                    stroke: currentColor;
+                }
+
+                .jgh6iqb {
+                    animation: mui-progress-circular-dash 1.4s ease-in-out infinite;
+                    animation-name: jt5d5h8;
+                    animation-delay: 300ms;
+                    stroke-dasharray: 80px, 200px;
+                    stroke-dashoffset: 0;
+                }
+
+                @-webkit-keyframes jfkdi1n {
+                    0% {
+                        opacity: 1;
+                    }
+
+                    100% {
+                        opacity: 1;
+                        transform: rotate(360deg);
+                    }
+                }
+
+                @-webkit-keyframes jt5d5h8 {
+                    0% {
+                        stroke-dasharray: 1px, 200px;
+                        stroke-dashoffset: 0;
+                    }
+
+                    50% {
+                        stroke-dasharray: 100px, 200px;
+                        stroke-dashoffset: -15px;
+                    }
+
+                    100% {
+                        stroke-dasharray: 100px, 200px;
+                        stroke-dashoffset: -125px;
+                    }
+                }
+            </style>
+            <div class="j6v5fg1 jvtfs4r j10lubw8 jwtxf5o" role="progressbar">
+                <svg class="jwc5s6h" viewBox="22 22 44 44">
+                    <circle class="jovpot2 jgh6iqb" cx="44" cy="44" r="20.2" fill="none" stroke-width="3.6"></circle>
+                </svg>
+            </div>
+        </div>
+    </body>
+</html>

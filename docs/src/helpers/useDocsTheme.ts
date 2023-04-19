@@ -1,12 +1,13 @@
 import { useMemo } from 'react';
 
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createTheme, useMediaQuery, Shadows, PaletteMode } from '@mui/material';
 
-import type { Shadows } from '@material-ui/core/styles/shadows';
+type Props = {
+    mode?: PaletteMode;
+};
 
-export function useDocsTheme() {
-    const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+export function useDocsTheme({ mode }: Props) {
+    const prefersDarkMode = true; //mode === 'dark'; // useMediaQuery('(prefers-color-scheme: dark)');
 
     return useMemo(() => {
         const shadows = [
@@ -16,9 +17,9 @@ export function useDocsTheme() {
                 .map((_, i) => `0 0 ${Math.round(i * 0.75 + 10)}px rgb(0,0,0,${prefersDarkMode ? 0.24 : 0.12})`),
         ] as Shadows;
 
-        return createMuiTheme({
+        return createTheme({
             palette: {
-                type: prefersDarkMode ? 'dark' : 'light',
+                mode: prefersDarkMode ? 'dark' : 'light',
                 background: {
                     default: prefersDarkMode ? '#333' : '#eee',
                 },

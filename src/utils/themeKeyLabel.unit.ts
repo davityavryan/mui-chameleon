@@ -1,3 +1,5 @@
+import { expect, test } from 'test-utils';
+
 import { themeKeyLabel } from './themeKeyLabel';
 
 test('themeKeyLabel returns correct label', () => {

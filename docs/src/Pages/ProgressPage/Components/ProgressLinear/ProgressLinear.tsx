@@ -1,10 +1,6 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
-import Box from '@material-ui/core/Box';
-import LinearProgress, { LinearProgressProps } from '@material-ui/core/LinearProgress';
-import Typography from '@material-ui/core/Typography';
-
-import useStyles from './ProgressLinear.style';
+import { Box, LinearProgress, LinearProgressProps, Typography, Stack } from '@mui/material';
 
 function LinearProgressWithLabel(props: LinearProgressProps & { value: number }) {
     return (
@@ -22,8 +18,6 @@ function LinearProgressWithLabel(props: LinearProgressProps & { value: number })
 }
 
 function ProgressLinear() {
-    const classes = useStyles();
-
     const [progress, setProgress] = React.useState(0);
     const [buffer, setBuffer] = React.useState(10);
 
@@ -54,14 +48,12 @@ function ProgressLinear() {
     }, []);
 
     return (
-        <Fragment>
-            <div className={classes.root}>
-                <LinearProgress />
-                <LinearProgress color="secondary" />
-                <LinearProgress variant="buffer" value={progress} valueBuffer={buffer} />
-                <LinearProgressWithLabel value={progress} />
-            </div>
-        </Fragment>
+        <Stack sx={{ width: '100%' }} spacing={2} direction="column">
+            <LinearProgress />
+            <LinearProgress color="secondary" />
+            <LinearProgress variant="buffer" value={progress} valueBuffer={buffer} />
+            <LinearProgressWithLabel value={progress} />
+        </Stack>
     );
 }
 

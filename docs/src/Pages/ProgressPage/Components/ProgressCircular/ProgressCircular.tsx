@@ -1,10 +1,6 @@
 import React, { Fragment } from 'react';
 
-import Box from '@material-ui/core/Box';
-import CircularProgress, { CircularProgressProps } from '@material-ui/core/CircularProgress';
-import Typography from '@material-ui/core/Typography';
-
-import useStyles from './ProgressCircular.style';
+import { Box, CircularProgress, CircularProgressProps, Stack, Typography } from '@mui/material';
 
 function CircularProgressWithLabel(props: CircularProgressProps & { value: number }) {
     return (
@@ -29,8 +25,6 @@ function CircularProgressWithLabel(props: CircularProgressProps & { value: numbe
 }
 
 function ProgressCircular() {
-    const classes = useStyles();
-
     const [progress, setProgress] = React.useState(0);
 
     React.useEffect(() => {
@@ -45,20 +39,20 @@ function ProgressCircular() {
 
     return (
         <Fragment>
-            <div className={classes.root}>
+            <Stack sx={{ my: 2 }} spacing={2} direction="row">
                 <CircularProgress />
                 <CircularProgress color="secondary" />
                 <CircularProgress disableShrink />
-            </div>
+            </Stack>
 
-            <div className={classes.root}>
+            <Stack sx={{ my: 2 }} spacing={2} direction="row">
                 <CircularProgress variant="determinate" value={25} />
                 <CircularProgress variant="determinate" value={50} />
                 <CircularProgress variant="determinate" value={75} />
                 <CircularProgress variant="determinate" value={100} />
                 <CircularProgress variant="determinate" value={progress} />
                 <CircularProgressWithLabel value={progress} />
-            </div>
+            </Stack>
         </Fragment>
     );
 }

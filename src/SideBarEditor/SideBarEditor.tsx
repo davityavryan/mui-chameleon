@@ -1,64 +1,54 @@
-import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
-import delve from 'dlv';
-import { dset } from 'dset';
-import { Property } from 'csstype';
-
-import { Box, Collapse } from '@material-ui/core';
-
-import { ThemeProvider as MuiThemeProvider, createMuiTheme, ThemeOptions } from '@material-ui/core/styles';
+import { Box, Collapse, ThemeProvider, createTheme, ThemeOptions } from '@mui/material';
 
 import { Editor, Header } from '../internal';
 
-import { Context } from '../utils';
+import { useStore } from '../utils';
 
-import useStyles from './SideBarEditor.style';
+import { StyledSidebarEditor } from './SideBarEditor.style';
 
-interface IProps {
+interface Props {
     open?: boolean;
     onReset?: () => void;
     onExpandToggle?: (isOpen: boolean) => void;
+    onUpdate?: (newTheme: ThemeOptions) => void;
     onSave: (newTheme: ThemeOptions) => void;
 }
 
-function SideBarEditor({ open = false, onReset, onExpandToggle, onSave }: IProps) {
+function SideBarEditor({ open = false, onReset, onExpandToggle, onSave, onUpdate }: Props) {
     const [isOpen, setIsOpen] = useState(open);
 
-    const { state, dispatch } = useContext(Context);
+    const [theme, updateTheme] = useStore(
+        ({ theme }) => theme,
+        ({ updateTheme }) => updateTheme
+    );
 
-    const editableTheme = createMuiTheme(state.theme);
+    const editableTheme = createTheme(theme);
+
     const defaultTheme = useMemo(
         () =>
-            createMuiTheme({
+            createTheme({
                 palette: {
-                    type: editableTheme.palette.type,
+                    mode: editableTheme.palette.mode,
                 },
             }),
-        [editableTheme.palette.type]
+        [editableTheme.palette.mode]
     );
     const sidebarTheme = useMemo(
         () =>
-            createMuiTheme({
+            createTheme({
                 palette: {
-                    type: editableTheme.palette.type,
+                    mode: editableTheme.palette.mode,
                 },
                 typography: {
                     button: {
                         textTransform: 'none',
                     },
                 },
-                overrides: {
-                    MuiPopover: {
-                        root: {
-                            zIndex: `${editableTheme.zIndex.tooltip + 11} !important` as Property.ZIndex, // more than the highest zIndex
-                        },
-                    },
-                },
             }),
-        [editableTheme.palette.type]
+        [editableTheme.palette.mode]
     );
-
-    const classes = useStyles({ isOpen });
 
     const handleToggleOpen = useCallback(() => {
         setIsOpen(!isOpen);
@@ -68,40 +58,24 @@ function SideBarEditor({ open = false, onReset, onExpandToggle, onSave }: IProps
         }
     }, [isOpen]);
 
-    const handleChange = (themeKey: string) => (newValue: unknown) => {
-        // TODO: fix performance issue here
-        const dynamicThemeCopy = JSON.parse(JSON.stringify(state.theme));
-
-        const parentKey = themeKey.replace(/^(.*)\.[^.]*$/, '$1');
-        const parentDefaultValue = delve(defaultTheme, parentKey);
-
-        if (Array.isArray(parentDefaultValue)) {
-            // If item is an array and we are setting by specific index, rest should be set from default theme
-            dset(dynamicThemeCopy, parentKey, parentDefaultValue);
-            dset(dynamicThemeCopy, themeKey, newValue);
-        } else {
-            // Material-UI will fail if palette's color is changes without having `main`. Set from default
-            if (parentDefaultValue.main !== undefined && themeKey !== 'main') {
-                dset(dynamicThemeCopy, `${parentKey}.main`, parentDefaultValue.main);
-            }
-
-            dset(dynamicThemeCopy, themeKey, newValue);
-        }
-
-        dispatch({
-            type: 'update',
-            payload: dynamicThemeCopy,
-        });
-    };
+    function handleChange<V>(themeKey: string) {
+        return (newValue: V) => {
+            updateTheme(defaultTheme, themeKey, newValue);
+        };
+    }
 
     // TODO: check if needed
     useEffect(() => {
         setIsOpen(open);
     }, [open]);
 
+    useEffect(() => {
+        onUpdate(theme);
+    }, [theme]);
+
     return (
-        <MuiThemeProvider theme={sidebarTheme}>
-            <div className={classes.root} data-testid="side-bar-editor">
+        <ThemeProvider theme={sidebarTheme}>
+            <StyledSidebarEditor isOpen={isOpen} data-testid="side-bar-editor">
                 <Header
                     isOpen={isOpen}
                     onReset={onReset}
@@ -115,8 +89,8 @@ function SideBarEditor({ open = false, onReset, onExpandToggle, onSave }: IProps
                         <Editor theme={editableTheme} defaultTheme={defaultTheme} onChange={handleChange} />
                     </Box>
                 </Collapse>
-            </div>
-        </MuiThemeProvider>
+            </StyledSidebarEditor>
+        </ThemeProvider>
     );
 }
 

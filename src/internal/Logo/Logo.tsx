@@ -1,15 +1,15 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 
-import { Theme } from '@material-ui/core/styles';
+import { Theme } from '@mui/material';
 
-interface IProps {
+interface Props {
     palette: Theme['palette'];
 }
 
-function Logo({ palette }: IProps) {
+function Logo({ palette }: Props) {
     const eyeRef = useRef<SVGGElement>(null);
 
-    const mouseMoveHandler = useCallback((event) => {
+    const mouseMoveHandler = useCallback((event: MouseEvent) => {
         if (eyeRef.current !== null) {
             const rect = eyeRef.current.getBoundingClientRect();
 

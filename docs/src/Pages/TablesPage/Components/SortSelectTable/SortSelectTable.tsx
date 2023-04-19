@@ -1,29 +1,28 @@
 import React from 'react';
 
-import clsx from 'clsx';
+import {
+    Box,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TablePagination,
+    TableRow,
+    TableSortLabel,
+    Toolbar,
+    Typography,
+    Paper,
+    Checkbox,
+    IconButton,
+    Tooltip,
+    FormControlLabel,
+    Switch,
+    useTheme,
+    lighten,
+} from '@mui/material';
 
-import Box from '@material-ui/core/Box';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
-
-import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
-
-import { useToolbarStyles, useStyles } from './SortSelectTable.style';
+import { Delete as DeleteIcon, FilterList as FilterListIcon } from '@mui/icons-material';
 
 interface Data {
     calories: number;
@@ -100,7 +99,6 @@ const headCells: HeadCell[] = [
 ];
 
 interface EnhancedTableProps {
-    classes: ReturnType<typeof useStyles>;
     numSelected: number;
     onRequestSort: (event: React.MouseEvent<unknown>, property: keyof Data) => void;
     onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -110,9 +108,21 @@ interface EnhancedTableProps {
 }
 
 function EnhancedTableHead(props: EnhancedTableProps) {
-    const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
+    const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
     const createSortHandler = (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
         onRequestSort(event, property);
+    };
+
+    const visuallyHiddenStyles = {
+        border: 0,
+        clip: 'rect(0 0 0 0)',
+        height: 1,
+        margin: -1,
+        overflow: 'hidden',
+        padding: 0,
+        position: 'absolute',
+        top: 20,
+        width: 1,
     };
 
     return (
@@ -130,7 +140,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
                     <TableCell
                         key={headCell.id}
                         align={headCell.numeric ? 'right' : 'left'}
-                        padding={headCell.disablePadding ? 'none' : 'default'}
+                        padding={headCell.disablePadding ? 'none' : 'normal'}
                         sortDirection={orderBy === headCell.id ? order : false}
                     >
                         <TableSortLabel
@@ -140,9 +150,9 @@ function EnhancedTableHead(props: EnhancedTableProps) {
                         >
                             {headCell.label}
                             {orderBy === headCell.id ? (
-                                <span className={classes.visuallyHidden}>
+                                <Box component="span" sx={visuallyHiddenStyles}>
                                     {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                                </span>
+                                </Box>
                             ) : null}
                         </TableSortLabel>
                     </TableCell>
@@ -157,17 +167,34 @@ interface EnhancedTableToolbarProps {
 }
 
 const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
-    const classes = useToolbarStyles();
+    const { palette } = useTheme();
     const { numSelected } = props;
 
+    let toolbarStyles = { pl: 2, pr: 1 };
+
+    if (numSelected > 0) {
+        toolbarStyles = Object.assign(
+            toolbarStyles,
+            palette.mode === 'light'
+                ? {
+                      color: palette.secondary.main,
+                      backgroundColor: lighten(palette.secondary.light, 0.85),
+                  }
+                : {
+                      color: palette.text.primary,
+                      backgroundColor: palette.secondary.dark,
+                  }
+        );
+    }
+
     return (
-        <Toolbar className={clsx(classes.root, { [classes.highlight]: numSelected > 0 })}>
+        <Toolbar sx={toolbarStyles}>
             {numSelected > 0 ? (
-                <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
+                <Typography sx={{ flex: '1 1 100%' }} color="inherit" variant="subtitle1" component="div">
                     {numSelected} selected
                 </Typography>
             ) : (
-                <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
+                <Typography sx={{ flex: '1 1 100%' }} variant="h6" id="tableTitle" component="div">
                     Nutrition
                 </Typography>
             )}
@@ -190,8 +217,6 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
 };
 
 function SortSelectTable() {
-    const classes = useStyles();
-
     const [order, setOrder] = React.useState<Order>('asc');
     const [orderBy, setOrderBy] = React.useState<keyof Data>('calories');
     const [selected, setSelected] = React.useState<string[]>([]);
@@ -231,16 +256,16 @@ function SortSelectTable() {
         setSelected(newSelected);
     };
 
-    const handleChangePage = (event: unknown, newPage: number) => {
+    const handlePageChange = (event: unknown, newPage: number) => {
         setPage(newPage);
     };
 
-    const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleRowsPerPageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
     };
 
-    const handleChangeDense = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleDenseChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setDense(event.target.checked);
     };
 
@@ -252,7 +277,7 @@ function SortSelectTable() {
         <Box width={1}>
             <Box display="flex" justifyContent="flex-end" mb={2}>
                 <FormControlLabel
-                    control={<Switch checked={dense} onChange={handleChangeDense} />}
+                    control={<Switch checked={dense} onChange={handleDenseChange} />}
                     label="Dense padding"
                 />
             </Box>
@@ -263,7 +288,6 @@ function SortSelectTable() {
                 <TableContainer>
                     <Table aria-labelledby="tableTitle" size={dense ? 'small' : 'medium'} aria-label="enhanced table">
                         <EnhancedTableHead
-                            classes={classes}
                             numSelected={selected.length}
                             order={order}
                             orderBy={orderBy}
@@ -319,8 +343,8 @@ function SortSelectTable() {
                     count={rows.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
-                    onChangePage={handleChangePage}
-                    onChangeRowsPerPage={handleChangeRowsPerPage}
+                    onPageChange={handlePageChange}
+                    onRowsPerPageChange={handleRowsPerPageChange}
                 />
             </Paper>
         </Box>

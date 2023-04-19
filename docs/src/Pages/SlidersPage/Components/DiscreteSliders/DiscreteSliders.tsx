@@ -1,9 +1,6 @@
 import React from 'react';
 
-import Typography from '@material-ui/core/Typography';
-import Slider from '@material-ui/core/Slider';
-
-import useStyles from './DiscreteSliders.style';
+import { Box, Typography, Slider } from '@mui/material';
 
 function valuetext(value: number) {
     return `${value}°C`;
@@ -29,10 +26,8 @@ const marks = [
 ];
 
 function DiscreteSliders() {
-    const classes = useStyles();
-
     return (
-        <div className={classes.root}>
+        <Box sx={{ width: 300 }}>
             <Typography id="discrete-slider" gutterBottom>
                 Temperature
             </Typography>
@@ -76,7 +71,7 @@ function DiscreteSliders() {
                 marks={marks}
                 valueLabelDisplay="on"
             />
-        </div>
+        </Box>
     );
 }
 

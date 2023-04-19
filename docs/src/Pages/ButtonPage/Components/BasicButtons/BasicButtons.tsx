@@ -1,15 +1,11 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
-import Button from '@material-ui/core/Button';
-
-import useStyles from './BasicButtons.style';
+import { Button, Stack } from '@mui/material';
 
 function BasicButtons() {
-    const classes = useStyles();
-
     return (
-        <Fragment>
-            <div className={classes.root}>
+        <Stack spacing={2} direction="column">
+            <Stack spacing={2} direction="row">
                 <Button variant="text">Default</Button>
                 <Button variant="text" color="primary">
                     Primary
@@ -20,9 +16,9 @@ function BasicButtons() {
                 <Button variant="text" color="secondary" disabled>
                     Disabled
                 </Button>
-            </div>
+            </Stack>
 
-            <div className={classes.root}>
+            <Stack spacing={2} direction="row">
                 <Button variant="outlined">Default</Button>
                 <Button variant="outlined" color="primary">
                     Primary
@@ -33,9 +29,9 @@ function BasicButtons() {
                 <Button variant="outlined" color="secondary" disabled>
                     Disabled
                 </Button>
-            </div>
+            </Stack>
 
-            <div className={classes.root}>
+            <Stack spacing={2} direction="row">
                 <Button variant="contained">Default</Button>
                 <Button variant="contained" color="primary">
                     Primary
@@ -46,8 +42,8 @@ function BasicButtons() {
                 <Button variant="contained" color="secondary" disabled>
                     Disabled
                 </Button>
-            </div>
-        </Fragment>
+            </Stack>
+        </Stack>
     );
 }
 

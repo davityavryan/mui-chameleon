@@ -1,26 +1,33 @@
-import React, { Fragment, memo } from 'react';
+import React, { Fragment } from 'react';
 
 import delve from 'dlv';
 
-import { Theme } from '@material-ui/core';
+import { Theme, Accordion } from '@mui/material';
 
-import { Accordion, Section, Parser } from '..';
+import { Section, Parser } from '..';
 
-import { themeMap, TThemeMapItem } from '../../utils';
+import { themeMap, ThemeMapItem } from '../../utils';
 
-interface IProps {
+interface Props {
     theme: Theme;
     defaultTheme: Theme;
-    onChange: (themeKey: string) => (newValue: unknown) => void;
+    onChange: <V>(themeKey: string) => (newValue: V) => void;
 }
 
-function Editor({ theme, defaultTheme, onChange }: IProps) {
+function Editor({ theme, defaultTheme, onChange }: Props) {
     return (
         <Fragment>
             {Object.entries(theme).map(([key, themeItem]) => {
                 const themeKey = key as keyof Theme;
+
+                // Shutting Error due to MUI DocsTheme and ThemeOptions difference
+                if (themeKey === 'unstable_sx') {
+                    return null;
+                }
+
                 const mapItem = themeMap[themeKey];
-                const mapItemType = (mapItem as TThemeMapItem).type;
+
+                const mapItemType = (mapItem as ThemeMapItem)?.type;
 
                 if (typeof themeItem === 'function' || mapItemType === 'skip') {
                     return null;
@@ -55,4 +62,4 @@ function Editor({ theme, defaultTheme, onChange }: IProps) {
     );
 }
 
-export default memo(Editor);
+export default Editor;

@@ -35,7 +35,7 @@ Minor fixes in README file and project scripts
 
 ### Breaking change
 
-UMD packages use to have wrong name. changed `material-ui` to `material-ui-chameleon`.
+UMD packages used to have wrong name. changed `material-ui` to `material-ui-chameleon`.
 
 ## v0.1.0-alpha.1
 

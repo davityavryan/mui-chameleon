@@ -1,29 +1,30 @@
-import React, { CSSProperties, memo, useCallback, useEffect, useState } from 'react';
+import React, { CSSProperties, useCallback, useEffect, useState } from 'react';
 
-import { Property } from 'csstype';
+import {
+    Autocomplete,
+    TextField,
+    TextFieldProps,
+    capitalize,
+    createFilterOptions,
+    UseAutocompleteProps,
+} from '@mui/material';
 
-import { Box, TextField, TextFieldProps } from '@material-ui/core';
-import { capitalize } from '@material-ui/core/utils';
+import { themeKeyLabel } from '../../utils/themeKeyLabel';
 
-import { Autocomplete, createFilterOptions } from '@material-ui/lab';
+type FontWeight = CSSProperties['fontWeight'];
 
-import { themeKeyLabel } from '../../utils';
-
-import useStyles from './FontWeightEditor.style';
-
-type TFontWeight = CSSProperties['fontWeight'];
-
-type TProps = TextFieldProps & {
-    value: TFontWeight;
+type Props = TextFieldProps & {
+    value: FontWeight;
     themeKey: string;
+    onChange: (newValue: FontWeight) => void;
 };
 
-type TFontWeightValue = {
+type FontWeightValue = {
     inputValue?: string;
-    value?: TFontWeight;
+    value?: FontWeight;
 };
 
-const fontWeightValues: TFontWeightValue[] = [
+const fontWeightValues: readonly FontWeightValue[] = [
     { value: 'lighter' },
     { value: 100 },
     { value: 200 },
@@ -42,22 +43,24 @@ const fontWeightValues: TFontWeightValue[] = [
     { value: 'unset' },
 ];
 
-let timer: number;
+let timer: NodeJS.Timeout;
 
-const filter = createFilterOptions<TFontWeightValue>();
+const filter = createFilterOptions<FontWeightValue>();
 
-function FontWeightEditor({ value, onChange, themeKey }: TProps) {
-    const [localValue, setLocalValue] = useState<TFontWeight | null>(value);
+type ValueType = NonNullable<string | FontWeightValue>;
+
+function FontWeightEditor({ value, onChange, themeKey }: Props) {
+    const [localValue, setLocalValue] = useState<FontWeight | null>(value);
 
     const [errorMessage, setErrorMessage] = useState<string>('');
-    const classes = useStyles();
 
-    const isValidValue = useCallback((value: string): boolean => {
-        const valueIsNumber = Number.parseInt(value);
+    const isValidValue = useCallback((value: FontWeight): boolean => {
+        const valueAsNumber = Number.parseInt(value as string);
+        const valueIsNumber = valueAsNumber.toString() === value;
 
         if (valueIsNumber) {
-            if (valueIsNumber < 0 || valueIsNumber > 1000) {
-                setErrorMessage('Please enter numbers in this range [1,1000]');
+            if (valueAsNumber < 0 || valueAsNumber > 1000) {
+                setErrorMessage('Please enter number in range [1,1000]');
                 return false;
             }
         } else {
@@ -70,7 +73,7 @@ function FontWeightEditor({ value, onChange, themeKey }: TProps) {
         return true;
     }, []);
 
-    const handleChange = useCallback(
+    const handleChange = useCallback<UseAutocompleteProps<ValueType, false, false, true>['onChange']>(
         (event, newValue) => {
             setErrorMessage('');
 
@@ -84,12 +87,8 @@ function FontWeightEditor({ value, onChange, themeKey }: TProps) {
                     handleChangeValue(newValue.inputValue);
                 }
             } else {
-                if (!newValue?.value) {
-                    return;
-                }
-
-                if (isValidValue(newValue.value)) {
-                    handleChangeValue(newValue.value);
+                if (isValidValue(newValue?.value)) {
+                    handleChangeValue(newValue?.value);
                 }
             }
         },
@@ -97,7 +96,7 @@ function FontWeightEditor({ value, onChange, themeKey }: TProps) {
     );
 
     const handleChangeValue = useCallback(
-        (fontWeight) => {
+        (fontWeight: FontWeight) => {
             clearTimeout(timer);
             timer = null;
 
@@ -126,31 +125,31 @@ function FontWeightEditor({ value, onChange, themeKey }: TProps) {
 
     return (
         <Autocomplete
-            classes={{ popper: classes.popper }}
             value={{ value: localValue }}
             options={fontWeightValues}
             onChange={handleChange}
             filterOptions={(options, params) => {
                 const filtered = filter(options, params);
 
+                const { inputValue } = params;
+
                 // Suggest the creation of a new value
-                if (params.inputValue !== '') {
+                const isExisting = options.some((option) => inputValue === option.value.toString());
+                if (inputValue !== '' && isValidValue(inputValue) && !isExisting) {
                     filtered.push({
-                        inputValue: `Add "${params.inputValue}"`,
-                        value: params.inputValue as TFontWeight,
+                        inputValue,
+                        value: `Set "${inputValue}"`,
                     });
                 }
 
                 return filtered;
             }}
             getOptionLabel={(option) => option.inputValue ?? String(option.value)}
-            renderOption={(option) => {
-                const fontWeight = option.inputValue ?? String(option.value);
-
-                return (
-                    <Box style={{ fontWeight } as { fontWeight: Property.FontWeight }}>{capitalize(fontWeight)}</Box>
-                );
-            }}
+            renderOption={(props, option) => (
+                <li style={{ fontWeight: option.value }} {...props}>
+                    {capitalize(String(option.value))}
+                </li>
+            )}
             renderInput={(params) => (
                 <TextField
                     {...params}
@@ -160,13 +159,14 @@ function FontWeightEditor({ value, onChange, themeKey }: TProps) {
                     error={Boolean(errorMessage)}
                 />
             )}
-            selectOnFocus
-            clearOnBlur
+            isOptionEqualToValue={(option, currentValue) => option.value === currentValue.value}
             handleHomeEndKeys
-            freeSolo
+            selectOnFocus
+            disablePortal
+            clearOnBlur
             fullWidth
         />
     );
 }
 
-export default memo(FontWeightEditor);
+export default FontWeightEditor;

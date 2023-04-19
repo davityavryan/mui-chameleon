@@ -1,10 +1,6 @@
 {
-    "extends": [
-        "plugin:@typescript-eslint/recommended",
-        "plugin:prettier/recommended",
-        "plugin:jest-playwright/recommended"
-    ],
-    "plugins": ["react-hooks", "prettier", "jest"],
+    "extends": ["plugin:@typescript-eslint/recommended", "plugin:prettier/recommended"],
+    "plugins": ["react-hooks", "prettier"],
     "rules": {
         "@typescript-eslint/explicit-module-boundary-types": "off"
     }

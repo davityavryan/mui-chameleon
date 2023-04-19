@@ -1,25 +1,7 @@
 import React from 'react';
 
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox';
-import { withStyles } from '@material-ui/core/styles';
-import { green } from '@material-ui/core/colors';
-
-import CheckBoxIcon from '@material-ui/icons/CheckBox';
-import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
-import Favorite from '@material-ui/icons/Favorite';
-import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
-
-const GreenCheckbox = withStyles({
-    root: {
-        color: green[400],
-        '&$checked': {
-            color: green[600],
-        },
-    },
-    checked: {},
-})((props: CheckboxProps) => <Checkbox color="default" {...props} />);
+import { FormGroup, FormControlLabel, Checkbox } from '@mui/material';
+import { CheckBox as CheckBoxIcon, CheckBoxOutlineBlank, Favorite, FavoriteBorder } from '@mui/icons-material';
 
 function CheckboxLabels() {
     const [state, setState] = React.useState({
@@ -51,17 +33,13 @@ function CheckboxLabels() {
                 label="Indeterminate"
             />
             <FormControlLabel
-                control={<GreenCheckbox checked={state.checkedG} onChange={handleChange} name="checkedG" />}
-                label="Custom color"
-            />
-            <FormControlLabel
                 control={<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} name="checkedH" />}
                 label="Custom icon"
             />
             <FormControlLabel
                 control={
                     <Checkbox
-                        icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
+                        icon={<CheckBoxOutlineBlank fontSize="small" />}
                         checkedIcon={<CheckBoxIcon fontSize="small" />}
                         name="checkedI"
                     />

@@ -1,7 +1,5 @@
 import { lazy } from 'react';
 
-const SimpleBreadcrumbs = lazy(
-    () => import(/* webpackChunkName: "component/breadcrumbs/simple" */ './SimpleBreadcrumbs/SimpleBreadcrumbs')
-);
+const SimpleBreadcrumbs = lazy(() => import('./SimpleBreadcrumbs/SimpleBreadcrumbs'));
 
 export { SimpleBreadcrumbs };

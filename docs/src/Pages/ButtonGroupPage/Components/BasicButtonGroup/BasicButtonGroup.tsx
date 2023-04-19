@@ -1,15 +1,10 @@
 import React from 'react';
 
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-
-import useStyles from './BasicButtonGroup.style';
+import { Button, ButtonGroup, Stack } from '@mui/material';
 
 function BasicButtonGroup() {
-    const classes = useStyles();
-
     return (
-        <div className={classes.root}>
+        <Stack spacing={2} direction="row">
             <ButtonGroup color="primary" aria-label="outlined primary button group">
                 <Button>One</Button>
                 <Button>Two</Button>
@@ -25,7 +20,7 @@ function BasicButtonGroup() {
                 <Button>Two</Button>
                 <Button>Three</Button>
             </ButtonGroup>
-        </div>
+        </Stack>
     );
 }
 

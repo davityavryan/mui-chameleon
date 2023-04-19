@@ -1,47 +1,36 @@
 import React, { useCallback } from 'react';
 
-import Typography from '@material-ui/core/Typography';
-import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-import Link from '@material-ui/core/Link';
-import Chip from '@material-ui/core/Chip';
-import { emphasize, withStyles, Theme } from '@material-ui/core/styles';
+import { Typography, Breadcrumbs, Link, Chip, Stack, emphasize, styled } from '@mui/material';
 
-import GrainIcon from '@material-ui/icons/Grain';
-import HomeIcon from '@material-ui/icons/Home';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import WhatshotIcon from '@material-ui/icons/Whatshot';
+import { Grain, Home, ExpandMore, NavigateNext, Whatshot } from '@mui/icons-material';
 
-import useStyles from './SimpleBreadcrumbs.style';
-
-const StyledBreadcrumb = withStyles((theme: Theme) => ({
-    root: {
-        backgroundColor: theme.palette.grey[100],
+const StyledBreadcrumb = styled(Chip)(({ theme }) => {
+    const backgroundColor = theme.palette.mode === 'light' ? theme.palette.grey[100] : theme.palette.grey[800];
+    return {
+        backgroundColor,
         height: theme.spacing(3),
-        color: theme.palette.grey[800],
+        color: theme.palette.text.primary,
         fontWeight: theme.typography.fontWeightRegular,
         '&:hover, &:focus': {
-            backgroundColor: theme.palette.grey[300],
+            backgroundColor: emphasize(backgroundColor, 0.06),
         },
         '&:active': {
             boxShadow: theme.shadows[1],
-            backgroundColor: emphasize(theme.palette.grey[300], 0.12),
+            backgroundColor: emphasize(backgroundColor, 0.12),
         },
-    },
-}))(Chip) as typeof Chip; // TypeScript only: need a type cast here because https://github.com/Microsoft/TypeScript/issues/26591
+    };
+}) as typeof Chip; // TypeScript only: need a type cast here because https://github.com/Microsoft/TypeScript/issues/26591
 
 function SimpleBreadcrumbs() {
-    const classes = useStyles();
-
     const handleClick = useCallback((event: React.MouseEvent<Element, MouseEvent>) => {
         event.preventDefault();
     }, []);
 
     return (
-        <div className={classes.root}>
+        <Stack spacing={2} direction="column">
             <Breadcrumbs aria-label="breadcrumb">
                 <Link color="inherit" href="/" onClick={handleClick}>
-                    Material-UI
+                    MUI
                 </Link>
                 <Link color="inherit" href="/getting-started/installation/" onClick={handleClick}>
                     Core
@@ -50,7 +39,7 @@ function SimpleBreadcrumbs() {
             </Breadcrumbs>
             <Breadcrumbs separator="›" aria-label="breadcrumb">
                 <Link color="inherit" href="/" onClick={handleClick}>
-                    Material-UI
+                    MUI
                 </Link>
                 <Link color="inherit" href="/getting-started/installation/" onClick={handleClick}>
                     Core
@@ -59,16 +48,16 @@ function SimpleBreadcrumbs() {
             </Breadcrumbs>
             <Breadcrumbs separator="-" aria-label="breadcrumb">
                 <Link color="inherit" href="/" onClick={handleClick}>
-                    Material-UI
+                    MUI
                 </Link>
                 <Link color="inherit" href="/getting-started/installation/" onClick={handleClick}>
                     Core
                 </Link>
                 <Typography color="textPrimary">Breadcrumb</Typography>
             </Breadcrumbs>
-            <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
+            <Breadcrumbs separator={<NavigateNext fontSize="small" />} aria-label="breadcrumb">
                 <Link color="inherit" href="/" onClick={handleClick}>
-                    Material-UI
+                    MUI
                 </Link>
                 <Link color="inherit" href="/getting-started/installation/" onClick={handleClick}>
                     Core
@@ -76,21 +65,16 @@ function SimpleBreadcrumbs() {
                 <Typography color="textPrimary">Breadcrumb</Typography>
             </Breadcrumbs>
             <Breadcrumbs aria-label="breadcrumb">
-                <Link color="inherit" href="/" onClick={handleClick} className={classes.link}>
-                    <HomeIcon className={classes.icon} />
-                    Material-UI
+                <Link display="flex" color="inherit" href="/" onClick={handleClick}>
+                    <Home sx={{ mr: 0.5, width: 20, height: 20 }} />
+                    MUI
                 </Link>
-                <Link
-                    color="inherit"
-                    href="/getting-started/installation/"
-                    onClick={handleClick}
-                    className={classes.link}
-                >
-                    <WhatshotIcon className={classes.icon} />
+                <Link display="flex" color="inherit" href="/getting-started/installation/" onClick={handleClick}>
+                    <Whatshot sx={{ mr: 0.5, width: 20, height: 20 }} />
                     Core
                 </Link>
-                <Typography color="textPrimary" className={classes.link}>
-                    <GrainIcon className={classes.icon} />
+                <Typography display="flex" color="textPrimary">
+                    <Grain sx={{ mr: 0.5, width: 20, height: 20 }} />
                     Breadcrumb
                 </Typography>
             </Breadcrumbs>
@@ -114,18 +98,18 @@ function SimpleBreadcrumbs() {
                     component="a"
                     href="#"
                     label="Home"
-                    icon={<HomeIcon fontSize="small" />}
+                    icon={<Home fontSize="small" />}
                     onClick={handleClick}
                 />
                 <StyledBreadcrumb component="a" href="#" label="Catalog" onClick={handleClick} />
                 <StyledBreadcrumb
                     label="Accessories"
-                    deleteIcon={<ExpandMoreIcon />}
+                    deleteIcon={<ExpandMore />}
                     onClick={handleClick}
                     onDelete={handleClick}
                 />
             </Breadcrumbs>
-        </div>
+        </Stack>
     );
 }
 

@@ -1,37 +1,47 @@
-import React, { Suspense, useState } from 'react';
-import ReactDOM from 'react-dom';
+import React, { Suspense, lazy, useState } from 'react';
 
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import { Routes, Route, HashRouter } from 'react-router-dom';
 
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import { ThemeOptions } from '@material-ui/core/styles';
-
-import { ThemeProvider, SideBarEditor } from 'material-ui-chameleon';
+import {
+    Box,
+    CssBaseline,
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    ThemeOptions,
+} from '@mui/material';
 
 import { MainLayout } from 'Layouts';
-import { Theme, Spinner } from 'Components';
-import { ROUTES } from 'helpers';
+import { DocsTheme, Spinner } from 'Components';
+import { ROUTES, entries } from 'helpers';
 import ClickMeImage from 'static/img/click-me.svg';
 
-import useStyles from './IndexPage.style';
-
-const initialTheme = {};
+const ThemeProvider = lazy(() => import('mui-chameleon').then((module) => ({ default: module.ThemeProvider })));
+const SideBarEditor = lazy(() => import('mui-chameleon').then((module) => ({ default: module.SideBarEditor })));
 
 function IndexPage() {
-    const classes = useStyles();
-
-    const [updatableTheme, setUpdatedTheme] = useState(initialTheme);
+    const [updatableTheme, setUpdatedTheme] = useState<ThemeOptions>({});
     const [isExpanded, setIsExpanded] = useState(false);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+    const clickMeStyles = {
+        position: 'fixed',
+        top: 25,
+        right: 75,
+        zIndex: 'tooltip',
+        // filter: 'drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.4))',
+        filter: 'drop-shadow(0px 3px 3px rgba(0, 0, 0, 1))',
+    };
 
     const handleThemeSave = (newTheme: ThemeOptions) => {
         setUpdatedTheme(newTheme);
         setIsDialogOpen(true);
+    };
+
+    const handleUpdate = (newTheme: ThemeOptions) => {
+        setUpdatedTheme(newTheme);
     };
 
     const handleExpandToggle = () => {
@@ -44,23 +54,35 @@ function IndexPage() {
 
     return (
         <HashRouter>
-            <Theme>
+            <DocsTheme mode={updatableTheme?.palette?.mode}>
                 <MainLayout>
                     <CssBaseline />
 
                     <ThemeProvider theme={updatableTheme}>
-                        <Suspense fallback={<Spinner isFixed />}>
-                            <Switch>
-                                {Object.entries(ROUTES).map(([routeKey, route]) => (
-                                    <Route key={routeKey} {...route} />
-                                ))}
-                            </Switch>
-                        </Suspense>
+                        <Routes>
+                            {entries(ROUTES).map(([routeKey, { index = false, path, Component }]) => (
+                                <Route
+                                    key={routeKey}
+                                    path={path}
+                                    index={index}
+                                    element={
+                                        <Suspense fallback={<Spinner isFixed />}>
+                                            <Component />
+                                        </Suspense>
+                                    }
+                                />
+                            ))}
+                        </Routes>
 
-                        <SideBarEditor onSave={handleThemeSave} onExpandToggle={handleExpandToggle} />
+                        <SideBarEditor
+                            onSave={handleThemeSave}
+                            onExpandToggle={handleExpandToggle}
+                            onReset={handleCloseDialog}
+                            onUpdate={handleUpdate}
+                        />
                     </ThemeProvider>
 
-                    {!isExpanded && <ClickMeImage className={classes.clickMe} />}
+                    {!isExpanded && <Box component={ClickMeImage} sx={clickMeStyles} />}
 
                     <Dialog
                         open={isDialogOpen}
@@ -81,16 +103,9 @@ function IndexPage() {
                         </DialogActions>
                     </Dialog>
                 </MainLayout>
-            </Theme>
+            </DocsTheme>
         </HashRouter>
     );
 }
 
-export default () => {
-    ReactDOM.render(
-        <Suspense fallback={<Spinner />}>
-            <IndexPage />
-        </Suspense>,
-        document.getElementById('root')
-    );
-};
+export default IndexPage;

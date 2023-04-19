@@ -1,24 +1,15 @@
-// Example from https://material-ui.com/components/text-fields/#icons
+// Example from https://mui.com/components/text-fields/#icons
 
 import React from 'react';
 
-import FormControl from '@material-ui/core/FormControl';
-import Grid from '@material-ui/core/Grid';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import TextField from '@material-ui/core/TextField';
+import { Box, FormControl, Input, InputLabel, InputAdornment, TextField, Unstable_Grid2 as Grid } from '@mui/material';
 
-import AccountCircle from '@material-ui/icons/AccountCircle';
-
-import useStyles from './IconsTextFields.style';
+import { AccountCircle } from '@mui/icons-material';
 
 function IconsTextFields() {
-    const classes = useStyles();
-
     return (
         <div>
-            <FormControl className={classes.margin}>
+            <FormControl sx={{ m: 1 }}>
                 <InputLabel htmlFor="input-with-icon-adornment">With a start adornment</InputLabel>
                 <Input
                     id="input-with-icon-adornment"
@@ -30,7 +21,6 @@ function IconsTextFields() {
                 />
             </FormControl>
             <TextField
-                className={classes.margin}
                 id="input-with-icon-textfield"
                 label="TextField"
                 InputProps={{
@@ -40,17 +30,18 @@ function IconsTextFields() {
                         </InputAdornment>
                     ),
                 }}
+                sx={{ m: 1 }}
             />
-            <div className={classes.margin}>
+            <Box m={1}>
                 <Grid spacing={1} alignItems="flex-end" container>
-                    <Grid item>
+                    <Grid>
                         <AccountCircle />
                     </Grid>
-                    <Grid item>
+                    <Grid>
                         <TextField id="input-with-icon-grid" label="With a grid" />
                     </Grid>
                 </Grid>
-            </div>
+            </Box>
         </div>
     );
 }

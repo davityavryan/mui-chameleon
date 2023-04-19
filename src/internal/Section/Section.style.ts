@@ -1,16 +1,12 @@
-import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { AccordionSummary, accordionSummaryClasses, styled } from '@mui/material';
 
-const useStyles = makeStyles(({ spacing }) =>
-    createStyles({
-        summaryRoot: {
-            paddingLeft: spacing(2),
-            paddingRight: spacing(2),
-        },
-        summaryContent: {
-            alignItems: 'center',
-            justifyContent: 'space-between',
-        },
-    })
-);
-
-export default useStyles;
+export const StyledAccordionSummary = styled(AccordionSummary)(({ theme }) => ({
+    [`& .${accordionSummaryClasses.root}`]: {
+        paddingLeft: theme.spacing(2),
+        paddingRight: theme.spacing(2),
+    },
+    [`& .${accordionSummaryClasses.content}`]: {
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+}));

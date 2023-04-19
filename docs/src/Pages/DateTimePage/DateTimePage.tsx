@@ -7,7 +7,7 @@ import { DateTimePickers, NativePickers } from './Components';
 function DateTimePage() {
     return (
         <Fragment>
-            <Frame title="@material-ui/pickers">
+            <Frame title="@mui/x-date-pickers">
                 <DateTimePickers />
             </Frame>
 

@@ -1,13 +1,10 @@
-// Example from https://material-ui.com/components/text-fields/#multiline
+// Example from https://mui.com/components/text-fields/#multiline
 
 import React from 'react';
 
-import TextField from '@material-ui/core/TextField';
-
-import useStyles from './MultilineTextFields.style';
+import { TextField } from '@mui/material';
 
 function MultilineTextFields() {
-    const classes = useStyles();
     const [value, setValue] = React.useState('Controlled');
 
     const handleChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -15,15 +12,16 @@ function MultilineTextFields() {
     };
 
     return (
-        <form className={classes.root} noValidate autoComplete="off">
+        <form autoComplete="off" noValidate>
             <div>
                 <TextField
                     id="standard-multiline-flexible"
                     label="Multiline"
                     multiline
-                    rowsMax={4}
+                    maxRows={4}
                     value={value}
                     onChange={handleChange}
+                    sx={{ m: 1, width: '25ch' }}
                 />
                 <TextField id="standard-textarea" label="Multiline Placeholder" placeholder="Placeholder" multiline />
                 <TextField
@@ -32,6 +30,7 @@ function MultilineTextFields() {
                     multiline
                     rows={4}
                     defaultValue="Default Value"
+                    sx={{ m: 1, width: '25ch' }}
                 />
             </div>
             <div>
@@ -39,10 +38,11 @@ function MultilineTextFields() {
                     id="filled-multiline-flexible"
                     label="Multiline"
                     multiline
-                    rowsMax={4}
+                    maxRows={4}
                     value={value}
                     onChange={handleChange}
                     variant="filled"
+                    sx={{ m: 1, width: '25ch' }}
                 />
                 <TextField
                     id="filled-textarea"
@@ -50,6 +50,7 @@ function MultilineTextFields() {
                     placeholder="Placeholder"
                     multiline
                     variant="filled"
+                    sx={{ m: 1, width: '25ch' }}
                 />
                 <TextField
                     id="filled-multiline-static"
@@ -58,6 +59,7 @@ function MultilineTextFields() {
                     rows={4}
                     defaultValue="Default Value"
                     variant="filled"
+                    sx={{ m: 1, width: '25ch' }}
                 />
             </div>
             <div>
@@ -65,10 +67,11 @@ function MultilineTextFields() {
                     id="outlined-multiline-flexible"
                     label="Multiline"
                     multiline
-                    rowsMax={4}
+                    maxRows={4}
                     value={value}
                     onChange={handleChange}
                     variant="outlined"
+                    sx={{ m: 1, width: '25ch' }}
                 />
                 <TextField
                     id="outlined-textarea"
@@ -76,6 +79,7 @@ function MultilineTextFields() {
                     placeholder="Placeholder"
                     multiline
                     variant="outlined"
+                    sx={{ m: 1, width: '25ch' }}
                 />
                 <TextField
                     id="outlined-multiline-static"
@@ -84,6 +88,7 @@ function MultilineTextFields() {
                     rows={4}
                     defaultValue="Default Value"
                     variant="outlined"
+                    sx={{ m: 1, width: '25ch' }}
                 />
             </div>
         </form>

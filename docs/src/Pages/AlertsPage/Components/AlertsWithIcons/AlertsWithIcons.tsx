@@ -1,38 +1,28 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
-import Button from '@material-ui/core/Button';
+import { Alert, Button, Stack } from '@mui/material';
 
-import Alert from '@material-ui/lab/Alert';
-
-import CheckIcon from '@material-ui/icons/Check';
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
-
-import useStyles from './AlertsWithIcons.style';
+import { Check, CheckCircleOutline } from '@mui/icons-material';
 
 function AlertsWithIcons() {
-    const classes = useStyles();
-
     return (
-        <Fragment>
-            <div className={classes.root}>
-                <Alert icon={<CheckIcon fontSize="inherit" />} onClose={() => undefined}>
-                    This is a success alert — check it out!
-                </Alert>
-                <Alert
-                    iconMapping={{ success: <CheckCircleOutlineIcon fontSize="inherit" /> }}
-                    action={
-                        <Button color="inherit" size="small">
-                            UNDO
-                        </Button>
-                    }
-                >
-                    This is a success alert — check it out!
-                </Alert>
-                <Alert icon={false} severity="success">
-                    This is a success alert — check it out!
-                </Alert>
-            </div>
-        </Fragment>
+        <Stack sx={{ width: '100%', my: 2 }} spacing={2}>
+            <Alert icon={<Check fontSize="inherit" />}>This is a success alert — check it out!</Alert>
+
+            <Alert
+                iconMapping={{ success: <CheckCircleOutline fontSize="inherit" /> }}
+                action={
+                    <Button color="inherit" size="small">
+                        UNDO
+                    </Button>
+                }
+            >
+                This is a success alert — check it out!
+            </Alert>
+            <Alert icon={false} severity="success">
+                This is a success alert — check it out!
+            </Alert>
+        </Stack>
     );
 }
 

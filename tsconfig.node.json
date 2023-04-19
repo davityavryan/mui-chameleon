@@ -1,0 +1,11 @@
+{
+    "include": ["./*.ts", "./*.tsx", "./package.json"],
+    "compilerOptions": {
+        "composite": true,
+        "resolveJsonModule": true,
+        "module": "ESNext",
+        "moduleResolution": "Node",
+        "allowSyntheticDefaultImports": true,
+        "noEmit": true
+    }
+}

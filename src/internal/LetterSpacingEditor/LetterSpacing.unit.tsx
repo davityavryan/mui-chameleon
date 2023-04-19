@@ -1,34 +1,25 @@
 import React from 'react';
 
-import { cleanup, render } from '@testing-library/react';
+import { describe, expect, test, vi, render } from 'test-utils';
 
 import LetterSpacingEditor from './LetterSpacingEditor';
 
-const themeKey = 'parents-parent.parent.child';
+describe('LetterSpacing', () => {
+    const themeKey = 'parents-parent.parent.child';
 
-jest.mock('../FieldEditor/FieldEditor', () => {
-    return {
-        __esModule: true,
-        default: () => {
-            return <div />;
-        },
-    };
-});
+    test('should render correctly', async () => {
+        const onChange = vi.fn();
 
-afterEach(cleanup);
+        render(<LetterSpacingEditor value="12px" defaultValue="12px" themeKey={themeKey} onChange={onChange} />);
 
-test('LetterSpacing should render correctly', async () => {
-    const onChange = jest.fn();
+        expect(onChange).not.toHaveBeenCalled();
+    });
 
-    render(<LetterSpacingEditor value="12px" defaultValue="12px" themeKey={themeKey} onChange={onChange} />);
+    test('should render correctly without value and defaultValue', async () => {
+        const onChange = vi.fn();
 
-    expect(onChange).not.toHaveBeenCalled();
-});
+        render(<LetterSpacingEditor value="" defaultValue="" themeKey={themeKey} onChange={onChange} />);
 
-test('LetterSpacing should render correctly without value and defaultValue', async () => {
-    const onChange = jest.fn();
-
-    render(<LetterSpacingEditor value="" defaultValue="" themeKey={themeKey} onChange={onChange} />);
-
-    expect(onChange).not.toHaveBeenCalled();
+        expect(onChange).not.toHaveBeenCalled();
+    });
 });

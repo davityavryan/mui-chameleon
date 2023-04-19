@@ -1,24 +1,12 @@
 import React from 'react';
 
-import clsx from 'clsx';
+import { Box, Drawer, Button, List, Divider, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 
-import Drawer from '@material-ui/core/Drawer';
-import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-
-import useStyles from './Drawers.style';
+import { MoveToInbox, Mail } from '@mui/icons-material';
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
 function Drawers() {
-    const classes = useStyles();
     const [state, setState] = React.useState({
         top: false,
         left: false,
@@ -38,18 +26,16 @@ function Drawers() {
     };
 
     const list = (anchor: Anchor) => (
-        <div
-            className={clsx(classes.list, {
-                [classes.fullList]: anchor === 'top' || anchor === 'bottom',
-            })}
+        <Box
             role="presentation"
             onClick={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}
+            sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
         >
             <List>
                 {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
                     <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                        <ListItemIcon>{index % 2 === 0 ? <MoveToInbox /> : <Mail />}</ListItemIcon>
                         <ListItemText primary={text} />
                     </ListItem>
                 ))}
@@ -58,12 +44,12 @@ function Drawers() {
             <List>
                 {['All mail', 'Trash', 'Spam'].map((text, index) => (
                     <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                        <ListItemIcon>{index % 2 === 0 ? <MoveToInbox /> : <Mail />}</ListItemIcon>
                         <ListItemText primary={text} />
                     </ListItem>
                 ))}
             </List>
-        </div>
+        </Box>
     );
 
     return (

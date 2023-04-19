@@ -1,0 +1,55 @@
+name: GitHub Pages
+
+on:
+    push:
+        branches: [master]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        name: Build and Deploy
+        steps:
+            -   uses: actions/checkout@v3
+
+            -   name: Setup node
+                uses: actions/setup-node@v3
+                with:
+                    node-version: 'lts/*'
+                    cache: 'yarn'
+
+            -   name: Cache node modules
+                uses: actions/cache@v3
+                id: cache-modules
+                env:
+                    cache-name: cache-node-${{ matrix.node }}-modules
+                with:
+                    path: ./node_modules
+                    key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./yarn.lock') }}
+                    restore-keys: |
+                        ${{ runner.os }}-build-${{ env.cache-name }}-
+
+            -   name: Install dependencies
+                if: steps.cache-modules.outputs.cache-hit != 'true'
+                run: yarn install --prefer-offline --frozen-lockfile
+
+            -   name: Cache Docs node modules
+                uses: actions/cache@v3
+                id: cache-docs-modules
+                env:
+                    cache-name: cache-node-${{ matrix.node }}-docs-modules
+                with:
+                    path: ./docs/node_modules
+                    key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./yarn.lock') }}
+                    restore-keys: |
+                        ${{ runner.os }}-build-${{ env.cache-name }}-
+
+            -   name: Install Docs dependencies
+                if: steps.cache-docs-modules.outputs.cache-hit != 'true'
+                run: yarn install --prefer-offline --frozen-lockfile --cwd docs
+
+            -   name: Deploy GH-Pages
+                run: |
+                    git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+                    yarn docs:deploy -u "github-actions-bot <github-actions-bot@users.noreply.github.com>" -m "${{ github.event.head_commit.message }}"
+                env:
+                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

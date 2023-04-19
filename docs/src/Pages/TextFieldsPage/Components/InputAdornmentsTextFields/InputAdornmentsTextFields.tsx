@@ -1,26 +1,22 @@
-// Example is taken from https://material-ui.com/components/text-fields/#input-adornments
+// Example is taken from https://mui.com/components/text-fields/#input-adornments
 
 import React from 'react';
 
-import clsx from 'clsx';
-
-import IconButton from '@material-ui/core/IconButton';
-import Input from '@material-ui/core/Input';
-import FilledInput from '@material-ui/core/FilledInput';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import TextField from '@material-ui/core/TextField';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
-
-import useStyles from './InputAdornmentsTextFields.style';
+import {
+    Box,
+    IconButton,
+    Input,
+    FilledInput,
+    OutlinedInput,
+    InputLabel,
+    InputAdornment,
+    FormHelperText,
+    FormControl,
+    TextField,
+} from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 function InputAdornmentsTextFields() {
-    const classes = useStyles();
-
     const [values, setValues] = React.useState({
         amount: '',
         password: '',
@@ -42,17 +38,17 @@ function InputAdornmentsTextFields() {
     };
 
     return (
-        <div className={classes.root}>
+        <Box display="flex" flexWrap="wrap">
             <div>
                 <TextField
                     label="With normal TextField"
                     id="standard-start-adornment"
-                    className={clsx(classes.margin, classes.textField)}
                     InputProps={{
                         startAdornment: <InputAdornment position="start">Kg</InputAdornment>,
                     }}
+                    sx={{ width: '25ch', m: 1 }}
                 />
-                <FormControl className={clsx(classes.margin, classes.withoutLabel, classes.textField)}>
+                <FormControl sx={{ width: '25ch', m: 1, mt: 3 }}>
                     <Input
                         id="standard-adornment-weight"
                         value={values.weight}
@@ -65,7 +61,7 @@ function InputAdornmentsTextFields() {
                     />
                     <FormHelperText id="standard-weight-helper-text">Weight</FormHelperText>
                 </FormControl>
-                <FormControl className={clsx(classes.margin, classes.textField)}>
+                <FormControl sx={{ width: '25ch', m: 1 }}>
                     <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
                     <Input
                         id="standard-adornment-password"
@@ -85,7 +81,7 @@ function InputAdornmentsTextFields() {
                         }
                     />
                 </FormControl>
-                <FormControl fullWidth className={classes.margin}>
+                <FormControl sx={{ m: 1 }} fullWidth>
                     <InputLabel htmlFor="standard-adornment-amount">Amount</InputLabel>
                     <Input
                         id="standard-adornment-amount"
@@ -99,13 +95,13 @@ function InputAdornmentsTextFields() {
                 <TextField
                     label="With normal TextField"
                     id="filled-start-adornment"
-                    className={clsx(classes.margin, classes.textField)}
                     InputProps={{
                         startAdornment: <InputAdornment position="start">Kg</InputAdornment>,
                     }}
                     variant="filled"
+                    sx={{ width: '25ch', m: 1 }}
                 />
-                <FormControl className={clsx(classes.margin, classes.textField)} variant="filled">
+                <FormControl sx={{ width: '25ch', m: 1 }} variant="filled">
                     <FilledInput
                         id="filled-adornment-weight"
                         value={values.weight}
@@ -118,7 +114,7 @@ function InputAdornmentsTextFields() {
                     />
                     <FormHelperText id="filled-weight-helper-text">Weight</FormHelperText>
                 </FormControl>
-                <FormControl className={clsx(classes.margin, classes.textField)} variant="filled">
+                <FormControl sx={{ width: '25ch', m: 1 }} variant="filled">
                     <InputLabel htmlFor="filled-adornment-password">Password</InputLabel>
                     <FilledInput
                         id="filled-adornment-password"
@@ -139,7 +135,7 @@ function InputAdornmentsTextFields() {
                         }
                     />
                 </FormControl>
-                <FormControl fullWidth className={classes.margin} variant="filled">
+                <FormControl sx={{ m: 1 }} variant="filled" fullWidth>
                     <InputLabel htmlFor="filled-adornment-amount">Amount</InputLabel>
                     <FilledInput
                         id="filled-adornment-amount"
@@ -153,13 +149,13 @@ function InputAdornmentsTextFields() {
                 <TextField
                     label="With normal TextField"
                     id="outlined-start-adornment"
-                    className={clsx(classes.margin, classes.textField)}
                     InputProps={{
                         startAdornment: <InputAdornment position="start">Kg</InputAdornment>,
                     }}
                     variant="outlined"
+                    sx={{ width: '25ch', m: 1 }}
                 />
-                <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
+                <FormControl sx={{ width: '25ch', m: 1 }} variant="outlined">
                     <OutlinedInput
                         id="outlined-adornment-weight"
                         value={values.weight}
@@ -169,11 +165,11 @@ function InputAdornmentsTextFields() {
                         inputProps={{
                             'aria-label': 'weight',
                         }}
-                        labelWidth={0}
+                        // labelWidth={0}
                     />
                     <FormHelperText id="outlined-weight-helper-text">Weight</FormHelperText>
                 </FormControl>
-                <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
+                <FormControl sx={{ width: '25ch', m: 1 }} variant="outlined">
                     <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                     <OutlinedInput
                         id="outlined-adornment-password"
@@ -192,21 +188,21 @@ function InputAdornmentsTextFields() {
                                 </IconButton>
                             </InputAdornment>
                         }
-                        labelWidth={70}
+                        // labelWidth={70}
                     />
                 </FormControl>
-                <FormControl fullWidth className={classes.margin} variant="outlined">
+                <FormControl sx={{ m: 1 }} variant="outlined" fullWidth>
                     <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
                     <OutlinedInput
                         id="outlined-adornment-amount"
                         value={values.amount}
                         onChange={handleChange('amount')}
                         startAdornment={<InputAdornment position="start">$</InputAdornment>}
-                        labelWidth={60}
+                        // labelWidth={60}
                     />
                 </FormControl>
             </div>
-        </div>
+        </Box>
     );
 }
 

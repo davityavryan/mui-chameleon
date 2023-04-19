@@ -1,27 +1,23 @@
 import React from 'react';
 
-import { Typography } from '@material-ui/core';
+import { Typography, Accordion } from '@mui/material';
 
-import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-import { Accordion, AccordionSummary } from '..';
-import { themeKeyLabel } from '../../utils';
+import { themeKeyLabel } from '../../utils/themeKeyLabel';
 
-import useStyles from './Section.style';
+import { StyledAccordionSummary } from './Section.style';
 
-interface IProps {
+interface Props {
     title: string;
     secondaryTitle?: string;
     children?: JSX.Element;
 }
 
-function Section({ title, secondaryTitle, children = null }: IProps) {
-    const classes = useStyles();
-
+function Section({ title, secondaryTitle, children = null }: Props) {
     return (
         <Accordion TransitionProps={{ mountOnEnter: true, unmountOnExit: true }}>
-            <AccordionSummary
-                classes={{ root: classes.summaryRoot, content: classes.summaryContent }}
+            <StyledAccordionSummary
                 expandIcon={Boolean(children) ? <ExpandMoreIcon /> : null}
                 disabled={!Boolean(children)}
             >
@@ -32,7 +28,7 @@ function Section({ title, secondaryTitle, children = null }: IProps) {
                         {secondaryTitle}
                     </Typography>
                 )}
-            </AccordionSummary>
+            </StyledAccordionSummary>
 
             {children && <div>{children}</div>}
         </Accordion>

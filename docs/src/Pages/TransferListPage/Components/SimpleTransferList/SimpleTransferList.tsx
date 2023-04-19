@@ -1,15 +1,15 @@
 import React from 'react';
 
-import Grid from '@material-ui/core/Grid';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Checkbox from '@material-ui/core/Checkbox';
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
-
-import useStyles from './SimpleTransferList.style';
+import {
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+    Checkbox,
+    Button,
+    Paper,
+    Unstable_Grid2 as Grid,
+} from '@mui/material';
 
 function not(a: number[], b: number[]) {
     return a.filter((value) => b.indexOf(value) === -1);
@@ -20,8 +20,6 @@ function intersection(a: number[], b: number[]) {
 }
 
 function SimpleTransferList() {
-    const classes = useStyles();
-
     const [checked, setChecked] = React.useState<number[]>([]);
     const [left, setLeft] = React.useState<number[]>([0, 1, 2, 3]);
     const [right, setRight] = React.useState<number[]>([4, 5, 6, 7]);
@@ -65,7 +63,7 @@ function SimpleTransferList() {
     };
 
     const customList = (items: number[]) => (
-        <Paper className={classes.paper}>
+        <Paper sx={{ width: 200, height: 230, overflow: 'auto' }}>
             <List dense component="div" role="list">
                 {items.map((value: number) => {
                     const labelId = `transfer-list-item-${value}-label`;
@@ -90,14 +88,14 @@ function SimpleTransferList() {
     );
 
     return (
-        <Grid container spacing={2} justify="center" alignItems="center" className={classes.root}>
-            <Grid item>{customList(left)}</Grid>
-            <Grid item>
-                <Grid container direction="column" alignItems="center">
+        <Grid spacing={2} justifyContent="center" alignItems="center" m="auto" container>
+            <Grid>{customList(left)}</Grid>
+            <Grid>
+                <Grid direction="column" alignItems="center" container>
                     <Button
+                        sx={{ mx: 0, my: 0.5 }}
                         variant="outlined"
                         size="small"
-                        className={classes.button}
                         onClick={handleAllRight}
                         disabled={left.length === 0}
                         aria-label="move all right"
@@ -105,9 +103,9 @@ function SimpleTransferList() {
                         ≫
                     </Button>
                     <Button
+                        sx={{ mx: 0, my: 0.5 }}
                         variant="outlined"
                         size="small"
-                        className={classes.button}
                         onClick={handleCheckedRight}
                         disabled={leftChecked.length === 0}
                         aria-label="move selected right"
@@ -115,9 +113,9 @@ function SimpleTransferList() {
                         &gt;
                     </Button>
                     <Button
+                        sx={{ mx: 0, my: 0.5 }}
                         variant="outlined"
                         size="small"
-                        className={classes.button}
                         onClick={handleCheckedLeft}
                         disabled={rightChecked.length === 0}
                         aria-label="move selected left"
@@ -125,9 +123,9 @@ function SimpleTransferList() {
                         &lt;
                     </Button>
                     <Button
+                        sx={{ mx: 0, my: 0.5 }}
                         variant="outlined"
                         size="small"
-                        className={classes.button}
                         onClick={handleAllLeft}
                         disabled={right.length === 0}
                         aria-label="move all left"
@@ -136,7 +134,7 @@ function SimpleTransferList() {
                     </Button>
                 </Grid>
             </Grid>
-            <Grid item>{customList(right)}</Grid>
+            <Grid>{customList(right)}</Grid>
         </Grid>
     );
 }

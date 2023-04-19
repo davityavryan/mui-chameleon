@@ -1,23 +1,20 @@
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import { Paper, styled } from '@mui/material';
 
-const useStyles = makeStyles<Theme, { isDry: boolean; isOpen: boolean }>(({ spacing, transitions, shape }) =>
-    createStyles({
-        root: {
-            position: 'sticky',
-            top: spacing(),
-            zIndex: 1,
+export const StyledPaper = styled(Paper, { shouldForwardProp: (prop: string) => !['isDry', 'isOpen'].includes(prop) })<{
+    isDry: boolean;
+    isOpen: boolean;
+}>(({ theme, isDry, isOpen }) => ({
+    position: 'sticky',
+    top: theme.spacing(),
+    zIndex: 1,
 
-            display: 'flex',
-            justifyContent: ({ isDry, isOpen }) => (isDry || !isOpen ? 'center' : 'space-between'),
-            alignItems: 'center',
-            paddingLeft: ({ isOpen }) => spacing(isOpen ? 2 : 1.25),
-            paddingRight: ({ isOpen }) => spacing(isOpen ? 2 : 1.25),
-            margin: spacing(),
-            borderRadius: ({ isOpen }) => (isOpen ? shape.borderRadius : '50%'),
+    display: 'flex',
+    justifyContent: isDry || !isOpen ? 'center' : 'space-between',
+    alignItems: 'center',
+    paddingLeft: theme.spacing(isOpen ? 2 : 0),
+    paddingRight: theme.spacing(isOpen ? 2 : 0),
+    margin: theme.spacing(),
+    borderRadius: isOpen ? theme.shape.borderRadius : '50%',
 
-            transition: transitions.create(['border-radius', 'padding']),
-        },
-    })
-);
-
-export default useStyles;
+    transition: theme.transitions.create(['border-radius', 'padding']),
+}));

@@ -1,23 +1,12 @@
-import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { styled } from '@mui/material';
 
-import { Property } from 'csstype';
+export const StyledColorPicker = styled('div')(({ theme, color }) => ({
+    width: theme.spacing(3),
+    minWidth: theme.spacing(3),
+    height: theme.spacing(3),
+    padding: 0,
+    border: `1px solid ${theme.palette.action.selected}`,
 
-const useStyles = makeStyles(({ palette, spacing, zIndex, shape }) =>
-    createStyles({
-        popover: {
-            zIndex: `${zIndex.tooltip + 11} !important` as Property.ZIndex, // more than the highest zIndex
-        },
-        colorPicker: {
-            width: spacing(3),
-            minWidth: spacing(3),
-            height: spacing(3),
-            padding: 0,
-            border: `1px solid ${palette.action.selected}`,
-
-            borderRadius: shape.borderRadius,
-            backgroundColor: ({ color }: { color: string }) => color,
-        },
-    })
-);
-
-export default useStyles;
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: color,
+}));

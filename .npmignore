@@ -20,7 +20,7 @@ docs
 .prettierignore
 .prettierrc.json
 babel.config.js
-copy-files.js
+copy-files.ts
 renovate.json
 tsconfig.json
 yarn.lock

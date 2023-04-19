@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import { Redirect } from 'react-router-dom';
+import { redirect } from 'react-router-dom';
 
 import { ROUTES } from 'helpers';
 
-function NotFoundPage() {
-    return <Redirect to={ROUTES.button.path} />;
+function NotFoundPage(): React.ReactElement {
+    useEffect(() => {
+        redirect(ROUTES.button.path);
+    }, []);
+
+    return null;
 }
 
 export default NotFoundPage;

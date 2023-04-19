@@ -1,14 +1,10 @@
 import React from 'react';
 
-import Alert from '@material-ui/lab/Alert';
-
-import useStyles from './AlertsOutlined.style';
+import { Alert, Stack } from '@mui/material';
 
 function AlertsOutlined() {
-    const classes = useStyles();
-
     return (
-        <div className={classes.root}>
+        <Stack sx={{ width: '100%', my: 2 }} spacing={2}>
             <Alert variant="outlined" severity="error">
                 This is an error alert — check it out!
             </Alert>
@@ -21,7 +17,7 @@ function AlertsOutlined() {
             <Alert variant="outlined" severity="success">
                 This is a success alert — check it out!
             </Alert>
-        </div>
+        </Stack>
     );
 }
 

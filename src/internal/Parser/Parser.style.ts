@@ -1,43 +1,44 @@
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { CSSProperties } from '@material-ui/styles/withStyles/withStyles';
+import { List, ListItem, ListSubheader, styled } from '@mui/material';
 
-const useStyles = makeStyles<Theme, { isTopLevel: boolean }>(({ palette, spacing }) =>
-    createStyles({
-        root: {
-            position: 'relative',
+export const StyledList = styled(List)(({ theme }) => ({
+    position: 'relative',
 
-            width: '100%',
-            overflow: 'auto',
-            maxHeight: spacing(85),
+    width: '100%',
+    overflow: 'auto',
+    maxHeight: theme.spacing(85),
 
-            backgroundColor: palette.background.paper,
-        },
-        listItem: ({ isTopLevel }) => {
-            const listItemStyles: CSSProperties = {
-                justifyContent: 'space-between',
-            };
+    backgroundColor: theme.palette.background.paper,
+}));
 
-            if (isTopLevel) {
-                listItemStyles.paddingTop = spacing(1.25);
-                listItemStyles.paddingBottom = spacing(1.25);
-            }
+export const StyledListItem = styled(ListItem, { shouldForwardProp: (prop: string) => prop !== 'isTopLevel' })<{
+    isTopLevel: boolean;
+}>(({ theme, isTopLevel }) => {
+    let listItemStyles = `
+        justify-content: 'space-between';
+    `;
 
-            return listItemStyles;
-        },
-        listSection: {
-            backgroundColor: 'inherit',
-        },
-        listSubHeader: {
-            zIndex: 2,
+    if (isTopLevel) {
+        listItemStyles += `
+            padding-top = ${theme.spacing(1.25)};
+            padding-bottom = ${theme.spacing(1.25)};
+        `;
+    }
 
-            color: palette.type === 'light' ? palette.common.black : palette.common.white,
-            backgroundColor: palette.type === 'light' ? palette.grey['200'] : palette.grey['700'],
-        },
-        ul: {
-            backgroundColor: 'inherit',
-            padding: 0,
-        },
-    })
-);
+    return listItemStyles;
+});
 
-export default useStyles;
+export const StyledLi = styled('li')({
+    backgroundColor: 'inherit',
+});
+
+export const StyledListSubHeader = styled(ListSubheader)(({ theme }) => ({
+    zIndex: 2,
+
+    color: theme.palette.mode === 'light' ? theme.palette.common.black : theme.palette.common.white,
+    backgroundColor: theme.palette.mode === 'light' ? theme.palette.grey['200'] : theme.palette.grey['700'],
+}));
+
+export const StyledUl = styled('ul')({
+    backgroundColor: 'inherit',
+    padding: 0,
+});

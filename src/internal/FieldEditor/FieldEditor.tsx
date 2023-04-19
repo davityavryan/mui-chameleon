@@ -1,27 +1,26 @@
-import React, { memo, useCallback, useContext, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
-import { InputAdornment, TextField, TextFieldProps } from '@material-ui/core';
+import { InputAdornment, TextField, TextFieldProps } from '@mui/material';
+import { toUnitless } from '@mui/material/styles/cssUtils';
 
-import { createMuiTheme } from '@material-ui/core/styles';
+import { Unit, Value } from '../../types';
 
-import { TUnit, TValue } from '../../types';
+import { themeKeyLabel } from '../../utils/themeKeyLabel';
 
-import { Context, makeConvertValueFromUnitToUnit, themeKeyLabel, toUnitless } from '../../utils';
+import UnitSet from '../UnitSet/UnitSet';
 
-import { UnitSet } from '../index';
+let timer: NodeJS.Timeout;
 
-let timer: number;
-
-export type TFieldEditorProps = Omit<TextFieldProps, 'value' | 'onChange'> & {
-    value: TValue;
-    defaultValue?: TValue;
+export type FieldEditorProps = Omit<TextFieldProps, 'value' | 'onChange'> & {
+    value: Value;
+    defaultValue?: Value;
     themeKey: string;
     step?: number;
     min?: number;
     max?: number;
     formatter?: (value: string) => string | number;
-    unit?: TUnit;
-    unitSet?: TUnit[];
+    unit?: Unit;
+    unitSet?: Unit[];
     onChange: (newValue: string | number) => void;
 };
 
@@ -37,19 +36,14 @@ function FieldEditor({
     unitSet,
     formatter = (newValue) => newValue,
     ...props
-}: TFieldEditorProps) {
-    const [localValue, setLocalValue] = useState<TValue>(value);
-    const { state } = useContext(Context);
-    const { typography } = createMuiTheme(state.theme);
+}: FieldEditorProps) {
+    const [localValue, setLocalValue] = useState<Value>(value);
 
-    const convertValueFromUnitToUnit = makeConvertValueFromUnitToUnit(typography.fontSize);
-
-    const handleUnitChange = (newUnit: TUnit) => {
-        const newValue = convertValueFromUnitToUnit(localValue, unit, newUnit);
+    const handleUnitChange = (newUnit: Unit) => {
+        const newValue = value ? `${toUnitless(value)}${newUnit}` : '';
 
         timer = setTimeout(() => {
-            setLocalValue(toUnitless(newValue));
-            onChange(newValue);
+            onChange(formatter(newValue));
         }, 50);
     };
 
@@ -59,7 +53,7 @@ function FieldEditor({
         </InputAdornment>
     ) : null;
 
-    const handleChange = useCallback(
+    const handleChange = useCallback<React.ChangeEventHandler<HTMLInputElement>>(
         (event) => {
             clearTimeout(timer);
             timer = null;
@@ -75,6 +69,12 @@ function FieldEditor({
         },
         [onChange, formatter]
     );
+
+    const handleBlur = () => {
+        if (value === '') {
+            onChange(formatter(defaultValue));
+        }
+    };
 
     useEffect(() => {
         // Update localValue if value is changed from outside(ex. reset)
@@ -99,10 +99,11 @@ function FieldEditor({
             value={localValue}
             label={themeKeyLabel(themeKey)}
             onChange={handleChange}
+            onBlur={handleBlur}
             inputProps={{ step, min, max }}
             fullWidth
         />
     );
 }
 
-export default memo(FieldEditor);
+export default FieldEditor;

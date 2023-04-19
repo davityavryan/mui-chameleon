@@ -1,21 +1,22 @@
-import React, { Fragment, memo } from 'react';
+import React, { Fragment } from 'react';
 
-import { IconButton, Menu, MenuItem } from '@material-ui/core';
+import { IconButton, Menu, MenuItem } from '@mui/material';
 
-import { TUnit } from '../../types';
+import { Unit } from '../../types';
 
-export type TUnitSetProps = {
-    unit: TUnit;
-    units: TUnit[];
-    onChange: (unit: TUnit) => void;
+export type UnitSetProps = {
+    unit: Unit;
+    units: Unit[];
+    onChange: (unit: Unit) => void;
 };
 
-function UnitSet({ unit, units, onChange }: TUnitSetProps) {
+function UnitSet({ unit, units, onChange }: UnitSetProps) {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
     // TODO: Add unitSet everywhere
     if (units === undefined) {
-        console.warn('TODO');
+        console.warn('TODO', unit, units);
+        console.trace(999);
         return <Fragment>{unit}</Fragment>;
     }
 
@@ -27,7 +28,7 @@ function UnitSet({ unit, units, onChange }: TUnitSetProps) {
         setAnchorEl(null);
     };
 
-    const handleMenuItemClick = (value: TUnit) => () => {
+    const handleMenuItemClick = (value: Unit) => () => {
         onChange(value);
         setAnchorEl(null);
     };
@@ -48,4 +49,4 @@ function UnitSet({ unit, units, onChange }: TUnitSetProps) {
     );
 }
 
-export default memo(UnitSet);
+export default UnitSet;

@@ -1,34 +1,28 @@
 import React from 'react';
 
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import Slider from '@material-ui/core/Slider';
-import VolumeDown from '@material-ui/icons/VolumeDown';
-import VolumeUp from '@material-ui/icons/VolumeUp';
-
-import useStyles from './ContinuousSliders.style';
+import { Box, Typography, Slider, Unstable_Grid2 as Grid } from '@mui/material';
+import { VolumeDown, VolumeUp } from '@mui/icons-material';
 
 function ContinuousSliders() {
-    const classes = useStyles();
     const [value, setValue] = React.useState<number>(30);
 
-    const handleChange = (event: React.ChangeEvent<unknown>, newValue: number | number[]) => {
+    const handleChange = (event: Event, newValue: number | number[]) => {
         setValue(newValue as number);
     };
 
     return (
-        <div className={classes.root}>
+        <Box sx={{ width: 300 }}>
             <Typography id="continuous-slider" gutterBottom>
                 Volume
             </Typography>
             <Grid container spacing={2}>
-                <Grid item>
+                <Grid>
                     <VolumeDown />
                 </Grid>
-                <Grid item xs>
+                <Grid xs>
                     <Slider value={value} onChange={handleChange} aria-labelledby="continuous-slider" />
                 </Grid>
-                <Grid item>
+                <Grid>
                     <VolumeUp />
                 </Grid>
             </Grid>
@@ -36,7 +30,7 @@ function ContinuousSliders() {
                 Disabled slider
             </Typography>
             <Slider disabled defaultValue={30} aria-labelledby="disabled-slider" />
-        </div>
+        </Box>
     );
 }
 

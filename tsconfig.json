@@ -1,13 +1,13 @@
 {
-    "exclude": ["node_modules", "build"],
-    "include": ["src"],
+    "include": ["./docs/src/@types", "./src"],
+    "exclude": ["./node_modules", "./dist"],
+    "references": [{ "path": "./tsconfig.node.json" }],
     "compilerOptions": {
-        "outDir": "build",
-        "baseUrl": "src",
+        "outDir": "./dist",
+        "baseUrl": "./src",
         "target": "ESNext",
         "module": "ESNext",
         "lib": ["DOM", "DOM.Iterable", "ESNext"],
-        "types": ["jest"],
         "strict": true,
         "strictNullChecks": false,
         "skipLibCheck": true,
@@ -17,6 +17,9 @@
         "moduleResolution": "Node",
         "resolveJsonModule": true,
         "isolatedModules": true,
-        "jsx": "react"
+        "jsx": "react",
+        "paths": {
+            "test-utils": ["../vitest.utils"]
+        }
     }
 }

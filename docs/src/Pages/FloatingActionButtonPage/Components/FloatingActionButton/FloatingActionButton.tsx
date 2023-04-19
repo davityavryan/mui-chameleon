@@ -1,33 +1,26 @@
 import React from 'react';
 
-import Fab from '@material-ui/core/Fab';
+import { Fab, Stack } from '@mui/material';
 
-import AddIcon from '@material-ui/icons/Add';
-import EditIcon from '@material-ui/icons/Edit';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import NavigationIcon from '@material-ui/icons/Navigation';
-
-import useStyles from './FloatingActionButton.style';
+import { Add, Edit, Favorite, Navigation } from '@mui/icons-material';
 
 function FloatingActionButton() {
-    const classes = useStyles();
-
     return (
-        <div className={classes.root}>
-            <Fab color="primary" aria-label="add">
-                <AddIcon />
+        <Stack spacing={2} direction="row">
+            <Fab sx={{ m: 1 }} color="primary" aria-label="add">
+                <Add />
             </Fab>
-            <Fab color="secondary" aria-label="edit">
-                <EditIcon />
+            <Fab sx={{ m: 1 }} color="secondary" aria-label="edit">
+                <Edit />
             </Fab>
-            <Fab variant="extended">
-                <NavigationIcon className={classes.extendedIcon} />
+            <Fab sx={{ m: 1 }} variant="extended">
+                <Navigation sx={{ mr: 1 }} />
                 Navigate
             </Fab>
-            <Fab disabled aria-label="like">
-                <FavoriteIcon />
+            <Fab sx={{ m: 1 }} disabled aria-label="like">
+                <Favorite />
             </Fab>
-        </div>
+        </Stack>
     );
 }
 

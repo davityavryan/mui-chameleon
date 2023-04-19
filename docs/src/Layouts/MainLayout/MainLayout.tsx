@@ -1,23 +1,22 @@
-import React, { Fragment, memo } from 'react';
+import React, { Fragment } from 'react';
 
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
+import { Box, Container } from '@mui/material';
 
 import { SideBar } from 'Layouts';
 
 import { ErrorBoundary } from 'Components';
 
-interface IProps {
+interface Props {
     children: JSX.Element | JSX.Element[];
 }
 
-function MainLayout({ children }: IProps) {
+function MainLayout({ children }: Props) {
     return (
         <Fragment>
             <SideBar />
 
             <Box component="main" display="flex" alignItems="center" flexGrow={1} py={3}>
-                <Container maxWidth="md">
+                <Container maxWidth="lg" sx={{ pl: { md: 32 + 3 } }}>
                     <ErrorBoundary>{children}</ErrorBoundary>
                 </Container>
             </Box>
@@ -25,4 +24,4 @@ function MainLayout({ children }: IProps) {
     );
 }
 
-export default memo(MainLayout);
+export default MainLayout;

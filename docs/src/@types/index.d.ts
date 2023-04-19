@@ -3,10 +3,10 @@ declare module '*.svg' {
     export default value;
 }
 
-declare const process: {
-    env: {
+declare namespace NodeJS {
+    interface ProcessEnv {
         NODE_ENV: 'development' | 'production' | 'test';
 
         TEST_BROWSER: 'chromium' | 'firefox' | 'webkit';
-    };
-} & NodeJS.Process;
+    }
+}

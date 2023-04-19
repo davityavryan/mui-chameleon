@@ -1,31 +1,28 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
-import { Button, IconButton, Paper } from '@material-ui/core';
-import { createMuiTheme, ThemeOptions } from '@material-ui/core/styles';
+import { Button, IconButton, createTheme, ThemeOptions } from '@mui/material';
 
 import { Logo } from '..';
-import { Context } from '../../utils';
+import { useStore } from '../../utils';
 
-import useStyles from './Header.style';
+import { StyledPaper } from './Header.style';
 
-interface IProps {
+interface Props {
     onToggleOpen: (event: React.MouseEvent<HTMLButtonElement>) => void;
     onReset?: () => void;
     onSave: (updatedTheme: ThemeOptions) => void;
     isOpen: boolean;
 }
 
-function Header({ isOpen, onToggleOpen, onReset, onSave }: IProps) {
-    const { state, dispatch } = useContext(Context);
+function Header({ isOpen, onToggleOpen, onReset, onSave }: Props) {
+    const [state, actions] = useStore();
 
-    const { palette } = createMuiTheme(state.theme);
+    const { palette } = createTheme(state.theme);
 
-    const isDry = JSON.stringify(state.theme) === JSON.stringify(state.originalTheme);
-
-    const classes = useStyles({ isOpen, isDry });
+    const isDry = JSON.stringify(state.theme) === JSON.stringify(state.initialTheme);
 
     const handleReset = () => {
-        dispatch({ type: 'reset' });
+        actions.reset();
 
         if (typeof onReset === 'function') {
             onReset();
@@ -37,7 +34,7 @@ function Header({ isOpen, onToggleOpen, onReset, onSave }: IProps) {
     };
 
     return (
-        <Paper className={classes.root}>
+        <StyledPaper isOpen={isOpen} isDry={isDry} square>
             {!isDry && isOpen && (
                 <Button variant="contained" size="small" onClick={handleReset}>
                     Reset
@@ -53,7 +50,7 @@ function Header({ isOpen, onToggleOpen, onReset, onSave }: IProps) {
                     Save
                 </Button>
             )}
-        </Paper>
+        </StyledPaper>
     );
 }
 

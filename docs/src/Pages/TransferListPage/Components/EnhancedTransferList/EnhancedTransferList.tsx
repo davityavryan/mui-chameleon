@@ -1,17 +1,17 @@
 import React from 'react';
 
-import Grid from '@material-ui/core/Grid';
-import List from '@material-ui/core/List';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import Checkbox from '@material-ui/core/Checkbox';
-import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
-
-import useStyles from './EnhancedTransferList.style';
+import {
+    List,
+    Card,
+    CardHeader,
+    ListItem,
+    ListItemText,
+    ListItemIcon,
+    Checkbox,
+    Button,
+    Divider,
+    Unstable_Grid2 as Grid,
+} from '@mui/material';
 
 function not(a: number[], b: number[]) {
     return a.filter((value) => b.indexOf(value) === -1);
@@ -26,8 +26,6 @@ function union(a: number[], b: number[]) {
 }
 
 function EnhancedTransferList() {
-    const classes = useStyles();
-
     const [checked, setChecked] = React.useState<number[]>([]);
     const [left, setLeft] = React.useState<number[]>([0, 1, 2, 3]);
     const [right, setRight] = React.useState<number[]>([4, 5, 6, 7]);
@@ -73,7 +71,6 @@ function EnhancedTransferList() {
     const customList = (title: React.ReactNode, items: number[]) => (
         <Card>
             <CardHeader
-                className={classes.cardHeader}
                 avatar={
                     <Checkbox
                         onClick={handleToggleAll(items)}
@@ -85,9 +82,16 @@ function EnhancedTransferList() {
                 }
                 title={title}
                 subheader={`${numberOfChecked(items)}/${items.length} selected`}
+                px={2}
+                py={1}
             />
             <Divider />
-            <List className={classes.list} dense component="div" role="list">
+            <List
+                sx={{ width: 200, height: 230, bgcolor: 'background.paper', overflow: 'auto' }}
+                dense
+                component="div"
+                role="list"
+            >
                 {items.map((value: number) => {
                     const labelId = `transfer-list-all-item-${value}-label`;
 
@@ -111,14 +115,14 @@ function EnhancedTransferList() {
     );
 
     return (
-        <Grid container spacing={2} justify="center" alignItems="center" className={classes.root}>
-            <Grid item>{customList('Choices', left)}</Grid>
-            <Grid item>
+        <Grid spacing={2} justifyContent="center" alignItems="center" m="auto" container>
+            <Grid>{customList('Choices', left)}</Grid>
+            <Grid>
                 <Grid container direction="column" alignItems="center">
                     <Button
+                        sx={{ mx: 0, my: 0.5 }}
                         variant="outlined"
                         size="small"
-                        className={classes.button}
                         onClick={handleCheckedRight}
                         disabled={leftChecked.length === 0}
                         aria-label="move selected right"
@@ -126,9 +130,9 @@ function EnhancedTransferList() {
                         &gt;
                     </Button>
                     <Button
+                        sx={{ mx: 0, my: 0.5 }}
                         variant="outlined"
                         size="small"
-                        className={classes.button}
                         onClick={handleCheckedLeft}
                         disabled={rightChecked.length === 0}
                         aria-label="move selected left"
@@ -137,7 +141,7 @@ function EnhancedTransferList() {
                     </Button>
                 </Grid>
             </Grid>
-            <Grid item>{customList('Chosen', right)}</Grid>
+            <Grid>{customList('Chosen', right)}</Grid>
         </Grid>
     );
 }

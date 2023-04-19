@@ -1,11 +1,25 @@
 {
     "extends": "../tsconfig.json",
-    "exclude": ["node_modules", "public"],
-    "include": ["src"],
+    "exclude": ["./node_modules", "./dist"],
+    "include": ["./src"],
     "compilerOptions": {
-        "outDir": "public",
-        "baseUrl": "src",
+        "outDir": "./dist",
+        "baseUrl": "./",
         "emitDeclarationOnly": false,
-        "noEmit": true
+        "noEmit": true,
+        "paths": {
+            "mui-chameleon/*": ["../src/*"],
+            "mui-chameleon": ["../src"],
+            "Pages/*": ["./src/Pages/*"],
+            "Pages": ["./src/Pages"],
+            "Layouts/*": ["./src/Layouts/*"],
+            "Layouts": ["./src/Layouts"],
+            "Components/*": ["./src/Components/*"],
+            "Components": ["./src/Components"],
+            "static/*": ["./src/static/*"],
+            "helpers/*": ["./src/helpers/*"],
+            "helpers": ["./src/helpers"],
+            "test-utils": ["../vitest.utils"]
+        }
     }
 }

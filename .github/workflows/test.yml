@@ -8,15 +8,12 @@ on:
 
 jobs:
     build-and-test:
-        runs-on: ubuntu-22.04
+        runs-on: ubuntu-latest
         strategy:
             fail-fast: false
             matrix:
                 experimental: [false] # Shadow CI Jobs
                 node: ['16', '18', '19'] # Refer to https://nodejs.org/en/about/releases/ for supported versions
-                include:
-                    - node: '18'
-                      experimental: true
 
         name: Test on Node v${{ matrix.node }}
         continue-on-error: ${{ matrix.experimental }}
@@ -28,6 +25,9 @@ jobs:
                 with:
                     node-version: ${{ matrix.node }}
                     cache: 'yarn'
+
+            -   name: Setup ignore engines flag for yarn
+                run: yarn config set ignore-engines true
 
             -   name: Cache node modules
                 uses: actions/cache@v3
@@ -72,14 +72,19 @@ jobs:
 
             -   name: Install Playwright browser
                 if: steps.cache-playwright.outputs.cache-hit != 'true'
-                run: yarn --cwd ./docs playwright install chromium
+                run: yarn playwright install chromium
 
             -   name: Build package
                 run: yarn build
 
             -   name: Run tests
                 env:
-                    CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
                     NODE_ENV: test
                 run:
-                    yarn test:coverage && yarn codecov
+                    yarn test
+
+            -   name: Collect coverage
+                uses: codecov/codecov-action@v3
+                with:
+                    fail_ci_if_error: true
+                    flags: Node-v${{ matrix.node }}

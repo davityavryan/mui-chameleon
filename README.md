@@ -1,29 +1,25 @@
 <p align="center">
-    <a href="https://davityavryan.github.io/material-ui-chameleon" rel="noopener" target="_blank">
-        <img width="256" src="https://raw.githubusercontent.com/davityavryan/material-ui-chameleon/master/docs/src/static/img/logo.svg?sanitize=true" alt="Material-UI Chameleon">
+    <a href="https://davityavryan.github.io/mui-chameleon" rel="noopener" target="_blank">
+        <img width="256" src="https://raw.githubusercontent.com/davityavryan/mui-chameleon/master/docs/src/static/img/logo.svg?sanitize=true" alt="MUI Chameleon">
     </a>
 </p>
 
-<h1 align="center">Material-UI Chameleon</h1>
+<h1 align="center">MUI Chameleon</h1>
 
 <div align="center">
 
 ## Warning: [WIP] This is not yet ready for production
 
-[Material-UI](https://material-ui.com/) theme editor.
+[MUI](https://mui.com/) theme editor.
 
-[![npm package](https://img.shields.io/npm/v/material-ui-chameleon/latest.svg)](https://www.npmjs.com/package/material-ui-chameleon)
-[![npm downloads](https://img.shields.io/npm/dm/material-ui-chameleon.svg)](https://www.npmjs.com/package/material-ui-chameleon)
-[![BundlePhobia](https://badgen.net/bundlephobia/minzip/material-ui-chameleon)](https://bundlephobia.com/result?p=material-ui-chameleon)
-[![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/davityavryan/material-ui-chameleon.svg)](https://isitmaintained.com/project/davityavryan/material-ui-chameleon 'Average time to resolve an issue')
+[![npm package](https://img.shields.io/npm/v/mui-chameleon/latest.svg)](https://www.npmjs.com/package/mui-chameleon)
+[![npm downloads](https://img.shields.io/npm/dm/mui-chameleon.svg)](https://www.npmjs.com/package/mui-chameleon)
+[![BundlePhobia](https://badgen.net/bundlephobia/minzip/mui-chameleon)](https://bundlephobia.com/result?p=mui-chameleon)
+[![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/davityavryan/mui-chameleon.svg)](https://isitmaintained.com/project/davityavryan/mui-chameleon 'Average time to resolve an issue')
 
-[![Dependencies](https://img.shields.io/david/davityavryan/material-ui-chameleon)](https://david-dm.org/davityavryan/material-ui-chameleon/master)
-[![DevDependencies](https://img.shields.io/david/dev/davityavryan/material-ui-chameleon)](https://david-dm.org/davityavryan/material-ui-chameleon/master?type=dev)
-[![PeerDependencies](https://img.shields.io/david/peer/davityavryan/material-ui-chameleon)](https://david-dm.org/davityavryan/material-ui-chameleon/master?type=peer)
-
-[![Github Action build](https://github.com/davityavryan/material-ui-chameleon/actions/workflows/build.yml/badge.svg)](https://github.com/davityavryan/material-ui-chameleon/actions/workflows/build.yml?branch=master&event=push)
-[![Github Action test](https://github.com/davityavryan/material-ui-chameleon/actions/workflows/test.yml/badge.svg)](https://github.com/davityavryan/material-ui-chameleon/actions/workflows/test.yml?branch=master&event=push)
-[![codecov](https://codecov.io/gh/davityavryan/material-ui-chameleon/branch/master/graph/badge.svg?token=FCLZL0XTXM)](https://codecov.io/gh/davityavryan/material-ui-chameleon)
+[![Github Action build](https://github.com/davityavryan/mui-chameleon/actions/workflows/build.yml/badge.svg)](https://github.com/davityavryan/mui-chameleon/actions/workflows/build.yml?branch=master&event=push)
+[![Github Action test](https://github.com/davityavryan/mui-chameleon/actions/workflows/test.yml/badge.svg)](https://github.com/davityavryan/mui-chameleon/actions/workflows/test.yml?branch=master&event=push)
+[![codecov](https://codecov.io/gh/davityavryan/mui-chameleon/branch/master/graph/badge.svg?token=FCLZL0XTXM)](https://codecov.io/gh/davityavryan/mui-chameleon)
 
 [![Buy me a coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/davityavryan)
 
@@ -31,14 +27,14 @@
 
 ## Installation
 
-Material-UI Chameleon is available as an [npm package](https://www.npmjs.com/package/material-ui-chameleon).
+MUI Chameleon is available as an [npm package](https://www.npmjs.com/package/mui-chameleon).
 
 ```sh
 // with npm
-npm install material-ui-chameleon
+npm install mui-chameleon
 
 // with yarn
-yarn add material-ui-chameleon
+yarn add mui-chameleon
 ```
 
 ## Usage
@@ -49,10 +45,10 @@ Here is a quick example to get you started, **it's all you need**:
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import ThemeProvider from 'material-ui-chameleon/ThemeProvider';
-import SideBarEditor from 'material-ui-chameleon/SideBarEditor';
+import ThemeProvider from 'mui-chameleon/ThemeProvider';
+import SideBarEditor from 'mui-chameleon/SideBarEditor';
 
-// import { ThemeProvider, SideBarEditor } from 'material-ui-chameleon';
+// import { ThemeProvider, SideBarEditor } from 'mui-chameleon';
 
 function App() {
     const showEditor = true; // of course
@@ -74,8 +70,8 @@ ReactDOM.render(<App />, document.querySelector('#app'));
 ## Acknowledgments
 
 -   Logo Design by Zara Magumyan. See her [Dribbble](https://dribbble.com/zmagumyan) for more awesome designs.
--   Some bundling Tools and scripts are used from [Material-UI](https://github.com/mui-org/material-ui) packages. This
-    makes my job easier, faster and compatibility of this package better with Material-UI packages.
+-   Some bundling Tools and scripts are used from [MUI](https://github.com/mui-org/mui) packages. This makes my job
+    easier, faster and compatibility of this package better with MUI packages.
 
 ## License
 

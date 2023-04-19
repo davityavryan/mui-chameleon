@@ -1,10 +1,6 @@
 import { lazy } from 'react';
 
-const ProgressCircular = lazy(
-    () => import(/* webpackChunkName: "component/progress/circular" */ './ProgressCircular/ProgressCircular')
-);
-const ProgressLinear = lazy(
-    () => import(/* webpackChunkName: "component/progress/linear" */ './ProgressLinear/ProgressLinear')
-);
+const ProgressCircular = lazy(() => import('./ProgressCircular/ProgressCircular'));
+const ProgressLinear = lazy(() => import('./ProgressLinear/ProgressLinear'));
 
 export { ProgressCircular, ProgressLinear };

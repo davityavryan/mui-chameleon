@@ -1,35 +1,35 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-
-import useStyles from './SimpleSelect.style';
+import { SelectChangeEvent, InputLabel, MenuItem, FormHelperText, FormControl, Select } from '@mui/material';
 
 function SimpleSelect() {
-    const classes = useStyles();
     const [age, setAge] = React.useState('');
 
-    const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    const handleChange = (event: SelectChangeEvent | ChangeEvent<HTMLSelectElement>) => {
         setAge(event.target.value as string);
     };
 
     return (
         <div>
-            <FormControl className={classes.formControl}>
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
                 <InputLabel id="demo-simple-select-label">Age</InputLabel>
-                <Select labelId="demo-simple-select-label" id="demo-simple-select" value={age} onChange={handleChange}>
+                <Select
+                    labelId="demo-simple-select-label"
+                    label="Age"
+                    id="demo-simple-select"
+                    value={age}
+                    onChange={handleChange}
+                >
                     <MenuItem value={10}>Ten</MenuItem>
                     <MenuItem value={20}>Twenty</MenuItem>
                     <MenuItem value={30}>Thirty</MenuItem>
                 </Select>
             </FormControl>
-            <FormControl className={classes.formControl}>
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
                 <InputLabel id="demo-simple-select-helper-label">Age</InputLabel>
                 <Select
                     labelId="demo-simple-select-helper-label"
+                    label="Age"
                     id="demo-simple-select-helper"
                     value={age}
                     onChange={handleChange}
@@ -43,14 +43,8 @@ function SimpleSelect() {
                 </Select>
                 <FormHelperText>Some important helper text</FormHelperText>
             </FormControl>
-            <FormControl className={classes.formControl}>
-                <Select
-                    value={age}
-                    onChange={handleChange}
-                    displayEmpty
-                    className={classes.selectEmpty}
-                    inputProps={{ 'aria-label': 'Without label' }}
-                >
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
+                <Select value={age} onChange={handleChange} displayEmpty inputProps={{ 'aria-label': 'Without label' }}>
                     <MenuItem value="">
                         <em>None</em>
                     </MenuItem>
@@ -60,17 +54,17 @@ function SimpleSelect() {
                 </Select>
                 <FormHelperText>Without label</FormHelperText>
             </FormControl>
-            <FormControl className={classes.formControl}>
-                <InputLabel shrink id="demo-simple-select-placeholder-label-label">
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
+                <InputLabel id="demo-simple-select-placeholder-label-label" shrink>
                     Age
                 </InputLabel>
                 <Select
                     labelId="demo-simple-select-placeholder-label-label"
+                    label="Age"
                     id="demo-simple-select-placeholder-label"
                     value={age}
                     onChange={handleChange}
                     displayEmpty
-                    className={classes.selectEmpty}
                 >
                     <MenuItem value="">
                         <em>None</em>
@@ -81,27 +75,26 @@ function SimpleSelect() {
                 </Select>
                 <FormHelperText>Label + placeholder</FormHelperText>
             </FormControl>
-            <FormControl className={classes.formControl} disabled>
+            <FormControl sx={{ m: 1, minWidth: 120 }} disabled>
                 <InputLabel id="demo-simple-select-disabled-label">Name</InputLabel>
                 <Select
                     labelId="demo-simple-select-disabled-label"
+                    label="Name"
                     id="demo-simple-select-disabled"
                     value={age}
                     onChange={handleChange}
                 >
-                    <MenuItem value="">
-                        <em>None</em>
-                    </MenuItem>
                     <MenuItem value={10}>Ten</MenuItem>
                     <MenuItem value={20}>Twenty</MenuItem>
                     <MenuItem value={30}>Thirty</MenuItem>
                 </Select>
                 <FormHelperText>Disabled</FormHelperText>
             </FormControl>
-            <FormControl className={classes.formControl} error>
+            <FormControl sx={{ m: 1, minWidth: 120 }} error>
                 <InputLabel id="demo-simple-select-error-label">Name</InputLabel>
                 <Select
                     labelId="demo-simple-select-error-label"
+                    label="Name"
                     id="demo-simple-select-error"
                     value={age}
                     onChange={handleChange}
@@ -116,10 +109,11 @@ function SimpleSelect() {
                 </Select>
                 <FormHelperText>Error</FormHelperText>
             </FormControl>
-            <FormControl className={classes.formControl}>
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
                 <InputLabel id="demo-simple-select-readonly-label">Name</InputLabel>
                 <Select
                     labelId="demo-simple-select-readonly-label"
+                    label="Name"
                     id="demo-simple-select-readonly"
                     value={age}
                     onChange={handleChange}
@@ -134,10 +128,11 @@ function SimpleSelect() {
                 </Select>
                 <FormHelperText>Read only</FormHelperText>
             </FormControl>
-            <FormControl className={classes.formControl}>
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
                 <InputLabel id="demo-simple-select-autowidth-label">Age</InputLabel>
                 <Select
                     labelId="demo-simple-select-autowidth-label"
+                    label="Age"
                     id="demo-simple-select-autowidth"
                     value={age}
                     onChange={handleChange}
@@ -152,14 +147,8 @@ function SimpleSelect() {
                 </Select>
                 <FormHelperText>Auto width</FormHelperText>
             </FormControl>
-            <FormControl className={classes.formControl}>
-                <Select
-                    value={age}
-                    onChange={handleChange}
-                    displayEmpty
-                    className={classes.selectEmpty}
-                    inputProps={{ 'aria-label': 'Without label' }}
-                >
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
+                <Select value={age} onChange={handleChange} inputProps={{ 'aria-label': 'Without label' }} displayEmpty>
                     <MenuItem value="" disabled>
                         Placeholder
                     </MenuItem>
@@ -169,14 +158,13 @@ function SimpleSelect() {
                 </Select>
                 <FormHelperText>Placeholder</FormHelperText>
             </FormControl>
-            <FormControl required className={classes.formControl}>
+            <FormControl sx={{ m: 1, minWidth: 120 }} required>
                 <InputLabel id="demo-simple-select-required-label">Age</InputLabel>
                 <Select
                     labelId="demo-simple-select-required-label"
                     id="demo-simple-select-required"
                     value={age}
                     onChange={handleChange}
-                    className={classes.selectEmpty}
                 >
                     <MenuItem value="">
                         <em>None</em>
@@ -187,14 +175,14 @@ function SimpleSelect() {
                 </Select>
                 <FormHelperText>Required</FormHelperText>
             </FormControl>
-            <FormControl variant="outlined" className={classes.formControl}>
+            <FormControl sx={{ m: 1, minWidth: 120 }} variant="outlined">
                 <InputLabel id="demo-simple-select-outlined-label">Age</InputLabel>
                 <Select
                     labelId="demo-simple-select-outlined-label"
+                    label="Age"
                     id="demo-simple-select-outlined"
                     value={age}
                     onChange={handleChange}
-                    label="Age"
                 >
                     <MenuItem value="">
                         <em>None</em>
@@ -204,10 +192,11 @@ function SimpleSelect() {
                     <MenuItem value={30}>Thirty</MenuItem>
                 </Select>
             </FormControl>
-            <FormControl variant="filled" className={classes.formControl}>
+            <FormControl sx={{ m: 1, minWidth: 120 }} variant="filled">
                 <InputLabel id="demo-simple-select-filled-label">Age</InputLabel>
                 <Select
                     labelId="demo-simple-select-filled-label"
+                    label="Age"
                     id="demo-simple-select-filled"
                     value={age}
                     onChange={handleChange}

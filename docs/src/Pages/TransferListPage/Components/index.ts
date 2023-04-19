@@ -1,11 +1,6 @@
 import { lazy } from 'react';
 
-const EnhancedTransferList = lazy(
-    () =>
-        import(/* webpackChunkName: "component/transfer-list/enhanced" */ './EnhancedTransferList/EnhancedTransferList')
-);
-const SimpleTransferList = lazy(
-    () => import(/* webpackChunkName: "component/transfer-list/simple" */ './SimpleTransferList/SimpleTransferList')
-);
+const EnhancedTransferList = lazy(() => import('./EnhancedTransferList/EnhancedTransferList'));
+const SimpleTransferList = lazy(() => import('./SimpleTransferList/SimpleTransferList'));
 
 export { SimpleTransferList, EnhancedTransferList };

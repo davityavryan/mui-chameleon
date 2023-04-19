@@ -1,7 +1,8 @@
-export type TThemeItemType =
+export type ThemeItemType =
     | 'text'
     | 'number'
     | 'boolean'
+    | 'borderRadius'
     | 'color'
     | 'shadow'
     | 'easing'
@@ -12,8 +13,9 @@ export type TThemeItemType =
     | 'letterSpacing'
     | 'skip'; // FIXME: remove?
 
-export type TUnit = TUnitDuration | TUnitSize;
-export type TUnitSize = 'px' | 'em' | 'rem';
-export type TUnitDuration = 'ms' | 's';
+export type Unit = UnitDuration | UnitSize | UnitRadius;
+export type UnitSize = 'px' | 'em' | 'rem';
+export type UnitDuration = 'ms' | 's';
+export type UnitRadius = UnitSize | '%';
 
-export type TValue = any;
+export type Value = any;

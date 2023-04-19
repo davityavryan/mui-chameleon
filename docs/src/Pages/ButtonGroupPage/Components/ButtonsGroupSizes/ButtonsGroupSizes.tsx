@@ -1,15 +1,10 @@
 import React from 'react';
 
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-
-import useStyles from './ButtonsGroupSizes.style';
+import { Button, ButtonGroup, Stack } from '@mui/material';
 
 function ButtonsGroupSizes() {
-    const classes = useStyles();
-
     return (
-        <div className={classes.root}>
+        <Stack spacing={2} direction="row">
             <ButtonGroup size="small" aria-label="small outlined button group">
                 <Button>One</Button>
                 <Button>Two</Button>
@@ -25,7 +20,7 @@ function ButtonsGroupSizes() {
                 <Button>Two</Button>
                 <Button>Three</Button>
             </ButtonGroup>
-        </div>
+        </Stack>
     );
 }
 
