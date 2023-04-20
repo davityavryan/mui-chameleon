@@ -1,0 +1,2 @@
+import{r as a,i as s,a as m}from"./index-d0d8acaf.js";import"./index-62000ba6.js";import{T as n}from"./ThemeProvider-d25e7d05.js";function d({mode:r}){return a.useMemo(()=>{const e=["none",...Array(24).fill("").map((u,t)=>`0 0 ${Math.round(t*.75+10)}px rgb(0,0,0,${.24})`)];return s({palette:{mode:"dark",background:{default:"#333"}},shadows:e})},[!0])}function h({mode:r,children:o}){const e=d({mode:r});return m(n,{theme:e,children:o})}export{h as default};
+//# sourceMappingURL=DocsTheme-a73f0923.js.map

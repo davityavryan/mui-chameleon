@@ -1,0 +1,2 @@
+import{f as n,a as e,E as s}from"./index-d0d8acaf.js";class i extends n.Component{constructor(r){super(r),this.state={error:void 0}}static getDerivedStateFromError(r){return{error:r}}componentDidCatch(r,t){console.error(r,t)}render(){const{error:r}=this.state,{children:t=null,FallbackComponent:o}=this.props;return r?o===void 0?e(s,{error:r}):e(o,{error:r}):t}}export{i as default};
+//# sourceMappingURL=ErrorBoundary-07068af6.js.map

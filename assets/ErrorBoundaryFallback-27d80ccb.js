@@ -1,0 +1,2 @@
+import{j as n,r as a,a as t}from"./index-d0d8acaf.js";import{T as o}from"./Typography-f2de5159.js";function c({message:r,error:e,info:i}){return r===void 0&&(r="Sorry, something went wrong. Please try again later."),n(a.Fragment,{children:[t(o,{variant:"h4",gutterBottom:!0,children:"Something went wrong"}),t(o,{variant:"body1",gutterBottom:!0,children:r}),!1]})}export{c as default};
+//# sourceMappingURL=ErrorBoundaryFallback-27d80ccb.js.map

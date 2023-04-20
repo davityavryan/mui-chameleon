@@ -1,0 +1,2 @@
+import{a as o,M as a,N as u,_ as f,O as r,l as c}from"./index-d0d8acaf.js";function y(e){return e==null||Object.keys(e).length===0}function i(e){const{styles:t,defaultTheme:s={}}=e;return o(a,{styles:typeof t=="function"?n=>t(y(n)?s:n):t})}function m({styles:e,themeId:t,defaultTheme:s={}}){const l=u(s),n=typeof e=="function"?e(t&&l[t]||l):e;return o(i,{styles:n})}function d(e){return o(m,f({},e,{defaultTheme:r,themeId:c}))}export{d as G};
+//# sourceMappingURL=GlobalStyles-fd055ad8.js.map
